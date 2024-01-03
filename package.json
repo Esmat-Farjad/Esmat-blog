@@ -1,17 +1,15 @@
 {
-  "name": "myblog",
+  "name": "Esmat-blog",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx tailwindcss -i ./src/tailwind.css -o ./src/tailwind.css --watch",
-    "build:css": "tailwind build src/tailwind.css -o src/tailwind.css"
-    
+    "build:css": "tailwind build src/tailwind.css -o blog/static/css/tailwind.css"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "tailwindcss": "^1.7.6"
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
   }
 }

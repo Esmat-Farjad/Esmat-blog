@@ -2,7 +2,7 @@ module.exports = {
   purge: {
     enabled: true,
     content: [
-      './tmplates/*.html',
+      './templates/**/*.{html}',
       './blog/static/js/main.js'
     ]
   },
