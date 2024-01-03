@@ -1,15 +1,17 @@
 {
-  "name": "basic-template-TailwindCSS",
+  "name": "myblog",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:css": "tailwind build src/tailwind.css -o assets/css/tailwind.css"
+    "dev": "npx tailwindcss -i ./src/tailwind.css -o ./src/tailwind.css --watch",
+    "build:css": "tailwind build src/tailwind.css -o src/tailwind.css"
+    
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "tailwindcss": "^3.4.0"
+  "dependencies": {
+    "tailwindcss": "^1.7.6"
   }
 }
