@@ -6,3 +6,5 @@ def index(request):
     return render(request, 'index.html')
 def home(request):
     return HttpResponse("Hello and welcome !")
+def login(request):
+    return render(request, 'login.html')
