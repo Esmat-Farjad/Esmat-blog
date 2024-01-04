@@ -2,6 +2,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Post
 
 class UserRegistrationForm(UserCreationForm):
     class Meta:
@@ -25,3 +26,15 @@ class UserRegistrationForm(UserCreationForm):
         if qs.exists():
             raise forms.ValidationError(f"{username} is already exists. please pick another")
         return username
+
+class BlogPostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title','text']
+        
+    def __init__(self, *args, **kwargs):
+        super(BlogPostForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = "px-3 w-full py-3 outline-none border border-sky-500 rounded focus:border-red-500"
+        
+

@@ -1,7 +1,7 @@
 
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, BlogPostForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
@@ -39,3 +39,21 @@ def signup(request):
 def signout(request):
     logout(request)
     return render(request, 'index.html')
+
+def create_post(request):
+    blog_post_form=BlogPostForm()
+    if request.method == 'POST':
+        blog_post_form = BlogPostForm(request.POST)
+        if blog_post_form.is_valid():
+            blog = blog_post_form.save(commit=False)
+            blog.user= request.user
+            print(request.user)
+            blog.save()
+
+            messages.success(request, "your blog posted successfully")
+        else:
+            blog_post_form = BlogPostForm(request.POST)
+    context = {
+        'blog_post':blog_post_form
+    }
+    return render(request, 'post.html', context)

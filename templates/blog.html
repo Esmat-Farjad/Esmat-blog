@@ -6,6 +6,11 @@
                 <div class="pb-8 section-title">
                     <div class="line"></div>
                     <h3 class="title"><span>Our Recent</span> Blog Posts</h3>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'create_post' %}" class="main-btn gradient-btn">
+                        <p class="text-white">Create your post</p>
+                    </a>
+                    {% endif %}
                 </div> <!-- section title -->
             </div>
         </div> <!-- row -->
