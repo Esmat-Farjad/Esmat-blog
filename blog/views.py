@@ -1,6 +1,6 @@
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .forms import UserRegistrationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -17,6 +17,7 @@ def signin(request):
         user = authenticate(request, username=username, password=password )
         if user is not None:
             login(request, user)
+            return redirect('index')
         else:
             messages.error(request, "Invalid username or password !")
 
@@ -28,9 +29,13 @@ def signup(request):
             username = form.cleaned_data.get("username")
             form.save()
             messages.success(request, f"{username} registered successfully !")
+            return redirect('signin')
         else:
             form = UserRegistrationForm(request.POST)
     else:
         form = UserRegistrationForm()
     context = {'user_form':form}
     return render(request, 'signup.html', context)
+def signout(request):
+    logout(request)
+    return render(request, 'index.html')

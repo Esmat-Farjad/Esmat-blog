@@ -45,6 +45,7 @@
                 <div class="row">
                     <div class="w-full">
                         <nav class="flex items-center justify-between navbar navbar-expand-lg">
+                            
                             <a class="mr-4 navbar-brand" href="{% url 'index' %}">
                                 <img src="{% static 'images/logo.svg' %}" alt="Logo">
                             </a>
@@ -74,14 +75,19 @@
                                     <li class="nav-item">
                                         <a class="page-scroll" href="#blog">Blog</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="{% url 'signin' %}">Login</a>
-                                    </li>
+                                    {% if user.is_authenticated %}
+                                        <li class="nav-item">
+                                            <a href="{% url 'signout' %}">Logout</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="nav-item">
+                                            <a class="page-scroll" href="{% url 'signin' %}">Login</a>
+                                        </li>
+                                    {% endif %}
                                 </ul>
                             </div> <!-- navbar collapse -->
-                            
-                            
                         </nav> <!-- navbar -->
+                        
                     </div>
                 </div> <!-- row -->
             </div> <!-- container -->
