@@ -14,16 +14,26 @@
 <div class="container">
     <div class="grid lg:grid-cols-3 sm:grid-cols-1 gap-4 m-10">
         <div class="side">
-            side 
+            <a href="{% url 'index' %}">
+                <p class="text-teal-500 hover:text-red-600 duration-500 cursor-pointer wow fadeInLeftBig">
+                    <span class="text-4xl">&#8592;</span>
+                    &nbsp;Back to home
+                </p>
+            </a>
         </div>
         <div class="">
             <h3 class="font-bold text-center">Post your blog</h3>
-            <form action="{% url 'create_post' %}" method="POST">
+            <form action="{% url 'create_post' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% for form in blog_post %}
                 <label>{{form.label}}</label>
                 <div>{{form}}</div>
                 <p class="text-sm">{{form.errors}}</p>
+                {% endfor %}
+                {% for form in post_formset %}
+                <label class="block mt-3">{{form.label}}</label>
+                {{form}}
+                {{form.errors}}
                 {% endfor %}
                 <div class="flex justify-center mt-10">
                     <button class="main-btn gradient-btn gradient-btn-3">save</button>
@@ -31,7 +41,7 @@
             </form>
         </div>
         <div class="side">
-            side 
+            
         </div>
     </div>
 </div>

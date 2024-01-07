@@ -1,9 +1,10 @@
 
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
-from .forms import UserRegistrationForm, BlogPostForm
+from django.shortcuts import get_object_or_404, redirect, render
+from .forms import PostImageForm, UserRegistrationForm, BlogPostForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from .models import Post
 
 # Create your views here.
 def index(request):
@@ -42,18 +43,43 @@ def signout(request):
 
 def create_post(request):
     blog_post_form=BlogPostForm()
+    image_form=PostImageForm()
     if request.method == 'POST':
         blog_post_form = BlogPostForm(request.POST)
         if blog_post_form.is_valid():
             blog = blog_post_form.save(commit=False)
             blog.user= request.user
-            print(request.user)
             blog.save()
 
-            messages.success(request, "your blog posted successfully")
+            post = get_object_or_404(Post, pk=blog.id)
+            image_form = PostImageForm(request.POST)
+            if image_form.is_valid():
+                photo = image_form.save(commit=False)
+                photo.post = post
+                photo.save()
+                messages.success(request, "Post Saved Successfully")
+            else:
+                return HttpResponse("Formset is Not valid")
         else:
             blog_post_form = BlogPostForm(request.POST)
+            image_form = PostImageForm(request.POST)
     context = {
-        'blog_post':blog_post_form
-    }
+        'blog_post':blog_post_form,
+        'post_formset':image_form
+    }   
     return render(request, 'post.html', context)
+
+# def create_post_images(request, post):
+#     if request.method == 'POST':
+
+#         print("REQUEST COMES IN")
+        
+#         post = get_object_or_404(Post, pk=post)
+#         image_formset = PostImageFormset(request.POST, instance=post, form_kwargs={"post":post})
+#         if image_formset.is_valid():
+#             image_formset.save()
+            
+            
+#             return redirect('create_post')
+#         else:
+#             return HttpResponse("Formset is Not valid")
