@@ -1,7 +1,7 @@
 
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from .forms import PostImageForm, UserRegistrationForm, BlogPostForm
+from .forms import UserRegistrationForm, BlogPostForm, PostImageForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import Post
@@ -43,29 +43,28 @@ def signout(request):
 
 def create_post(request):
     blog_post_form=BlogPostForm()
-    image_form=PostImageForm()
+    image_form = PostImageForm()
+
     if request.method == 'POST':
         blog_post_form = BlogPostForm(request.POST)
-        if blog_post_form.is_valid():
-            blog = blog_post_form.save(commit=False)
-            blog.user= request.user
-            blog.save()
+        image_form = PostImageForm(request.POST, request.FILES)
+        if blog_post_form.is_valid() and image_form.is_valid():
+            blogPost = blog_post_form.save(commit=False)
+            blogPost.user = request.user
+            blogPost.save()
 
-            post = get_object_or_404(Post, pk=blog.id)
-            image_form = PostImageForm(request.POST)
-            if image_form.is_valid():
-                photo = image_form.save(commit=False)
-                photo.post = post
-                photo.save()
-                messages.success(request, "Post Saved Successfully")
-            else:
-                return HttpResponse("Formset is Not valid")
+            imagePost = image_form.save(commit=False)
+            imagePost.post = blogPost
+            imagePost.save()
+            messages.success(request, "Your Post created successfully !")
         else:
-            blog_post_form = BlogPostForm(request.POST)
-            image_form = PostImageForm(request.POST)
+            messages.error(request, "Forms are invalid !")
+            blog_post_form=BlogPostForm(request.POST)
+            image_form=PostImageForm(request.POST)
+            
     context = {
-        'blog_post':blog_post_form,
-        'post_formset':image_form
+        'post_form':blog_post_form,
+        'image_form':image_form
     }   
     return render(request, 'post.html', context)
 

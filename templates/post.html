@@ -25,12 +25,12 @@
             <h3 class="font-bold text-center">Post your blog</h3>
             <form action="{% url 'create_post' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                {% for form in blog_post %}
+                {% for form in post_form %}
                 <label>{{form.label}}</label>
                 <div>{{form}}</div>
                 <p class="text-sm">{{form.errors}}</p>
                 {% endfor %}
-                {% for form in post_formset %}
+                {% for form in image_form %}
                 <label class="block mt-3">{{form.label}}</label>
                 {{form}}
                 {{form.errors}}
