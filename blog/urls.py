@@ -1,5 +1,6 @@
 from django.urls import path
 from blog import views
+from .views import PostDetailView
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -8,5 +9,7 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('signout/', views.signout, name='signout'),
     path('post/create', views.create_post, name='create_post'),
+    path('post/view/<pid>', views.post_view, name='post_view'),
+    path('post/<int:pk>/<str:slug>', PostDetailView.as_view(), name='post_view')
    
 ]

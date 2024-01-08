@@ -8,6 +8,11 @@ $(function () {
 
     
     //===== Sticky
+    // ===toggle posts
+    $("#toggleButton").on('click', function(e){
+        $(".sub-container").toggleClass("hidden");
+    });
+    // =====toggle posts end
 
     $(window).on('scroll', function (event) {
         var scroll = $(window).scrollTop();

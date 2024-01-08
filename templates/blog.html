@@ -29,7 +29,7 @@
                             <li class="ml-12">{{blog.created_at | date:"jS F Y"}}</li>
                         </ul>
                         <p class="mb-6 text-2xl leading-snug text-gray-900">{{blog.title}}</p>
-                        <a class="text-theme-color-2" href="javascript:void(0)">
+                        <a class="text-theme-color-2" href="{% url 'post_view' blog.id %}">
                             Learn More
                             <i class="ml-2 lni lni-chevron-right"></i>
                         </a>

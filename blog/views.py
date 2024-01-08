@@ -5,8 +5,15 @@ from .forms import UserRegistrationForm, BlogPostForm, PostImageForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import Post
+from hitcount.views import HitCountDetailView
 
 # Create your views here.
+class PostDetailView(HitCountDetailView):
+    model = Post
+    template_name = "post_view.html"
+    count_hit = True
+    
+
 def index(request):
     blogs = Post.objects.all().order_by('-created_at')[:3]
     context = {'blogs':blogs}
@@ -72,3 +79,8 @@ def create_post(request):
     }   
     return render(request, 'post.html', context)
 
+def post_view(request, pid):
+    post = Post.objects.get(id=pid)
+    all_posts = Post.objects.all().order_by('-created_at')
+    context = {'post':post, 'all_posts':all_posts}
+    return render(request, 'post_view.html', context)
