@@ -1,6 +1,6 @@
 
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
 from .forms import UserRegistrationForm, BlogPostForm, PostImageForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -8,7 +8,11 @@ from .models import Post
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    blogs = Post.objects.all().order_by('-created_at')[:3]
+    context = {'blogs':blogs}
+    
+    return render(request, 'index.html', context)
+
 def home(request):
     return HttpResponse("Hello and welcome !")
 def signin(request):
@@ -68,17 +72,3 @@ def create_post(request):
     }   
     return render(request, 'post.html', context)
 
-# def create_post_images(request, post):
-#     if request.method == 'POST':
-
-#         print("REQUEST COMES IN")
-        
-#         post = get_object_or_404(Post, pk=post)
-#         image_formset = PostImageFormset(request.POST, instance=post, form_kwargs={"post":post})
-#         if image_formset.is_valid():
-#             image_formset.save()
-            
-            
-#             return redirect('create_post')
-#         else:
-#             return HttpResponse("Formset is Not valid")
