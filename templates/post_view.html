@@ -1,17 +1,21 @@
 {% load static %}
 {% load hitcount_tags %}
 {% include 'links.html' %}
-
-
 <div class="container my-5">
     <div class="grid lg:grid-cols-5 sm:grid-cols-1 gap-2">
         <div class=""> 
+            <a href="{% url 'index' %}">
+                <p class="text-teal-500 hover:text-red-600 duration-500 cursor-pointer wow fadeInLeftBig">
+                    <span class="text-4xl">&#8592;</span>
+                    &nbsp;Back to home
+                </p>
+            </a>
         </div>
         <div class="col-span-3 px-16 border-2 rounded shadow">
             <p class="my-5">
                 <span class="">
                     <img class="w-12 h-12 inline rounded-3xl shadow border-2" src="{% static 'images/team-2.png' %}" alt="">
-                    <span class="font-bold text-xl">{{post.user}}</span>
+                    <span class="font-bold text-xl">{{post.user.get_full_name}}</span>
                 </span> 
             </p>
             <p class="font-bold text-2xl">{{post.title}}</p>
