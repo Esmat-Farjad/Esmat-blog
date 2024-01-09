@@ -1,7 +1,7 @@
 
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from .forms import UserRegistrationForm, BlogPostForm, PostImageForm
+from .forms import CommentForm, UserRegistrationForm, BlogPostForm, PostImageForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import Post
@@ -16,7 +16,19 @@ class PostDetailView(HitCountDetailView):
 
 def index(request):
     blogs = Post.objects.all().order_by('-created_at')[:3]
-    context = {'blogs':blogs}
+    comment_form = CommentForm()
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.user = request.user
+            comment.save()
+            messages.success(request, "Your review posted successfully ! Thanks...")
+        else:
+            comment_form = CommentForm(request.POST)
+            messages.error(request, "Oops...Something went wrong !")
+    
+    context = {'blogs':blogs,'comment_form':comment_form}
     
     return render(request, 'index.html', context)
 
@@ -84,3 +96,6 @@ def post_view(request, pid):
     all_posts = Post.objects.all().order_by('-created_at')
     context = {'post':post, 'all_posts':all_posts}
     return render(request, 'post_view.html', context)
+
+def update_profile(request):
+    return render(request, 'profile.html')

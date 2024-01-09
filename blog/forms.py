@@ -2,7 +2,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Post, PostImage
+from .models import Comment, Post, PostImage
 
 class UserRegistrationForm(UserCreationForm):
     class Meta:
@@ -45,3 +45,34 @@ class PostImageForm(forms.ModelForm):
         widgets = {
             'image': forms.FileInput(attrs={'class':'mb-3 file:bg-gradient-to-r from-sky-700 to-sky-400 file:rounded-lg file:border-0 file:px-4 file:py-2 file:text-white'})
         }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        field = "__all__"
+        exclude = ('user','created_at',)
+        labels = {'review':'Descriptions'}
+        widgets = {
+            'review': forms.Textarea(
+                attrs={
+                    'class':'px-3 w-96 py-3 outline-none border-b border-sky-500 rounded focus:border-red-500',
+                    'rows':3,
+                    'placeholder':'Type your review...'
+                    }
+            ),
+            'rate':forms.Select(
+                attrs={
+                    'class':'px-3 w-32 py-3 outline-none border border-sky-500 rounded focus:border-red-500'
+                    })
+        }
+
+    # def __init__(self, *args, **kwargs):
+    #     super(CommentForm, self).__init__(*args, **kwargs)
+    #     for visible in self.visible_fields():
+    #         visible.field.widget.attrs['class'] = ""
+            
+        
+
+    
+
+

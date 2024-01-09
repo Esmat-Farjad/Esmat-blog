@@ -29,5 +29,30 @@ class PostImage(models.Model):
     def __str__(self):
         return self.post.title
     
+class Profile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    position = models.CharField(max_length=100, blank=True, null=True)
+    picture = models.ImageField(upload_to='profile_image', null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
+    
+class Comment(models.Model):
+    RATE_CHOICES = [
+        ('1','1'),
+        ('2','2'),
+        ('3,','3'),
+        ('4','4'),
+        ('5','5')
+    ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    rate = models.IntegerField(choices=RATE_CHOICES)
+    review = models.TextField(max_length=500, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.review
 
     
