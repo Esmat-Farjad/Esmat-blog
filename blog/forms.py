@@ -31,11 +31,19 @@ class BlogPostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title','text']
+
+        widgets = {
+            'title': forms.TextInput(attrs={
+                'class':'form-control shadow-none',
+                'required':True }),
+            'text': forms.Textarea(attrs={
+                'class':'form-control shadow-none',
+                'rows':6,
+                'required':True
+                })
+        }
         
-    def __init__(self, *args, **kwargs):
-        super(BlogPostForm, self).__init__(*args, **kwargs)
-        for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = "px-3 w-full py-3 outline-none border border-sky-500 rounded focus:border-red-500"
+    
 
 class PostImageForm(forms.ModelForm):
     class Meta:
@@ -43,7 +51,10 @@ class PostImageForm(forms.ModelForm):
         field = "__all___"
         exclude = ('post',)
         widgets = {
-            'image': forms.FileInput(attrs={'class':'mb-3 file:bg-gradient-to-r from-sky-700 to-sky-400 file:rounded-lg file:border-0 file:px-4 file:py-2 file:text-white'})
+            'image': forms.FileInput(attrs={
+                'type':'file',
+                'required': True   
+                })
         }
 
 class CommentForm(forms.ModelForm):

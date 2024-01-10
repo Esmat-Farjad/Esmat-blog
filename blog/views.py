@@ -89,7 +89,7 @@ def create_post(request):
         'post_form':blog_post_form,
         'image_form':image_form
     }   
-    return render(request, 'post.html', context)
+    return render(request, 'forms/post_form.html', context)
 
 def post_view(request, pid):
     post = Post.objects.get(id=pid)

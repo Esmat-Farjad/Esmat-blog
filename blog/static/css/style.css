@@ -8,6 +8,21 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+input[type="file"]::file-selector-button{
+  border: 1px solid #13a456;
+  border-radius: 5px;
+  padding: 5px 20px;
+}
+input[type="file"]{
+  border-bottom: 2px solid #13a456;
+  padding-bottom: 5px;
+  display: block;
+  
+}
+input[type="file"]::file-selector-button:hover{
+  color: #13a456;
+  transition: all 0.5s ease-in-out;
+}
 body {
   background: #fff;
   color: #666666;
@@ -1462,8 +1477,8 @@ section {
 #contact .php-email-form input::focus, #contact .php-email-form textarea::focus {
   background-color: #18d26e;
 }
-
-#contact .php-email-form button[type="submit"] {
+ 
+button[type="submit"] {
   background: #18d26e;
   border: 0;
   padding: 10px 30px;
@@ -1471,8 +1486,11 @@ section {
   transition: 0.4s;
   cursor: pointer;
 }
+.text-official{
+  color: #13a456;
+}
 
-#contact .php-email-form button[type="submit"]:hover {
+button[type="submit"]:hover {
   background: #13a456;
 }
 
