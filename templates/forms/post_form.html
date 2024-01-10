@@ -1,27 +1,29 @@
 {% load static %}
 {% include '../links/link.html' %}
 <div class="container py-3">
-    
+    <!-- ========SYSTEM MESSAGES======== -->
     <div class="message-container my-3">
         {% if messages %}
         {% for message in messages %}
         {% if message.tags == 'success' %}
         <h5 class="text-official text-center">
             <span class="px-5 py-3 border border-success rounded">
-            {{message}}
-            <i class="icofont-tick-boxed"></i>
-        </span>
-            
+                {{message}}
+                <i class="icofont-tick-boxed"></i>
+            </span>
         </h5>
         {% elif message == 'error' %}
         <h5 class="text-danger text-center">
-            <i class="icofont-close-line-squared-alt"></i>
-            {{message}}
+            <span class="px-5 py-3 border border-danger rounded">
+                <i class="icofont-close-line-squared-alt"></i>
+                {{message}}
+            </span>
         </h5>
         {% endif %}
         {% endfor %}
         {% endif %}
     </div>
+    <!-- ======PAGE CONTENT===== -->
     <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-12 py-4">
             <a href="{% url 'index' %}">
@@ -49,7 +51,23 @@
             </form>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="post-container mt-5">
+                <h3>
+                    <a href="#">
+                        Post Created
+                    </a>
+                </h3>
+                <div class="posts">
+                    {% for post in recent_post %}
+                    <div class="item-container">
+                        <p class="post-title">{{post.title}}</p>
+                        <p class="post-description" style="">{{post.text}}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<!-- ========PAGE CONTAINER END======= -->
 {% include '../links/scripts.html' %}

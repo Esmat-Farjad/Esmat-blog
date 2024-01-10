@@ -28,7 +28,29 @@ body {
   color: #666666;
   font-family: "Open Sans", sans-serif;
 }
+.item-container{
+  border-left: 4px solid #13a456;
+  padding: 5px;
+  margin: 10px 0px ;
+}
+.item-container:hover{
+  background-color: rgb(231, 231, 231);
+  transition: all 0.5s ease;
+  cursor:default;
+}
 
+.post-title, .post-description{
+  padding: 0px;
+  margin: 0px;
+  vertical-align: 0px;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: clip;
+}
+.post-title{
+  font-weight: bold;
+  font-size: large;
+}
 a {
   color: #18d26e;
   transition: 0.5s;

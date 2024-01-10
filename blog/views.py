@@ -84,10 +84,11 @@ def create_post(request):
             messages.error(request, "Forms are invalid !")
             blog_post_form=BlogPostForm(request.POST)
             image_form=PostImageForm(request.POST)
-            
+    recent_post = Post.objects.filter(user=request.user).order_by('-created_at')[:5]      
     context = {
         'post_form':blog_post_form,
-        'image_form':image_form
+        'image_form':image_form,
+        'recent_post':recent_post
     }   
     return render(request, 'forms/post_form.html', context)
 
