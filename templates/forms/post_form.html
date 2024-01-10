@@ -27,10 +27,7 @@
     <!-- ======PAGE CONTENT===== -->
     <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-12 py-4">
-            <a href="{% url 'index' %}">
-                <i class="ion-ios-arrow-left"></i>&nbsp;
-                Back to home
-            </a>
+            
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 pt-5">
             <div class="section-header ">
@@ -52,21 +49,20 @@
             </form>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
-            <div class="post-container mt-5">
-                <h3>
-                    <a href="#">
-                        Post Created
-                    </a>
-                </h3>
-                <div class="posts">
-                    {% for post in recent_post %}
-                    <div class="item-container">
-                        <p class="post-title">{{post.title}}</p>
-                        <p class="post-description" style="">{{post.text}}</p>
-                    </div>
-                    {% endfor %}
-                </div>
+            
+        </div>
+    </div>
+    <div class="post-container my-5">
+        <div class="section-header ">
+            <h3>Created Post</h3>
+        </div>
+        <div class="posts">
+            {% for post in recent_post %}
+            <div class="item-container">
+                <p class="post-title">{{post.title}}</p>
+                <p class="post-description">{{post.text}}</p>
             </div>
+            {% endfor %}
         </div>
     </div>
 </div>
