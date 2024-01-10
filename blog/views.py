@@ -45,21 +45,23 @@ def signin(request):
         else:
             messages.error(request, "Invalid username or password !")
 
-    return render(request, 'login.html')
+    return render(request, 'signin.html')
 def signup(request):
+    
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data.get("username")
             form.save()
             messages.success(request, f"{username} registered successfully !")
-            return redirect('signin')
+            
         else:
+            messages.error(request, "Form is not valid Sorry !")
             form = UserRegistrationForm(request.POST)
     else:
         form = UserRegistrationForm()
     context = {'user_form':form}
-    return render(request, 'signup.html', context)
+    return render(request, 'forms/signup.html', context)
 def signout(request):
     logout(request)
     return render(request, 'index.html')

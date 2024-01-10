@@ -7,11 +7,17 @@ from .models import Comment, Post, PostImage
 class UserRegistrationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name','username', 'email','password1','password2']
+        fields = ['username','first_name', 'last_name', 'email','password1','password2']
+        widgets = {
+            'username':forms.TextInput(attrs={'placeholder':'Enter a unique username...'}),
+        }
+        
     def __init__(self, *args, **kwargs):
         super(UserRegistrationForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = "px-3 w-full py-3 outline-none border border-sky-500 rounded focus:border-red-500"
+            visible.field.widget.attrs['class'] = "form-control shadow-none mt-0 "
+
+
     def clean_email(self):
         """check if email already exist"""
         email = self.cleaned_data.get("email")

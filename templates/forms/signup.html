@@ -1,0 +1,59 @@
+{% load static %}
+{% include '../links/link.html' %}
+{% include './sub-header.html' %}
+<div class="container pt-5 mt-5">
+  
+    
+    <!-- ========SYSTEM MESSAGES======== -->
+    <div class="message-container my-5">
+        
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <h5 class="text-official text-center">
+            <span class="px-5 py-3 border border-success rounded">
+                {{message}}
+                <i class="icofont-tick-boxed"></i>
+            </span>
+        </h5>
+        {% elif message.tags == 'error' %}
+        <h5 class="text-danger text-center">
+            <span class="px-5 py-3 border border-danger rounded">
+                <i class="icofont-close-line-squared-alt"></i>
+                {{message}}
+            </span>
+        </h5>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        
+    </div>
+    <!-- ======PAGE CONTENT===== -->
+    
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="section-header ">
+                <h3>Sign Up</h3>
+            </div>
+            <form action="{% url 'signup' %}" method="POST">
+                {% csrf_token %}
+                {% for field in user_form %}
+                <label class="mb-0-0">{{field.label}}</label>
+                {{field}}
+                
+                <p class="text-danger text-small">{{field.errors}}</p>
+                {% endfor %}
+                <div class="text-center my-3">
+                    <button type="submit">Sign Up</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            
+        </div>
+    </div>
+</div>
+{% include '../links/scripts.html' %}
