@@ -100,3 +100,6 @@ def post_view(request, pid):
 
 def update_profile(request):
     return render(request, 'profile.html')
+
+def portfolio(request):
+    return render(request, 'portfolio-details.html')
