@@ -45,7 +45,7 @@ def signin(request):
         else:
             messages.error(request, "Invalid username or password !")
 
-    return render(request, 'signin.html')
+    return render(request, 'forms/signin.html')
 def signup(request):
     
     if request.method == "POST":
