@@ -24,7 +24,7 @@ class Post(models.Model, HitCountMixin):
 class PostImage(models.Model):
     #Relationships
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    image = models.ImageField(blank=True, null=True, upload_to="post_images")
+    image = models.ImageField(upload_to="post_images")
 
     def __str__(self):
         return self.post.title

@@ -57,10 +57,7 @@ class PostImageForm(forms.ModelForm):
         field = "__all___"
         exclude = ('post',)
         widgets = {
-            'image': forms.FileInput(attrs={
-                'type':'file',
-                'required': True   
-                })
+            'image': forms.FileInput(attrs={'type':'file'})
         }
 
 class CommentForm(forms.ModelForm):

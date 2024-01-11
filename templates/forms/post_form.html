@@ -35,15 +35,17 @@
             <div class="section-header ">
                 <h3>Create Your Post</h3>
             </div>
-            <form action="{% url 'create_post' %}" method="POST" class="px-3">
+            <form action="{% url 'create_post' %}" enctype="multipart/form-data" method="POST" class="px-3" >
                 {% csrf_token %}
                 {% for field in post_form %}
                 <label class="mt-2">{{field.label}}</label>
                 <div class="" >{{field}}</div>
+                <h6 class="text-danger mt-0 pt-0">{{field.errors}}</h6>
                 {% endfor %}
                 {% for field in image_form %}
                 <label class="mt-2">{{field.label}}</label>
-                <div class="">{{field}}</div>
+                {{field}}
+                <h6 class="text-danger mt-0 pt-0">{{field.errors}}</h6>
                 {% endfor %}
                 <div class="text-center my-5">
                     <button type="submit">Post</button>
