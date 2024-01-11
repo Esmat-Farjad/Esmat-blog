@@ -103,3 +103,6 @@ def update_profile(request):
 
 def portfolio(request):
     return render(request, 'portfolio-details.html')
+
+def blog_view(request):
+    return render(request, 'blogs_view.html')

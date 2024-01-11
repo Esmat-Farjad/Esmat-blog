@@ -3,31 +3,22 @@
 {% include './forms/sub-header.html' %}
 {% load hitcount_tags %}
 
-<div class="container pt-5 mt-5">
+<div class="container mt-5">
 
 
-    <!-- ========SYSTEM MESSAGES======== -->
-    <div class="message-container mt-5">
-        {% if messages %}
-        {% for message in messages %}
-        {% if message.tags == 'success' %}
-        <h5 class="text-official text-center">
-            <span class="px-5 py-3 border border-success rounded">
-                {{message}}
-                <i class="icofont-tick-boxed"></i>
-            </span>
-        </h5>
-        {% elif message == 'error' %}
-        <h5 class="text-danger text-center">
-            <span class="px-5 py-3 border border-danger rounded">
-                <i class="icofont-close-line-squared-alt"></i>
-                {{message}}
-            </span>
-        </h5>
-        {% endif %}
-        {% endfor %}
-        {% endif %}
-    </div>
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2>Blog Details</h2>
+            <ol>
+              <li><a href="{%  url 'index' %}">Home</a></li>
+              <li><a href="{% url 'create_post' %}">Create Post</a></li>
+              <li>Post Details</li>
+            </ol>
+          </div>
+        </div>
+      </section><!-- Breadcrumbs Section -->
     <!-- ======PAGE CONTENT===== -->
     <div class="row">
         <div class="col-lg-2 col-md-2 col-sm-12 py-4">
@@ -35,7 +26,7 @@
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 pt-5">
             <div class="section-header ">
-                <h3>Posts</h3>
+                <h3>Web Blogs</h3>
             </div>
             <div class="shadow border rounded p-4">
                 <div class="content">
@@ -107,7 +98,6 @@
             {% endfor %}
         </div>
     </section>
-    
 </div>
 <!-- ========PAGE CONTAINER END======= -->
 {% include './links/scripts.html' %}

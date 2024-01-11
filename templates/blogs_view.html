@@ -1,0 +1,44 @@
+{% load static %}
+{% include './links/link.html' %}
+{% include './forms/sub-header.html' %}
+{% load hitcount_tags %}
+
+<div class="container pt-5 mt-5">
+    
+    <div class="section-header ">
+        <h3>Blogs Feed</h3>
+    </div>
+    <section id="morePost" >
+        <div class="container d-none more-post" data-aos="fade-up">
+            {% for post in all_posts %}
+            <div class="shadow p-4 rounded border my-3">
+                <div class="content">
+                    <img src="{{post.user.picture.url}}" alt="user profile">
+                    {% if post.user.get_full_name %}
+                    <h5 class="d-inline font-weight-bold">{{post.user.get_full_name}}</h5>
+                    {% else %}
+                    <h5 class="d-inline font-weight-bold">Admin</h5>
+                    {% endif %}
+                </div>
+                <div class="post-container">
+                    <h3 class="my-3 font-weight-bold">{{post.title}}</h3>
+                    <p>{{post.text}}</p>
+                    <p>
+                        {% for pic in post.postimage_set.all %}
+                        <img src="{{pic.image.url}}" class="post-image-all rounded " alt="image">
+                        {% endfor %}
+                        <p class="text-small">
+                            <span class="text-secondary mr-2">updated at: </span>
+                            <span class="">{{post.created_at}}</span>
+                            <span class="ml-3"><i class="icofont-eye-alt"></i>&nbsp;</span>
+                            <span class="text-secondary">{% get_hit_count for post %}</span>
+                        </p>
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+<!-- ========PAGE CONTAINER END======= -->
+{% include './links/scripts.html' %}
