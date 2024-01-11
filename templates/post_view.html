@@ -1,0 +1,113 @@
+{% load static %}
+{% include './links/link.html' %}
+{% include './forms/sub-header.html' %}
+{% load hitcount_tags %}
+
+<div class="container pt-5 mt-5">
+
+
+    <!-- ========SYSTEM MESSAGES======== -->
+    <div class="message-container mt-5">
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <h5 class="text-official text-center">
+            <span class="px-5 py-3 border border-success rounded">
+                {{message}}
+                <i class="icofont-tick-boxed"></i>
+            </span>
+        </h5>
+        {% elif message == 'error' %}
+        <h5 class="text-danger text-center">
+            <span class="px-5 py-3 border border-danger rounded">
+                <i class="icofont-close-line-squared-alt"></i>
+                {{message}}
+            </span>
+        </h5>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+    </div>
+    <!-- ======PAGE CONTENT===== -->
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-12 py-4">
+            
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12 pt-5">
+            <div class="section-header ">
+                <h3>Posts</h3>
+            </div>
+            <div class="shadow border rounded p-4">
+                <div class="content">
+                    <img src="{{post.user.picture.url}}" alt="user profile">
+                    {% if post.user.get_full_name %}
+                    <h5 class="d-inline font-weight-bold">{{post.user.get_full_name}}</h5>
+                    {% else %}
+                    <h5 class="d-inline font-weight-bold">Admin</h5>
+                    {% endif %}
+                </div>
+                <div class="post-container">
+                    <h3 class="my-3 font-weight-bold">{{post.title}}</h3>
+                    <p>{{post.text}}</p>
+                    <p>
+                        {% for pic in post.postimage_set.all %}
+                        <img src="{{pic.image.url}}" class="post-image rounded " alt="image">
+                        {% endfor %}
+                        <p class="text-small">
+                            <span class="text-secondary mr-2">updated at: </span>
+                            <span class="">{{post.created_at}}</span>
+                            <span class="ml-3"><i class="icofont-eye-alt"></i>&nbsp;</span>
+                            <span class="text-secondary">{% get_hit_count for post %}</span>
+                        </p>
+                    </p>
+                </div>
+            </div>
+            <div class="my-3">
+                <ul>
+                    <li class="nav-menu" type="none">
+                        <a href="#morePost" class="text-success" id="load-more-post">
+                            <h3>see more post...</h3>
+                        </a>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12"> 
+        </div>
+    </div>
+    <section id="morePost" >
+        <div class="container d-none more-post" data-aos="fade-up">
+            {% for post in all_posts %}
+            <div class="shadow p-4 rounded border my-3">
+                <div class="content">
+                    <img src="{{post.user.picture.url}}" alt="user profile">
+                    {% if post.user.get_full_name %}
+                    <h5 class="d-inline font-weight-bold">{{post.user.get_full_name}}</h5>
+                    {% else %}
+                    <h5 class="d-inline font-weight-bold">Admin</h5>
+                    {% endif %}
+                </div>
+                <div class="post-container">
+                    <h3 class="my-3 font-weight-bold">{{post.title}}</h3>
+                    <p>{{post.text}}</p>
+                    <p>
+                        {% for pic in post.postimage_set.all %}
+                        <img src="{{pic.image.url}}" class="post-image-all rounded " alt="image">
+                        {% endfor %}
+                        <p class="text-small">
+                            <span class="text-secondary mr-2">updated at: </span>
+                            <span class="">{{post.created_at}}</span>
+                            <span class="ml-3"><i class="icofont-eye-alt"></i>&nbsp;</span>
+                            <span class="text-secondary">{% get_hit_count for post %}</span>
+                        </p>
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    
+</div>
+<!-- ========PAGE CONTAINER END======= -->
+{% include './links/scripts.html' %}

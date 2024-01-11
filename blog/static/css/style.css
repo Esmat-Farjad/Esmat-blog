@@ -57,8 +57,16 @@ input[type='checkbox']{
   accent-color: #13a456;
   width: 15px;
   height: 15px;
- 
-
+}
+.post-image{
+  width: 100%;
+  height: 30%;
+  object-fit: cover;
+}
+.post-image-all{
+  width: 100%;
+  height: 40%;
+  object-fit: cover;
 }
 input[type='email']:focus,
 input[type='password']:focus,

@@ -63,8 +63,10 @@
         <div class="posts">
             {% for post in recent_post %}
             <div class="item-container">
+                <a href="{% url 'post_view' post.id %}">
                 <p class="post-title">{{post.title}}</p>
                 <p class="post-description">{{post.text}}</p>
+                </a>
             </div>
             {% endfor %}
         </div>

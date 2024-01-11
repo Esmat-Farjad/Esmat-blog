@@ -7,6 +7,11 @@
 (function($) {
   "use strict";
 
+  // load more post
+  $('#load-more-post').click(() => {
+    $('.more-post').toggleClass('d-none'); 
+  });
+
   // Preloader
   $(window).on('load', function() {
     if ($('#preloader').length) {
