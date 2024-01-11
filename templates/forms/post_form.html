@@ -1,9 +1,11 @@
 {% load static %}
 {% include '../links/link.html' %}
 {% include './sub-header.html' %}
-<div class="container py-3 mt-5">
+<div class="container pt-5 mt-5">
+
+
     <!-- ========SYSTEM MESSAGES======== -->
-    <div class="message-container my-3">
+    <div class="message-container mt-5">
         {% if messages %}
         {% for message in messages %}
         {% if message.tags == 'success' %}
