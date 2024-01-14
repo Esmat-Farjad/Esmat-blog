@@ -2,7 +2,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Comment, Post, PostImage
+from .models import Comment, Post, PostImage, Project, Feature, Technology, ProjectImage
 
 class UserRegistrationForm(UserCreationForm):
     class Meta:
@@ -43,7 +43,7 @@ class BlogPostForm(forms.ModelForm):
                 'class':'form-control shadow-none',
                 'required':True }),
             'text': forms.Textarea(attrs={
-                'class':'form-control shadow-none',
+                
                 'rows':6,
                 'required':True
                 })
@@ -80,13 +80,55 @@ class CommentForm(forms.ModelForm):
                     })
         }
 
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = "__all__"
+        exclude = ('created_at','id','image')   
+        widgets = {
+            'technology': forms.SelectMultiple(attrs={'multiple':'multiple'}),
+            'feature': forms.SelectMultiple(attrs={'multiple':'multiple'}),
+            'description':forms.Textarea(attrs={'rows':4})
+               
+        } 
     # def __init__(self, *args, **kwargs):
-    #     super(CommentForm, self).__init__(*args, **kwargs)
+    #     super(ProjectForm, self).__init__(*args, **kwargs)
     #     for visible in self.visible_fields():
-    #         visible.field.widget.attrs['class'] = ""
-            
-        
+    #         visible.field.widget.attrs['class'] = "form-control shadow-none mt-0 "
 
+            
+class FeatureForm(forms.ModelForm):
+    class Meta:
+        model = Feature
+        fields = "__all__"
+        exclude = ("project",)
+        widgets = {
+            'name':forms.TextInput(attrs={
+                'class':'form-control shadow-none mt-0',
+                'placeholder':'Enter features..'
+                })
+        }
+        
+class MultipleFileInput(forms.ClearableFileInput):
+    allow_multiple_selected = True
+class MultipleFileField(forms.FileField):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('widget', MultipleFileInput())
+        super().__init__(*args, **kwargs)
+    
+    def clean(self, data, initial=None):
+        single_file_clean = super().clean
+        if isinstance(data, (list, tuple)):
+            result = [single_file_clean(d, initial) for d in data]
+        else:
+            result = single_file_clean(data, initial)
+        return result
+class ProjectImageForm(forms.ModelForm):
+    image = MultipleFileField()
+    class Meta:
+        model = ProjectImage
+        fields = ['image']
+        
     
 
 

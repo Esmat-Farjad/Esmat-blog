@@ -56,7 +56,6 @@ class Comment(models.Model):
         return self.review
     
 class Technology(models.Model):
-
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=100)
 
@@ -64,32 +63,40 @@ class Technology(models.Model):
         return self.name  
 
 class Feature(models.Model):
-
     name = models.CharField(max_length=100)
     
     def __str__(self):
         return self.name
-    
+
+class ProjectImage(models.Model):
+    image = models.ImageField(default='default.jpg', upload_to="project_images")
+
+    def __str__(self) -> str:
+        return self.project.name  
 
 
 class Project(models.Model):
+    CATEGORY_CHOICES = [
+        ('Business','Business'),
+        ('Education','Education'),
+        ('Social','Social'),
+        ('Organization','Organization'),
+    ]
     name = models.CharField(max_length=250)
     description = models.TextField(max_length=500)
-    category = models.CharField(max_length=100)
+    category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)  
+    # =========RELATIONS==========
     technology = models.ManyToManyField(Technology)
     feature = models.ManyToManyField(Feature)
+    image = models.ManyToManyField(ProjectImage)
+
     link = models.URLField()
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
     
-class ProjectImage(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    image = models.ImageField(default='default.jpg', upload_to="project_images")
 
-    def __str__(self) -> str:
-        return self.project.name
     
 
 

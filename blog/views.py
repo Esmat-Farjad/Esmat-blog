@@ -1,7 +1,7 @@
 
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from .forms import CommentForm, UserRegistrationForm, BlogPostForm, PostImageForm
+from .forms import CommentForm, FeatureForm, ProjectForm, ProjectImageForm, UserRegistrationForm, BlogPostForm, PostImageForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import Post
@@ -108,7 +108,20 @@ def blog_view(request):
     return render(request, 'blogs_view.html')
 
 def add_project(request):
+    project_form = ProjectForm()
+    image_form = ProjectImageForm()
+    if request.method == 'POST':
+        project_form = ProjectForm(request.POST)
+        image_form = ProjectImageForm(request.POST, request.FILES)
+        if project_form.is_valid() and project_form.is_valid():
+            project_form.save()
+            image_form.save()
+            messages.success(request, "Project added successfully !")
+        
     context = {
+       
+        'project_form':project_form,
+        'image_form':image_form
 
     }
     return render(request, 'forms/add_project_form.html',context)

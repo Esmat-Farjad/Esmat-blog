@@ -48,40 +48,21 @@
             <div class="section-header ">
                 <h3>Add Project</h3>
             </div>
-            <form action="{% url 'add_project' %}" enctype="multipart/form-data" method="POST" class="px-3" >
+            <form action="{% url 'add_project' %}" enctype="multipart/form-data"  method="POST" class="px-3 w-full border" >
                 {% csrf_token %}
-                {% for field in post_form %}
+                {% for field in project_form %}
                 <label class="mt-2">{{field.label}}</label>
-                <div class="" >{{field}}</div>
+                <div class="form-floating" >{{field}}</div>
                 <h6 class="text-danger mt-0 pt-0">{{field.errors}}</h6>
                 {% endfor %}
-                {% for field in image_form %}
-                <label class="mt-2">{{field.label}}</label>
-                {{field}}
-                <h6 class="text-danger mt-0 pt-0">{{field.errors}}</h6>
-                {% endfor %}
+                {{image_form}}
                 <div class="text-center my-5">
-                    <button type="submit">Post</button>
+                    <button type="submit">ADD</button>
                 </div>
             </form>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
             
-        </div>
-    </div>
-    <div class="post-container my-5">
-        <div class="section-header ">
-            <h3>Created Post</h3>
-        </div>
-        <div class="posts">
-            {% for post in recent_post %}
-            <div class="item-container">
-                <a href="{% url 'post_view' post.id %}">
-                <p class="post-title">{{post.title}}</p>
-                <p class="post-description">{{post.text}}</p>
-                </a>
-            </div>
-            {% endfor %}
         </div>
     </div>
 </div>
