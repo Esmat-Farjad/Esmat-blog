@@ -106,3 +106,9 @@ def portfolio(request):
 
 def blog_view(request):
     return render(request, 'blogs_view.html')
+
+def add_project(request):
+    context = {
+
+    }
+    return render(request, 'forms/add_project_form.html',context)
