@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from .forms import CommentForm, FeatureForm, ProjectForm, ProjectImageForm, UserRegistrationForm, BlogPostForm, PostImageForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import Post
+from .models import Post, Project
 from hitcount.views import HitCountDetailView
 
 # Create your views here.
@@ -109,19 +109,15 @@ def blog_view(request):
 
 def add_project(request):
     project_form = ProjectForm()
-    image_form = ProjectImageForm()
+    project = Project.objects.all().order_by('-created_at')[:5]
     if request.method == 'POST':
         project_form = ProjectForm(request.POST)
-        image_form = ProjectImageForm(request.POST, request.FILES)
+        
         if project_form.is_valid() and project_form.is_valid():
             project_form.save()
-            image_form.save()
             messages.success(request, "Project added successfully !")
-        
     context = {
-       
         'project_form':project_form,
-        'image_form':image_form
-
+        'project':project
     }
     return render(request, 'forms/add_project_form.html',context)

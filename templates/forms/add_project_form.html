@@ -48,21 +48,28 @@
             <div class="section-header ">
                 <h3>Add Project</h3>
             </div>
-            <form action="{% url 'add_project' %}" enctype="multipart/form-data"  method="POST" class="px-3 w-full border" >
+            <form action="{% url 'add_project' %}" enctype="multipart/form-data"  method="POST" class="px-3 w-full" >
                 {% csrf_token %}
                 {% for field in project_form %}
                 <label class="mt-2">{{field.label}}</label>
                 <div class="form-floating" >{{field}}</div>
                 <h6 class="text-danger mt-0 pt-0">{{field.errors}}</h6>
                 {% endfor %}
-                {{image_form}}
                 <div class="text-center my-5">
                     <button type="submit">ADD</button>
                 </div>
             </form>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
-            
+            {% for p in project %}
+            <a href="#">
+                <p>{{p.name}}</p>
+                <p>{{p.description}}</p>
+                <p>{{p.feature}}</p>
+                <p>{{p.technology}}</p>
+                <p>{{p.link}}</p>
+            </a>
+            {% endfor %}
         </div>
     </div>
 </div>

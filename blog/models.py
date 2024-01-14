@@ -68,11 +68,7 @@ class Feature(models.Model):
     def __str__(self):
         return self.name
 
-class ProjectImage(models.Model):
-    image = models.ImageField(default='default.jpg', upload_to="project_images")
 
-    def __str__(self) -> str:
-        return self.project.name  
 
 
 class Project(models.Model):
@@ -88,13 +84,18 @@ class Project(models.Model):
     # =========RELATIONS==========
     technology = models.ManyToManyField(Technology)
     feature = models.ManyToManyField(Feature)
-    image = models.ManyToManyField(ProjectImage)
 
     link = models.URLField()
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
+class ProjectImage(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    image = models.ImageField(default='default.jpg', upload_to="project_images")
+
+    def __str__(self) -> str:
+        return self.project.name  
     
 
     
