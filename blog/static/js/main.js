@@ -12,6 +12,10 @@
     $('.more-post').toggleClass('d-none'); 
   });
 
+  $(".upload-item").on('mouserover', function(){
+    $(".upload-toggle").toggleClass("d-none");
+  });
+
   // Preloader
   $(window).on('load', function() {
     if ($('#preloader').length) {

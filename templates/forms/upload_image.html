@@ -1,0 +1,165 @@
+{% load static %}
+{% include '../links/link.html' %}
+{% include './sub-header.html' %}
+
+   <!-- ======= Breadcrumbs Section ======= -->
+   <section class="breadcrumbs">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2>Upload images</h2>
+        <ol>
+          <li><a href="{%  url 'index' %}">Home</a></li>
+          <li><a href="{% url 'create_post' %}">View Project</a></li>
+          <li>upload images</li>
+        </ol>
+      </div>
+    </div>
+  </section><!-- Breadcrumbs Section -->
+<!-- ======PAGE CONTENT===== -->
+    <!-- ========SYSTEM MESSAGES======== -->
+    <div class="message-container mt-5">
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <h5 class="text-official text-center">
+            <span class="px-5 py-3 border border-success rounded">
+                {{message}}
+                <i class="icofont-tick-boxed"></i>
+            </span>
+        </h5>
+        {% elif message == 'error' %}
+        <h5 class="text-danger text-center">
+            <span class="px-5 py-3 border border-danger rounded">
+                <i class="icofont-close-line-squared-alt"></i>
+                {{message}}
+            </span>
+        </h5>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+    </div>
+    
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section class="portfolio-details">
+        <div class="container">
+            <div class="portfolio-details-container">
+                <div class="owl-carousel portfolio-details-carousel">
+                    {% for img in project.projectimage_set.all %}
+                        <img src="{{img.image.url}}" class="img-fluid project-image-slide" alt="">
+                    {% endfor %}
+                </div>
+                <div class="portfolio-info">
+                <h3>Project information</h3>
+                <ul>
+                    <li><strong>Category</strong>:{{project.category}}</li>
+                    <li><strong>Technology</strong>:
+                    {% for t in project.technology.all %}
+                        <span>{{t.name}}</span> |
+                    {% endfor %}
+                    </li>
+                    <li><strong>Project date</strong>: {{project.created_at}}</li>
+                    <li><strong>Project URL</strong>: <a href="#">{{project.link}}</a></li>
+                </ul>
+                </div>
+            </div>
+            <div class="portfolio-description">
+                <h2>{{project.name}}</h2>
+                <p>{{project.description}}</p>
+                
+                <div>
+                    <div>
+                        <h6 class="d-block">Upload Project Images</h6>
+                    </div>
+                    <form action="" enctype="multipart/form-data"  method="POST" class="px-3 w-full" >
+                        {% csrf_token %}
+                        {{image_form}}
+                        <div class="text-center my-5">
+                            <button type="submit">upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>  
+        </div>
+        
+    </section><!-- End Portfolio Details Section -->
+  
+    </main><!-- End #main -->
+    <!-- ======PAGE CONTENT===== -->
+    
+    
+
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-info">
+            <h3>BizPage</h3>
+            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="ion-ios-arrow-right"></i> <a href="#">Home</a></li>
+              <li><i class="ion-ios-arrow-right"></i> <a href="#">About us</a></li>
+              <li><i class="ion-ios-arrow-right"></i> <a href="#">Services</a></li>
+              <li><i class="ion-ios-arrow-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="ion-ios-arrow-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h4>Contact Us</h4>
+            <p>
+              A108 Adam Street <br>
+              New York, NY 535022<br>
+              United States <br>
+              <strong>Phone:</strong> +1 5589 55488 55<br>
+              <strong>Email:</strong> info@example.com<br>
+            </p>
+
+            <div class="social-links">
+              <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+              <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+              <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+              <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+            </div>
+
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna veniam enim veniam illum dolore legam minim quorum culpa amet magna export quem marada parida nodela caramase seza.</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>BizPage</strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!--
+        All the links in the footer should remain intact.
+        You can delete the links only if you purchased the pro version.
+        Licensing information: https://bootstrapmade.com/license/
+        Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=BizPage
+      -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+<!-- ========PAGE CONTAINER END======= -->
+{% include '../links/scripts.html' %}

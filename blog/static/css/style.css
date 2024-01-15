@@ -8,6 +8,28 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+.project-info a{
+  color: #000;
+}
+.project-image-slide{
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+
+}
+.project-info{
+  border-left: 2px solid #13a456;
+  margin: 10px 0px;
+  padding:5px;
+  border-radius: 5px;
+
+}
+.project-info:hover a{
+  color: #13a456;
+}
+.project-info:hover{
+  background-color: rgb(207, 207, 207);
+}
 input[type="file"]::file-selector-button{
   border: 1px solid #13a456;
   border-radius: 5px;

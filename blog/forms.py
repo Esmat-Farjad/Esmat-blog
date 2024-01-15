@@ -1,5 +1,6 @@
 
 from django import forms
+
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Comment, Post, PostImage, Project, Feature, Technology, ProjectImage
@@ -110,9 +111,11 @@ class FeatureForm(forms.ModelForm):
         }
 
 class ProjectImageForm(forms.ModelForm):
+    
     class Meta:
         model = ProjectImage
         fields = ['image']
+       
 
 # select multiple file 
 # class MultipleFileInput(forms.ClearableFileInput):

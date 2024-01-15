@@ -336,95 +336,6 @@
 
       <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap">
-            <figure>
-              <img src="{% static '/img/portfolio/app1.jpg' %}" class="img-fluid" alt="">
-              <a href="{% static '/img/portfolio/app1.jpg' %}" data-lightbox="portfolio" data-title="App 1" class="link-preview"><i class="ion ion-eye"></i></a>
-              <a href="{% url 'portfolio' %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-            </figure>
-
-            <div class="portfolio-info">
-              <h4><a href="{% url 'portfolio' %}">App 1</a></h4>
-              <p>App</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-          <div class="portfolio-wrap">
-            <figure>
-              <img src="{% static 'img/portfolio/web3.jpg' %}" class="img-fluid" alt="">
-              <a href="{% static 'img/portfolio/web3.jpg' %}" class="link-preview venobox" data-gall="portfolioGallery" title="Web 3"><i class="ion ion-eye"></i></a>
-              <a href="{% url 'portfolio' %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-            </figure>
-
-            <div class="portfolio-info">
-              <h4><a href="{% url 'portfolio' %}">Web 3</a></h4>
-              <p>Web</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap">
-            <figure>
-              <img src="{% static 'img/portfolio/app2.jpg' %}" class="img-fluid" alt="">
-              <a href="{% static 'img/portfolio/app2.jpg' %}" class="link-preview venobox" data-gall="portfolioGallery" title="App 2"><i class="ion ion-eye"></i></a>
-              <a href="{% url 'portfolio' %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-            </figure>
-
-            <div class="portfolio-info">
-              <h4><a href="{% url 'portfolio' %}">App 2</a></h4>
-              <p>App</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-          <div class="portfolio-wrap">
-            <figure>
-              <img src="{% static 'img/portfolio/card2.jpg' %}" class="img-fluid" alt="">
-              <a href="{% static 'img/portfolio/card2.jpg' %}" class="link-preview venobox" data-gall="portfolioGallery" title="Card 2"><i class="ion ion-eye"></i></a>
-              <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-            </figure>
-
-            <div class="portfolio-info">
-              <h4><a href="#">{{blog.title}}</a></h4>
-              <p>Blog</p>
-            </div>
-          </div>
-        </div> -->
-        
-        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-          <div class="portfolio-wrap">
-            <figure>
-              <img src="{% static '/img/portfolio/web2.jpg' %}" class="img-fluid" alt="">
-              <a href="{% static '/img/portfolio/web2.jpg' %}" class="link-preview venobox" data-gall="portfolioGallery" title="Web 2"><i class="ion ion-eye"></i></a>
-              <a href="{% url 'portfolio' %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-            </figure>
-
-            <div class="portfolio-info">
-              <h4><a href="{% url 'portfolio' %}">Web 2</a></h4>
-              <p>Web</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap">
-            <figure>
-              <img src="{% static 'img/portfolio/app3.jpg' %}" class="img-fluid" alt="">
-              <a href="{% static 'img/portfolio/app3.jpg' %}" class="link-preview venobox" data-gall="portfolioGallery" title="App 3"><i class="ion ion-eye"></i></a>
-              <a href="{% url 'portfolio' %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-            </figure>
-
-            <div class="portfolio-info">
-              <h4><a href="{% url 'portfolio' %}">App 3</a></h4>
-              <p>App</p>
-            </div>
-          </div>
-        </div>
         {% for blog in blogs %}
         <div class="col-lg-4 col-md-6 portfolio-item filter-card">
           <div class="portfolio-wrap">
@@ -445,35 +356,25 @@
           </div>
         </div>
         {% endfor %}
-        <!-- <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-          <div class="portfolio-wrap">
-            <figure>
-              <img src="{% static 'img/portfolio/card3.jpg' %}" class="img-fluid" alt="">
-              <a href="{% static 'img/portfolio/card3.jpg' %}" class="link-preview venobox" data-gall="portfolioGallery" title="Card 3"><i class="ion ion-eye"></i></a>
-              <a href="{% url 'portfolio' %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-            </figure>
 
-            <div class="portfolio-info">
-              <h4><a href="{% url 'portfolio' %}">Card 3</a></h4>
-              <p>Card</p>
-            </div>
-          </div>
-        </div> -->
-
+        {% for app in project %}
         <div class="col-lg-4 col-md-6 portfolio-item filter-web">
           <div class="portfolio-wrap">
             <figure>
               <img src="{% static 'img/portfolio/web1.jpg' %}" class="img-fluid" alt="">
               <a href="{% static 'img/portfolio/web1.jpg' %}" class="link-preview venobox" data-gall="portfolioGallery" title="Web 1"><i class="ion ion-eye"></i></a>
-              <a href="{% url 'portfolio' %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
+              <a href="{% url 'portfolio' app.id %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
             </figure>
 
             <div class="portfolio-info">
-              <h4><a href="{% url 'portfolio' %}">Task Manager</a></h4>
-              <p>Web</p>
+              <h4><a href="{% url 'portfolio' app.id %}">{{app.name}}</a></h4>
+              {% for tech in app.technology.all %}
+              <p class="d-inline">{{tech.name}}</p> |
+              {% endfor %}
             </div>
           </div>
         </div>
+        {% endfor %}
 
       </div>
 

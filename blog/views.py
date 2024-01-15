@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from .forms import CommentForm, FeatureForm, ProjectForm, ProjectImageForm, UserRegistrationForm, BlogPostForm, PostImageForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import Post, Project
+from .models import Post, Project, ProjectImage
 from hitcount.views import HitCountDetailView
 
 # Create your views here.
@@ -16,6 +16,7 @@ class PostDetailView(HitCountDetailView):
 
 def index(request):
     blogs = Post.objects.all().order_by('-created_at')[:3]
+    project = Project.objects.all().order_by('-created_at')[:3]
     comment_form = CommentForm()
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
@@ -28,7 +29,11 @@ def index(request):
             comment_form = CommentForm(request.POST)
             messages.error(request, "Oops...Something went wrong !")
     
-    context = {'blogs':blogs,'comment_form':comment_form}
+    context = {
+        'blogs':blogs,
+        'comment_form':comment_form,
+        'project':project,
+        }
     
     return render(request, 'index.html', context)
 
@@ -101,23 +106,51 @@ def post_view(request, pid):
 def update_profile(request):
     return render(request, 'profile.html')
 
-def portfolio(request):
-    return render(request, 'portfolio-details.html')
+def portfolio(request, pk):
+    if pk:
+        project = Project.objects.get(id=pk)
+        context = {
+            'project':project
+        }
+    return render(request, 'portfolio-details.html',context)
 
 def blog_view(request):
     return render(request, 'blogs_view.html')
 
 def add_project(request):
     project_form = ProjectForm()
+    image_form = ProjectImageForm()
     project = Project.objects.all().order_by('-created_at')[:5]
     if request.method == 'POST':
         project_form = ProjectForm(request.POST)
-        
-        if project_form.is_valid() and project_form.is_valid():
-            project_form.save()
-            messages.success(request, "Project added successfully !")
+        image_form = ProjectImageForm(request.POST, request.FILES)
+        if project_form.is_valid() and image_form.is_valid():
+            pro = project_form.save()
+            img = image_form.save(commit=False)
+            img.project = pro
+            img.save()
+            messages.success(request, f"{pro} was added successfully. please upload project images.")
+            
     context = {
         'project_form':project_form,
-        'project':project
+        'project':project,
+        'image_form':image_form
+
     }
     return render(request, 'forms/add_project_form.html',context)
+
+def upload_image(request, pk):
+    image_form = ProjectImageForm()
+    project = Project.objects.get(id=pk)
+    if request.method == 'POST':
+        image_form = ProjectImageForm(request.POST, request.FILES)
+        if image_form.is_valid():
+            img = image_form.save(commit=False)
+            img.project_id = pk
+            img.save()
+        else:
+            messages.error(request, "Oops...Something went wrong please try again.")
+
+    context={'image_form':image_form,'project':project}
+    return render(request, 'forms/upload_image.html', context)
+
