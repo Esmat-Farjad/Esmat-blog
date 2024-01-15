@@ -1,0 +1,54 @@
+{% load static %}
+{% include './links/link.html' %}
+{% include './forms/sub-header.html' %}
+{% load hitcount_tags %}
+
+<div class="container mt-5">
+
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <!-- ======= Breadcrumbs Section ======= -->
+   <section class="breadcrumbs">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2>Projects</h2>
+        <ol>
+          <li><a href="{%  url 'index' %}">Home</a></li>
+          <li><a href="{% url 'add_project' %}">Add Project</a></li>
+          <li>Projects</li>
+        </ol>
+      </div>
+    </div>
+  </section><!-- Breadcrumbs Section -->
+    <!-- ======PAGE CONTENT===== -->
+    <div class="section-header mb-3">
+        <h3>Add Project</h3>
+    </div>
+    <section id="portfolio" class="section-bg">
+    <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+        {% for app in projects %}
+
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                <div class="portfolio-wrap">
+                  <figure>
+                    <img src="{% static 'img/portfolio/web1.jpg' %}" class="img-fluid" alt="">
+                    <a href="{% static 'img/portfolio/web1.jpg' %}" class="link-preview venobox" data-gall="portfolioGallery" title="Web 1"><i class="ion ion-eye"></i></a>
+                    <a href="{% url 'portfolio' app.id %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
+                  </figure>
+      
+                  <div class="portfolio-info">
+                    <h4><a href="{% url 'portfolio' app.id %}">{{app.name}}</a></h4>
+                    {% for tech in app.technology.all %}
+                    <p class="d-inline">{{tech.name}}</p> |
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+     
+        {% endfor %}
+    </div>
+</section>
+    
+</div>
+<!-- ========PAGE CONTAINER END======= -->
+{% include './links/scripts.html' %}

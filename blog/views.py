@@ -154,3 +154,9 @@ def upload_image(request, pk):
     context={'image_form':image_form,'project':project}
     return render(request, 'forms/upload_image.html', context)
 
+def project_list(request):
+    projects = Project.objects.all().order_by('-created_at')
+    context = {
+        'projects':projects
+    }
+    return render(request, 'project_list.html',context)
