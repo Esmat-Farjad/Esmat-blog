@@ -35,7 +35,7 @@ class Profile(models.Model):
     position = models.CharField(max_length=100, blank=True, null=True)
     contact = models.IntegerField(blank=True, null=True)
     address = models.CharField(max_length=100, null=True, blank=True)
-    picture = models.ImageField(upload_to='profile_image', null=True, blank=True)
+    picture = models.ImageField(default='default.svg', upload_to='profile_image', null=True, blank=True)
 
     def __str__(self):
         return self.user.username

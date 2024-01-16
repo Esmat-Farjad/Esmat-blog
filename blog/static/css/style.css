@@ -12,10 +12,9 @@
   color: #000;
 }
 .profile-picture{
-  width: 16%;
-  height: 16%;
   object-fit: cover;
-  border-radius: 5px;
+  border: 3px solid #13a456;
+ 
 }
 .project-image-slide{
   width: 100%;
