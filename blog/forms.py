@@ -3,7 +3,7 @@ from django import forms
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Comment, Post, PostImage, Project, Feature, Technology, ProjectImage
+from .models import Comment, Post, PostImage, Profile, Project, Feature, Technology, ProjectImage
 
 class UserRegistrationForm(UserCreationForm):
     class Meta:
@@ -33,6 +33,17 @@ class UserRegistrationForm(UserCreationForm):
         if qs.exists():
             raise forms.ValidationError(f"{username} is already exists. please pick another")
         return username
+    
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = "__all__"
+        exclude = ('user',)
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name','last_name','email']
+        
 
 class BlogPostForm(forms.ModelForm):
     class Meta:

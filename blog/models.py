@@ -30,9 +30,11 @@ class PostImage(models.Model):
         return self.post.title
     
 class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
 
     position = models.CharField(max_length=100, blank=True, null=True)
+    contact = models.IntegerField(blank=True, null=True)
+    address = models.CharField(max_length=100, null=True, blank=True)
     picture = models.ImageField(upload_to='profile_image', null=True, blank=True)
 
     def __str__(self):

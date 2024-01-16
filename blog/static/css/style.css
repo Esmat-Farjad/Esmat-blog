@@ -11,6 +11,12 @@
 .project-info a{
   color: #000;
 }
+.profile-picture{
+  width: 16%;
+  height: 16%;
+  object-fit: cover;
+  border-radius: 5px;
+}
 .project-image-slide{
   width: 100%;
   max-height: 500px;
@@ -70,6 +76,7 @@ label{
 }
 select,
 textarea,
+input[type='number'],
 input[type='url'],
 input[type='email'],
 input[type='password'],
@@ -97,6 +104,7 @@ input[type='checkbox']{
 }
 select:focus,
 textarea:focus,
+input[type='number']:focus,
 input[type='email']:focus,
 input[type='password']:focus,
 input[type='url']:focus,

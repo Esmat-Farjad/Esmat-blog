@@ -1,12 +1,22 @@
 
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from .forms import CommentForm, FeatureForm, ProjectForm, ProjectImageForm, UserRegistrationForm, BlogPostForm, PostImageForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import Post, Project, ProjectImage
+from django.contrib.auth.models import User
+from .models import Post, Profile, Project, ProjectImage
 from hitcount.views import HitCountDetailView
-
+from .forms import (
+    CommentForm,
+      FeatureForm, 
+      ProfileUpdateForm, 
+      ProjectForm, 
+      ProjectImageForm, 
+      UserRegistrationForm, 
+      BlogPostForm, 
+      PostImageForm, 
+      UserUpdateForm
+)
 # Create your views here.
 class PostDetailView(HitCountDetailView):
     model = Post
@@ -104,7 +114,33 @@ def post_view(request, pid):
     return render(request, 'post_view.html', context)
 
 def update_profile(request):
-    return render(request, 'profile.html')
+    user = request.user
+    user_form = UserUpdateForm(instance=user)
+    profile_form = ProfileUpdateForm(instance=user.profile)
+    user = User.objects.get(id=user.id)
+   
+    if request.method == 'POST':
+        user_form = UserUpdateForm(request.POST, instance=user)
+        profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=user.profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            if Profile.objects.get(user=request.user):
+                profile_form.save()
+            else:
+                profile = profile_form.save(commit=False)
+                profile.user = request.user
+                profile.save()
+            messages.success(request, 'Profile updated ')
+        else:
+            messages.error(request, "Invalid Form...")
+    
+    context = {
+        'user_form':user_form,
+        'profile_form':profile_form,
+        'user':user
+    }
+    return render(request, 'forms/update_profile.html', context)
 
 def portfolio(request, pk):
     if pk:
@@ -160,3 +196,4 @@ def project_list(request):
         'projects':projects
     }
     return render(request, 'project_list.html',context)
+
