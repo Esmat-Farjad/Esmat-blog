@@ -29,26 +29,39 @@
         
     </div>
     <!-- ======PAGE CONTENT===== -->
-    
-    <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-12">
-
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="section-header ">
                 <h3>Sign Up</h3>
             </div>
+            <h5 class="text-center pb-0 mb-0">Welcome</h5>
+            <h6 class="text-center px-5">
+                Join our community and unlock a world of possibilities.
+                Sign up now to create your account and start exploring the features and benefits we have to offer. <br>
+                <small class="text-success">To get started, please provide the following information.</small>
+            </h6>
+            
             <form action="{% url 'signup' %}" method="POST">
                 {% csrf_token %}
-                {% for field in user_form %}
-                <label class="mb-0-0">{{field.label}}</label>
-                {{field}}
-                <h6 class="text-danger mt-0 pt-0 text-small">{{field.errors}}</h6>
-                {% endfor %}
-                <div class="form-check mt-2">
-                    <input class="form-check-input" type="checkbox" id="agree" required>
-                    <label class="text-sm" for="agree">I agree to <a href="#">Terms and conditions</a></label>
+                <div class="row px-5">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        {% for field in user_form %}
+                        <label class="mb-0-0">{{field.label}}</label>
+                        {{field}}
+                        <h6 class="text-danger mt-0 pt-0 text-small">{{field.errors}}</h6>
+                        {% endfor %}
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        {% for field in profile_form %}
+                        <label>{{field.label}}</label>
+                        {{field}}
+                        <h6 class="text-danger mt-0 pt-0 text-small">{{field.errors}}</h6>
+                        {% endfor %}
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" id="agree" required>
+                            <label class="text-sm" for="agree">I agree to <a href="#">Terms and conditions</a></label>
+                        </div>
+                    </div>
                 </div>
+                
                 <div class="text-center my-3">
                     <button type="submit">Sign Up</button>
                 </div>
@@ -56,10 +69,5 @@
                     <a href="{% url 'signin' %}">Sign In</a>
                 </p>
             </form>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-            
-        </div>
-    </div>
 </div>
 {% include '../links/scripts.html' %}

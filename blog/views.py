@@ -62,21 +62,27 @@ def signin(request):
 
     return render(request, 'forms/signin.html')
 def signup(request):
-    
+    user_form = UserRegistrationForm()
+    profile_form = ProfileUpdateForm()
     if request.method == "POST":
-        form = UserRegistrationForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get("username")
-            form.save()
+        user_form = UserRegistrationForm(request.POST)
+        profile_form = ProfileUpdateForm(request.POST, request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            username = user_form.cleaned_data.get("username")
+            user = user_form.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
             messages.success(request, f"{username} registered successfully !")
-            
         else:
             messages.error(request, "Form is not valid Sorry !")
-            form = UserRegistrationForm(request.POST)
-    else:
-        form = UserRegistrationForm()
-    context = {'user_form':form}
+            
+    context = {
+        'user_form':user_form,
+        'profile_form':profile_form
+        }
     return render(request, 'forms/signup.html', context)
+
 def signout(request):
     logout(request)
     return render(request, 'index.html')
