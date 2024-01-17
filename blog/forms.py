@@ -50,7 +50,6 @@ class BlogPostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title','text']
-
         widgets = {
             'title': forms.TextInput(attrs={
                 'class':'form-control shadow-none',
@@ -62,8 +61,6 @@ class BlogPostForm(forms.ModelForm):
                 })
         }
         
-    
-
 class PostImageForm(forms.ModelForm):
     class Meta:
         model = PostImage

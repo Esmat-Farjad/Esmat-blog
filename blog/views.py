@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
-from .models import Post, Profile, Project, ProjectImage
+from .models import Comment, Post, Profile, Project, ProjectImage
 from hitcount.views import HitCountDetailView
 from .forms import (
     CommentForm,
@@ -28,21 +28,11 @@ class PostDetailView(HitCountDetailView):
 def index(request):
     blogs = Post.objects.all().order_by('-created_at')[:3]
     project = Project.objects.all().order_by('-created_at')[:3]
-    comment_form = CommentForm()
-    if request.method == 'POST':
-        comment_form = CommentForm(request.POST)
-        if comment_form.is_valid():
-            comment = comment_form.save(commit=False)
-            comment.user = request.user
-            comment.save()
-            messages.success(request, "Your review posted successfully ! Thanks...")
-        else:
-            comment_form = CommentForm(request.POST)
-            messages.error(request, "Oops...Something went wrong !")
+    comments = Comment.objects.select_related('user').order_by('-created_at')[:5]
     
     context = {
+        'comments':comments,
         'blogs':blogs,
-        'comment_form':comment_form,
         'project':project,
         }
     
@@ -218,3 +208,19 @@ def change_password(request):
         'password_form':password_form
     }
     return render(request, 'forms/change_password.html', context)
+
+def user_review(request):
+    comment_form = CommentForm()
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid:
+            comment = comment_form.save(commit=False)
+            comment.user = request.user
+            comment.save()
+            messages.success(request, "Thanks ! your review submitted.")
+        else:
+            messages.error(request, "Invalid Operations")
+    context = {
+        'comment_form':comment_form
+    }
+    return render(request, 'forms/user_review.html',context)

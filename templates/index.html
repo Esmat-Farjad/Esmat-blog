@@ -410,19 +410,19 @@
         <header class="section-header">
           <h3>Testimonials</h3>
         </header>
-
         <div class="owl-carousel testimonials-carousel">
-
+          {% for comment in comments %}
           <div class="testimonial-item">
-            <img src="{% static 'img/testimonial-1.jpg' %}" class="testimonial-img" alt="">
-            <h3>Saul Goodman</h3>
-            <h4>Ceo &amp; Founder</h4>
+            <img src="{{comment.user.profile.picture.url}}" class="testimonial-img" alt="">
+            <h3>{{comment.user.get_full_name}}</h3>
+            <h4>{{comment.user.profile.position}}</h4>
             <p>
               <img src="{% static 'img/quote-sign-left.png' %}" class="quote-sign-left" alt="">
-              Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+              {{comment.review}}
               <img src="{% static 'img/quote-sign-right.png' %}" class="quote-sign-right" alt="">
             </p>
           </div>
+          {% endfor %}
 
           <div class="testimonial-item">
             <img src="{% static 'img/testimonial-2.jpg' %}" class="testimonial-img" alt="">

@@ -20,4 +20,5 @@ urlpatterns = [
     path('project/view', views.project_list, name='project_list'),
     path('profile/update', views.update_profile, name='update_profile'),
     path('password/change', views.change_password, name='change_password'),
+    path('user/review', views.user_review, name='user_review'),
 ]
