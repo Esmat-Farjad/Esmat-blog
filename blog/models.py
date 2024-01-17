@@ -63,6 +63,17 @@ class Feature(models.Model):
     def __str__(self):
         return self.name
 
+class Team(models.Model):
+    # =======RELATIONS======
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.SET_NULL)
+   
+
+    linkedin = models.CharField(max_length=100, null=True, blank=True)
+    twitter = models.CharField(max_length=100, null=True, blank=True)
+    facebook = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
 
 
 

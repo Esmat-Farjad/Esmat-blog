@@ -7,7 +7,8 @@ Comment,
 Technology,
 Feature,
 Project,
-ProjectImage
+ProjectImage,
+Team
 )
 
 
@@ -20,3 +21,4 @@ admin.site.register(Project)
 admin.site.register(ProjectImage)
 admin.site.register(Technology)
 admin.site.register(Feature)
+admin.site.register(Team)

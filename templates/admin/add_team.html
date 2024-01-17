@@ -1,0 +1,91 @@
+{% load static %}
+{% include '../links/link.html' %}
+{% include '../forms/sub-header.html' %}
+<div class="container">
+
+   <!-- ======= Breadcrumbs Section ======= -->
+   <section class="breadcrumbs">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2>Add Team</h2>
+        <ol>
+          <li><a href="{%  url 'index' %}">Home</a></li>
+          <li><a href="{% url 'add_project' %}">Add Project</a></li>
+          <li>Add Team</li>
+        </ol>
+      </div>
+    </div>
+  </section><!-- Breadcrumbs Section -->
+    <!-- ======PAGE CONTENT===== -->
+    <!-- ========SYSTEM MESSAGES======== -->
+    <div class="message-container mt-5">
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <h5 class="text-official text-center">
+            <span class="px-5 py-3 border border-success rounded">
+                {{message}}
+                <i class="icofont-tick-boxed"></i>
+            </span>
+        </h5>
+        {% elif message == 'error' %}
+        <h5 class="text-danger text-center">
+            <span class="px-5 py-3 border border-danger rounded">
+                <i class="icofont-close-line-squared-alt"></i>
+                {{message}}
+            </span>
+        </h5>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+    </div>
+    <!-- ======PAGE CONTENT===== -->
+    <div class="section-header mb-3">
+        <h3>Add Team</h3>
+    </div>
+    <div class="row">
+        <form action="{% url 'add_team' %}" enctype="multipart/form-data" method="POST" class="px-3 w-full" >
+            {% csrf_token %}
+            <div class="row">
+            {% for field in team_form %}
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <label>{{field.label}}</label>
+                {{field}}
+                <small class="d-block text-danger mt-0 pt-0">{{field.errors}}</small>
+            </div>
+            {% endfor %}
+            </div>
+            {{image_form}}
+            <div class="text-center my-3">
+                <button type="submit">ADD</button>
+            </div>
+        </form>
+    </div>
+    <hr>
+    <h5 class="my-2 text-center">
+        Project List
+    </h5>
+    {% if project %}
+    {% for p in project %}
+        <div class="project-info">
+            <a href="{% url 'upload_image' p.id %}">
+                <h5 class="p-0 m-0 post-tilte d-inline">{{p.name}}</h5>
+                <h6  class="p-0 m-0 post-description">{{p.description}}</h6>
+            </a>
+        </div>
+    {% endfor %}
+    
+    {% else %}
+    <div class="text-center my-3">
+        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" viewBox="0 0 512 512">
+            <path fill="#cfcfcf" d="M386.3 160H336c-17.7 0-32 14.3-32 32s14.3 32 32 32H464c17.7 0 32-14.3 32-32V64c0-17.7-14.3-32-32-32s-32 14.3-32 32v51.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0s-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3s163.8-62.5 226.3 0L386.3 160z"/>
+        </svg>
+        <h5 class="p-0 m-0">No Project Found.</h5>
+        <small class="text-dark">Lets create one !</small>
+    </div>
+    {% endif %}
+   
+</div>
+
+<!-- ========PAGE CONTAINER END======= -->
+{% include '../links/scripts.html' %}

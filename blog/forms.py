@@ -3,7 +3,7 @@ from django import forms
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Comment, Post, PostImage, Profile, Project, Feature, Technology, ProjectImage
+from .models import Comment, Post, PostImage, Profile, Project, Feature, Team, Technology, ProjectImage
 
 class UserRegistrationForm(UserCreationForm):
     class Meta:
@@ -119,7 +119,11 @@ class ProjectImageForm(forms.ModelForm):
         model = ProjectImage
         fields = ['image']
     
-      
+class TeamForm(forms.ModelForm):
+    class Meta:
+        model = Team
+        fields = "__all__"  
+        
     
 
 

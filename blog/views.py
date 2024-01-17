@@ -4,14 +4,15 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
-from .models import Comment, Post, Profile, Project, ProjectImage
+from .models import Comment, Post, Profile, Project, ProjectImage, Team
 from hitcount.views import HitCountDetailView
 from .forms import (
     CommentForm,
       FeatureForm, 
       ProfileUpdateForm, 
       ProjectForm, 
-      ProjectImageForm, 
+      ProjectImageForm,
+    TeamForm, 
       UserRegistrationForm, 
       BlogPostForm, 
       PostImageForm, 
@@ -29,11 +30,13 @@ def index(request):
     blogs = Post.objects.all().order_by('-created_at')[:3]
     project = Project.objects.all().order_by('-created_at')[:3]
     comments = Comment.objects.select_related('user').order_by('-created_at')[:5]
+    team = Team.objects.all()
     
     context = {
         'comments':comments,
         'blogs':blogs,
         'project':project,
+        'team_member':team,
         }
     
     return render(request, 'index.html', context)
@@ -170,7 +173,7 @@ def add_project(request):
         'image_form':image_form
 
     }
-    return render(request, 'forms/add_project_form.html',context)
+    return render(request, 'admin/add_project_form.html',context)
 
 def upload_image(request, pk):
     image_form = ProjectImageForm()
@@ -224,3 +227,19 @@ def user_review(request):
         'comment_form':comment_form
     }
     return render(request, 'forms/user_review.html',context)
+
+def add_team(request):
+    team_form = TeamForm()
+    if request.method == 'POST':
+        team_form = TeamForm(request.POST)
+        
+        if team_form.is_valid():
+            user = team_form.cleaned_data.get('user')
+            team_form.save()
+            messages.success(request, f"{user} added as team memeber successfully.")
+        else:
+            messages.error(request, "Oops...something went wrong !")
+    context = {
+        'team_form':team_form
+    }
+    return render(request, 'admin/add_team.html',context)
