@@ -39,11 +39,12 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = "__all__"
         exclude = ('user',)
+        
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name','last_name','email']
-        
+
 
 class BlogPostForm(forms.ModelForm):
     class Meta:
@@ -121,7 +122,7 @@ class ProjectImageForm(forms.ModelForm):
         model = ProjectImage
         fields = ['image']
     
-        
+      
     
 
 

@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
 from .models import Post, Profile, Project, ProjectImage
 from hitcount.views import HitCountDetailView
@@ -17,6 +17,7 @@ from .forms import (
       PostImageForm, 
       UserUpdateForm
 )
+from django.contrib.auth.forms import PasswordChangeForm
 # Create your views here.
 class PostDetailView(HitCountDetailView):
     model = Post
@@ -203,3 +204,17 @@ def project_list(request):
     }
     return render(request, 'project_list.html',context)
 
+def change_password(request):
+    password_form = PasswordChangeForm(user=request.user)
+    if request.method == 'POST':
+        password_form = PasswordChangeForm(user=request.user, data=request.POST)
+        if password_form.is_valid():
+            password_form.save()
+            update_session_auth_hash(request, password_form.user)
+            messages.success(request, "Your password changed successfully.")
+        else:
+            messages.error(request, "Invalid Operation.")
+    context = {
+        'password_form':password_form
+    }
+    return render(request, 'forms/change_password.html', context)
