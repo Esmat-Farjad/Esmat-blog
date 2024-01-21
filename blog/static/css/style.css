@@ -11,10 +11,11 @@
 .project-info a{
   color: #000;
 }
-/* .team-image{
-  max-width: 30%;
-  max-height: 40%;
-} */
+.team-image{
+ width: 200px;
+ height: 255px;
+ object-fit: cover;
+}
 .profile-picture{
   object-fit: cover;
   border: 3px solid #13a456;
