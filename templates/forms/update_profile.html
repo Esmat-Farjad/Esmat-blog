@@ -59,10 +59,22 @@
                         </div>
                       <div class=" my-4">
                         <h5 class="text-success">User Information</h5>
-                          <h6 class="text-dark m-0 p-0">Username: &nbsp;<small>{{user.username}}</small></h6>
-                          <h6 class="text-dark m-0 p-0">Email: &nbsp;<small >{{user.email}}</small></h6>
-                          <h6 class="text-dark m-0 p-0">Mobile:  &nbsp;<small>{{user.profile.contact}}</small></h6>
-                          <h6 class="text-dark m-0 p-0">Address: &nbsp;<small>{{user.profile.address}}</small></h6>
+                        <div class="border-bottom p-2">
+                          <h6 class="text-dark m-0 p-0 font-weight-bold">Username</h6>
+                          <small>{{user.username}}</small>
+                        </div>
+                        <div class="border-bottom p-2">
+                          <h6 class="text-dark m-0 p-0 font-weight-bold">Email</h6>
+                          <small >{{user.email}}</small>
+                        </div>
+                        <div class="border-bottom p-2">
+                          <h6 class="text-dark m-0 p-0 font-weight-bold">Mobile</h6>
+                          <small>{{user.profile.contact}}</small>
+                        </div>
+                        <div class="border-bottom p-2">
+                          <h6 class="text-dark m-0 p-0 font-weight-bold">Address</h6>
+                          <small>{{user.profile.address}}</small>
+                        </div>
                       </div>
                       <a href="{% url 'user_review' %}">
                         Give us review
