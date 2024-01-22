@@ -63,24 +63,32 @@
     </div>
     <hr>
     <h5 class="my-2 text-center">
-        Project List
+        Team Members
     </h5>
-    {% if project %}
-    {% for p in project %}
-        <div class="project-info">
-            <a href="{% url 'upload_image' p.id %}">
-                <h5 class="p-0 m-0 post-tilte d-inline">{{p.name}}</h5>
-                <h6  class="p-0 m-0 post-description">{{p.description}}</h6>
-            </a>
+    {% if team_member %}
+    
+        <div class="row my-2">
+            {% for p in team_member %}
+            <div class="col-1">
+                <img src="{{p.user.profile.picture.url}}"
+                 width="70px" height="70px" 
+                 class="d-inline object-cover shadow rounded-circle border border-5 border-success" alt="">
+            </div>
+            <div class="col-11 py-3">
+                <h5 class="d-inline font-weight-bold">{{p.user.get_full_name}}</h5><br>
+                <h6 class="d-inline">{{p.user.profile.position}}</h6>
+            </div>
+            {% endfor %}
         </div>
-    {% endfor %}
+    
+
     
     {% else %}
     <div class="text-center my-3">
         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" viewBox="0 0 512 512">
             <path fill="#cfcfcf" d="M386.3 160H336c-17.7 0-32 14.3-32 32s14.3 32 32 32H464c17.7 0 32-14.3 32-32V64c0-17.7-14.3-32-32-32s-32 14.3-32 32v51.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0s-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3s163.8-62.5 226.3 0L386.3 160z"/>
         </svg>
-        <h5 class="p-0 m-0">No Project Found.</h5>
+        <h5 class="p-0 m-0">No Team Member Found !.</h5>
         <small class="text-dark">Lets create one !</small>
     </div>
     {% endif %}
