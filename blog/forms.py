@@ -3,7 +3,7 @@ from django import forms
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Comment, Post, PostImage, Profile, Project, Feature, Query, Team, Technology, ProjectImage
+from .models import Comment, Contact, Post, PostImage, Profile, Project, Feature, Query, Team, Technology, ProjectImage
 
 class UserRegistrationForm(UserCreationForm):
     class Meta:
@@ -136,6 +136,10 @@ class QueryForm(forms.ModelForm):
             'email': forms.TextInput(attrs={'placeholder':'Email'}),
             'subject': forms.TextInput(attrs={'placeholder':'Subject'}),
         }  
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = "__all__"
     
 
 

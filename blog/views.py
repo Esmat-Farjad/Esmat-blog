@@ -4,10 +4,11 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
-from .models import Comment, Post, Profile, Project, ProjectImage, Team
+from .models import Comment, Contact, Post, Profile, Project, ProjectImage, Team
 from hitcount.views import HitCountDetailView
 from .forms import (
     CommentForm,
+    ContactForm,
       FeatureForm, 
       ProfileUpdateForm, 
       ProjectForm, 
@@ -258,4 +259,17 @@ def add_team(request):
     return render(request, 'admin/add_team.html',context)
 
 def dashboard(request):
-    return render(request, 'admin/dashboard.html')
+    contact_form = ContactForm()
+    info = Contact.objects.all()
+    if request.method == 'POST':
+        contact_form= ContactForm(request.POST)
+        if contact_form.is_valid():
+            contact_form.save()
+            messages.success(request, "Contact added successfully ")
+        else:
+            messages.error(request, "Oops...something went wrong. Please Try Again...")
+    context = {
+        'contact_form':contact_form,
+        'info':info
+    }
+    return render(request, 'admin/dashboard.html', context)
