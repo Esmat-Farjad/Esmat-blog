@@ -230,6 +230,7 @@ def user_review(request):
 
 def add_team(request):
     team_form = TeamForm()
+    team_member = Team.objects.all()
     if request.method == 'POST':
         team_form = TeamForm(request.POST)
         
@@ -240,6 +241,7 @@ def add_team(request):
         else:
             messages.error(request, "Oops...something went wrong !")
     context = {
-        'team_form':team_form
+        'team_form':team_form,
+        'team_member':team_member
     }
     return render(request, 'admin/add_team.html',context)
