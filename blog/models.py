@@ -104,7 +104,30 @@ class ProjectImage(models.Model):
         return self.project.name  
     
 
+class Service(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField(max_length=250)
+
+    def __str__(self):
+        return self.title
     
+class Contact(models.Model):
+    email = models.EmailField(max_length=100)
+    phone = models.IntegerField()
+    address = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.email
+    
+class Query(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=100)
+    subject = models.CharField(max_length=100)
+    message = models.TextField(max_length=250)
+
+    def __str__(self):
+        return self.name
+
 
 
     

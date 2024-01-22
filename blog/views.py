@@ -12,6 +12,7 @@ from .forms import (
       ProfileUpdateForm, 
       ProjectForm, 
       ProjectImageForm,
+    QueryForm,
     TeamForm, 
       UserRegistrationForm, 
       BlogPostForm, 
@@ -31,12 +32,22 @@ def index(request):
     project = Project.objects.all().order_by('-created_at')[:3]
     comments = Comment.objects.select_related('user').order_by('-created_at')[:5]
     team = Team.objects.all()
+    query_form = QueryForm()
+    if request.method == 'POST':
+        query_form = QueryForm(request.POST)
+        if query_form.is_valid():
+            query_form.save()
+            messages.success(request, "Your Query submitted. Thank Your !")
+        else:
+            messages.error(request, "Oops...something went wrong. please try again...")
+
     
     context = {
         'comments':comments,
         'blogs':blogs,
         'project':project,
         'team_member':team,
+        'query_form':query_form,
         }
     
     return render(request, 'index.html', context)
@@ -245,3 +256,6 @@ def add_team(request):
         'team_member':team_member
     }
     return render(request, 'admin/add_team.html',context)
+
+def dashboard(request):
+    return render(request, 'admin/dashboard.html')

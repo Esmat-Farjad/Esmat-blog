@@ -600,34 +600,47 @@
         </div>
 
         <div class="form">
-          <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+          <p class="text-center">
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'success' %}
+            <small class="text-success">{{message}}</small>
+            {% else %}
+            <small class="text-danger">{{message}}</small>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+          </p>
+          <form action="{% url 'index' %}" method="post">
             <div class="form-row">
+              {% csrf_token %}
               <div class="form-group col-md-6">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                <div class="validate"></div>
+                <label>{{query_form.name.label}}</label>
+                {{query_form.name}}
+                <small class="text-danger">{{query_form.name.errors}}</small>
               </div>
+              
               <div class="form-group col-md-6">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                <div class="validate"></div>
+                <label>{{query_form.email.label}}</label>
+                {{query_form.email}}
+                <small class="text-danger">{{query_form.email.errors}}</small>
               </div>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-              <div class="validate"></div>
+              <label>{{query_form.subject.label}}</label>
+              {{query_form.subject}}
+              <small class="text-danger">{{query_form.subject.errors}}</small>
             </div>
             <div class="form-group">
-              <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
-              <div class="validate"></div>
+              <label>{{query_form.message.label}}</label>
+              {{query_form.message}}
+              <small class="text-danger">{{query_form.message.errors}}</small>
             </div>
-            <div class="mb-3">
-              <div class="loading">Loading</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Your message has been sent. Thank you!</div>
+            <div class="text-center">
+              <button type="submit">Send Message</button>
             </div>
-            <div class="text-center"><button type="submit">Send Message</button></div>
           </form>
         </div>
-
       </div>
     </section><!-- End Contact Section -->
 
