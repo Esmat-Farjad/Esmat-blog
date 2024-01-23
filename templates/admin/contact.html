@@ -1,0 +1,42 @@
+<section class="border rounded shadow p-5">
+    <div class="section-header">
+        <h3>
+            Contact Information
+        </h3>
+        <h6 class="text-center"><i class="icofont-gear"></i>&nbsp;Contact setting</h6>
+        <form action="{% url 'dashboard' %}" method="POST">
+            {% csrf_token %}
+        <div class="row">
+            {% for field in contact_form %}
+            <div class="col-lg-4 col-md-4 col-sm-12 px-3">
+                <label>{{field.label}}</label>
+                {{field}}
+                <small class="text-danger">{{field.errors}}</small>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center my-3">
+            <button type="submit">Save</button>
+        </div>
+    </form>
+    {% for contact in info %}
+    <div class="border shadow row text-center ">
+        <div class="col-lg-4 col-md-4 col-sm-12 border-right border-success pt-3">
+            <h6 class="font-weight-bold"><i class="icofont-ui-email text-success"></i>&nbsp;Email</h6>
+            <h6 class="">{{contact.email}}</h6>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 border-right border-success pt-3">
+            <h6 class="font-weight-bold"><i class="icofont-phone text-success"></i>&nbsp; Phone Number</h6>
+            <h6 class="">{{contact.phone}}</h6>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 pt-3">
+            <h6 class="font-weight-bold"><i class="icofont-location-pin text-success"></i>Address</h6>
+            <h6 class="">{{contact.address}}</h6>
+        </div> 
+    </div>
+    {% endfor %}
+    <div class="text-center mt-3">
+        <button class="btn btn-info text-center">update</button>
+    </div>
+    </div>
+</section>

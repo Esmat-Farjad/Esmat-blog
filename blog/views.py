@@ -298,4 +298,21 @@ def add_skill(request):
             return redirect('dashboard')
 
 def dashboardRoute(request, flag):
-    return render(request, 'admin/dashboard')
+    contact_form = ContactForm()
+    skill_form = SkillForm()
+    skills = Skill.objects.all()
+    info = Contact.objects.all()
+    if flag == 1:
+        flag = flag
+    elif flag == 2:
+        flag = flag
+    elif flag == 3:
+        flag = flag
+    context = {
+        'skill_form':skill_form,
+        'contact_form':contact_form,
+        'info':info,
+        'skills':skills,
+        'flag':flag,
+    }
+    return render(request, 'admin/dashboard.html', context)
