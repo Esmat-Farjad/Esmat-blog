@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
-from .models import Comment, Contact, Post, Profile, Project, ProjectImage, Skill, Team
+from .models import Comment, Contact, Post, Profile, Project, ProjectImage, Query, Skill, Team
 from hitcount.views import HitCountDetailView
 from .forms import (
     CommentForm,
@@ -302,6 +302,7 @@ def dashboardRoute(request, flag):
     skill_form = SkillForm()
     skills = Skill.objects.all()
     info = Contact.objects.all()
+    queries = Query.objects.all().order_by('-id')
     if flag == 1:
         flag = flag
     elif flag == 2:
@@ -314,5 +315,6 @@ def dashboardRoute(request, flag):
         'info':info,
         'skills':skills,
         'flag':flag,
+        'queries':queries,
     }
     return render(request, 'admin/dashboard.html', context)

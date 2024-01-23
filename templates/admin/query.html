@@ -1,0 +1,28 @@
+<section>
+    <div class="section-header">
+        <h3>User Queries</h3>
+    </div>
+    <div class="">
+        <table class="table table-hover">
+            <thead>
+                <th>#</th>
+                <th>Full Name</th>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Email</th>
+            </thead>
+            <tbody>
+                {% for q in queries %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{q.name}}</td>
+                    <td>{{q.subject}}</td>
+                    <td>{{q.message}}</td>
+                    <td><a href="#">{{q.email}}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</section>
