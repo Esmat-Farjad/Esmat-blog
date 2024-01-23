@@ -3,7 +3,10 @@ from .models import (
     Post, 
 PostImage, 
 Profile, 
-Comment, 
+Comment,
+    Query,
+    Service,
+    Skill, 
 Technology,
 Feature,
 Project,
@@ -22,3 +25,6 @@ admin.site.register(ProjectImage)
 admin.site.register(Technology)
 admin.site.register(Feature)
 admin.site.register(Team)
+admin.site.register(Service)
+admin.site.register(Query)
+admin.site.register(Skill)

@@ -3,7 +3,7 @@ from django import forms
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Comment, Contact, Post, PostImage, Profile, Project, Feature, Query, Team, Technology, ProjectImage
+from .models import Comment, Contact, Post, PostImage, Profile, Project, Feature, Query, Skill, Team, Technology, ProjectImage
 
 class UserRegistrationForm(UserCreationForm):
     class Meta:
@@ -139,6 +139,10 @@ class QueryForm(forms.ModelForm):
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
+        fields = "__all__"
+class SkillForm(forms.ModelForm):
+    class Meta:
+        model = Skill
         fields = "__all__"
     
 

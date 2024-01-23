@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
-from .models import Comment, Contact, Post, Profile, Project, ProjectImage, Team
+from .models import Comment, Contact, Post, Profile, Project, ProjectImage, Skill, Team
 from hitcount.views import HitCountDetailView
 from .forms import (
     CommentForm,
@@ -14,6 +14,7 @@ from .forms import (
       ProjectForm, 
       ProjectImageForm,
     QueryForm,
+    SkillForm,
     TeamForm, 
       UserRegistrationForm, 
       BlogPostForm, 
@@ -80,7 +81,9 @@ def signup(request):
             user = user_form.save()
             profile = profile_form.save(commit=False)
             profile.user = user
+            
             profile.save()
+            profile_form.save_m2m()
             messages.success(request, f"{username} registered successfully !")
         else:
             messages.error(request, "Form is not valid Sorry !")
@@ -132,7 +135,6 @@ def update_profile(request):
     user_form = UserUpdateForm(instance=user)
     profile_form = ProfileUpdateForm(instance=user.profile)
     user = User.objects.get(id=user.id)
-   
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=user)
         profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=user.profile)
@@ -262,6 +264,8 @@ def add_team(request):
 
 def dashboard(request):
     contact_form = ContactForm()
+    skill_form = SkillForm()
+    skills = Skill.objects.all()
     info = Contact.objects.all()
     if request.method == 'POST':
         contact_form= ContactForm(request.POST)
@@ -270,8 +274,24 @@ def dashboard(request):
             messages.success(request, "Contact added successfully ")
         else:
             messages.error(request, "Oops...something went wrong. Please Try Again...")
+
     context = {
+        'skill_form':skill_form,
         'contact_form':contact_form,
-        'info':info
+        'info':info,
+        'skills':skills,
     }
     return render(request, 'admin/dashboard.html', context)
+
+def add_skill(request):
+    if request.method == 'POST':
+        skill_form = SkillForm(request.POST, request.FILES)
+        if skill_form.is_valid():
+            skill_form.save()
+            messages.success(request, "Skill Added Successfully !")
+            return redirect('dashboard')
+        else:
+            print(skill_form)
+            messages.error(request, "Oops...someting went wrong. Please try again.")
+            return redirect('dashboard')
+    

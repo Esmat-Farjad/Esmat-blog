@@ -128,6 +128,11 @@ class Query(models.Model):
     def __str__(self):
         return self.name
 
+class Skill(models.Model):
+    name = models.CharField(max_length=100)
+    logo = models.FileField(upload_to="logos")
 
+    def __str__(self):
+        return self.name
 
     

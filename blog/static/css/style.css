@@ -11,6 +11,10 @@
 .project-info a{
   color: #000;
 }
+.about-text{
+  height: 150px;
+  overflow: hidden;
+}
 .team-image{
  width: 200px;
  height: 255px;
@@ -907,9 +911,9 @@ section {
 
 #services .title {
   margin-left: 60px;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 15px;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 #services .title a {
