@@ -296,4 +296,6 @@ def add_skill(request):
             print(skill_form)
             messages.error(request, "Oops...someting went wrong. Please try again.")
             return redirect('dashboard')
-    
+
+def dashboardRoute(request, flag):
+    return render(request, 'admin/dashboard')

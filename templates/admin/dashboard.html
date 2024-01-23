@@ -41,8 +41,39 @@
     {% endfor %}
     {% endif %}
     </div>
-
+</div>
     <!-- ======PAGE CONTENT===== -->
+<div class="main-section m-3">
+    <div class="row">
+        <div class="menu-container col-lg-2 cl-md-2 border-right">
+            <div class="my-2 text-center">
+                <h3 class="text-black">Menu</h3>
+            </div>
+            <ul type="none">
+                <li class="" id="menu-item" data-aos-delay="100">
+                    <h3 class="title">
+                        <a href="{% url 'dashboardRoute' 1 %}">Contact</a> 
+                    </h3>
+                </li>
+                <li class="" id="menu-item" data-aos-delay="100">
+                    <h3 class="title">
+                        <a href="{% url 'dashboardRoute' 2 %}">Skills</a>
+                    </h3>
+                </li>
+                <li class="" id="menu-item" data-aos-delay="100">
+                    <h3 class="title">
+                       <a href="{% url 'dashboardRoute' 3 %}"> Query</a>
+                    </h3>
+                </li>    
+            </ul>
+        </div>
+        <div class="main-content col-lg-10 cl-md-10">
+            
+        </div>
+    </div>
+</div>
+
+
     <section>
     <div class="section-header">
         <h3>
@@ -146,7 +177,7 @@
     </section>
  
    
-</div>
+
 
 <!-- ========PAGE CONTAINER END======= -->
 {% include '../links/scripts.html' %}

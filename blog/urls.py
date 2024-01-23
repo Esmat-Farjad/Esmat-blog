@@ -24,4 +24,5 @@ urlpatterns = [
     path('team/create', views.add_team, name='add_team'),
     path('setting/dashboard', views.dashboard, name='dashboard'),
     path('dashboard/add/skills', views.add_skill, name='add_skill'),
+    path('dashboard/route/<flag>', views.dashboardRoute, name='dashboardRoute'),
 ]

@@ -12,7 +12,7 @@
     $('.more-post').toggleClass('d-none'); 
   });
   // load profile
-  
+
   $(".upload-item").on('mouserover', function(){
     $(".upload-toggle").toggleClass("d-none");
   });

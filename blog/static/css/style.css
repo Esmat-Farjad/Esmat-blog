@@ -11,6 +11,15 @@
 .project-info a{
   color: #000;
 }
+.title a{
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+  cursor: pointer;
+}
+.title:hover a{
+  color: #13a456;
+}
 .about-text{
   height: 150px;
   overflow: hidden;
