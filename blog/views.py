@@ -33,6 +33,7 @@ def index(request):
     blogs = Post.objects.all().order_by('-created_at')[:3]
     project = Project.objects.all().order_by('-created_at')[:3]
     comments = Comment.objects.select_related('user').order_by('-created_at')[:5]
+    skills = Skill.objects.all()
     team = Team.objects.all()
     contact = Contact.objects.all()
     query_form = QueryForm()
@@ -52,6 +53,7 @@ def index(request):
         'team_member':team,
         'query_form':query_form,
         'contact':contact,
+        'skills':skills,
         }
     
     return render(request, 'index.html', context)
