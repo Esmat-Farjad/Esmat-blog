@@ -25,4 +25,7 @@ urlpatterns = [
     path('setting/dashboard', views.dashboard, name='dashboard'),
     path('dashboard/add/skills', views.add_skill, name='add_skill'),
     path('dashboard/route/<flag>', views.dashboardRoute, name='dashboardRoute'),
+    path('contact/update/<str:id>', views.update_contact, name='update_contact'),
+    path('team/delete/<str:id>', views.delete_team, name='delete_team'),
+    path('team/update/<str:id>', views.update_team, name='update_team'),
 ]

@@ -17,6 +17,14 @@
   color: #000;
   cursor: pointer;
 }
+#menu-item{
+  margin: 0;
+  padding: 0;
+}
+#menu-item .title:hover{
+  background-color: rgb(243, 243, 243);
+  transition: 0.5s;
+}
 .title:hover a{
   color: #13a456;
 }

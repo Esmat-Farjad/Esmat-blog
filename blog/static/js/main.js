@@ -12,7 +12,10 @@
     $('.more-post').toggleClass('d-none'); 
   });
   // load profile
-
+  $(document).on('click', '.confirm-delete', function(){
+    console.log("clicked");
+    return confirm('Are you sure you want to delete this?');
+})
   $(".upload-item").on('mouserover', function(){
     $(".upload-toggle").toggleClass("d-none");
   });

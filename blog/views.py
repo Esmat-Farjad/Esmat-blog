@@ -248,7 +248,6 @@ def user_review(request):
 
 def add_team(request):
     team_form = TeamForm()
-    team_member = Team.objects.all()
     if request.method == 'POST':
         team_form = TeamForm(request.POST)
         
@@ -256,13 +255,10 @@ def add_team(request):
             user = team_form.cleaned_data.get('user')
             team_form.save()
             messages.success(request, f"{user} added as team memeber successfully.")
+            return redirect('dashboardRoute', 4)
         else:
             messages.error(request, "Oops...something went wrong !")
-    context = {
-        'team_form':team_form,
-        'team_member':team_member
-    }
-    return render(request, 'admin/add_team.html',context)
+    
 
 def dashboard(request):
     contact_form = ContactForm()
@@ -302,12 +298,16 @@ def dashboardRoute(request, flag):
     skill_form = SkillForm()
     skills = Skill.objects.all()
     info = Contact.objects.all()
+    team_form = TeamForm()
+    team_member = Team.objects.all()
     queries = Query.objects.all().order_by('-id')
     if flag == 1:
         flag = flag
     elif flag == 2:
         flag = flag
     elif flag == 3:
+        flag = flag
+    elif flag == 4:
         flag = flag
     context = {
         'skill_form':skill_form,
@@ -316,5 +316,35 @@ def dashboardRoute(request, flag):
         'skills':skills,
         'flag':flag,
         'queries':queries,
+        'team_form':team_form,
+        'team_member':team_member,
     }
     return render(request, 'admin/dashboard.html', context)
+
+def update_contact(request, id):
+    contact = Contact.objects.get(id=id)
+    if request.method == 'POST':
+        contact_form = ContactForm(request.POST, instance=contact)
+        context = {
+            'contact_form':contact_form,
+            'flag':1,
+        }
+        return render(request, 'admin/dashboard.html', context)
+    else:
+        return redirect('dashboardRoute', 1)
+    
+def delete_team(request, id):
+    if  id:
+        Team.objects.filter(id = id).delete()
+        messages.success(request, "Team Member Removed Successfully !")
+        return redirect('dashboardRoute', 4 )
+def update_team(request, id):
+    if id:
+        team = Team.objects.get(id=id)
+        team_form = TeamForm()
+        if request.method == 'POST':
+            team_form = TeamForm(request.POST, instance=team)
+            if team_form.is_valid():
+                team_form.save()
+                messages.success(request, "Team member information updated.")
+        return redirect('dashboardRoute', 4)
