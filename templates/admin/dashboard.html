@@ -43,28 +43,65 @@
     </div>
 </div>
     <!-- ======PAGE CONTENT===== -->
-<div class="main-section m-3">
+<div class="main-section my-3">
     <div class="row">
         <div class="menu-container col-lg-2 cl-md-2 border-right">
             <div class="my-2 text-center">
                 <h3 class="text-black">Menu</h3>
             </div>
-            <ul type="none">
+            <ul type="none" class="px-1">
+                {% if flag == '1' %}
+                <li data-aos-delay="100">
+                    <h5 class="font-weight-bold px-2 m-0 py-3 bg-light">
+                       <a href="{% url 'dashboardRoute' 1 %}"> Contact</a>
+                    </h5>
+                </li>
+                {% else %}
                 <li class="" id="menu-item" data-aos-delay="100">
-                    <h3 class="title">
+                    <h3 class="title py-3 px-2 m-0">
                         <a href="{% url 'dashboardRoute' 1 %}">Contact</a> 
                     </h3>
                 </li>
+                {% endif %}
+                {% if  flag == '2' %}
+                <li data-aos-delay="100">
+                    <h5 class="font-weight-bold px-2 m-0 py-3 bg-light">
+                       <a href="{% url 'dashboardRoute' 2 %}"> Skills</a>
+                    </h5>
+                </li>
+                {% else %}
                 <li class="" id="menu-item" data-aos-delay="100">
-                    <h3 class="title">
+                    <h3 class="title py-3 px-2 m-0">
                         <a href="{% url 'dashboardRoute' 2 %}">Skills</a>
                     </h3>
                 </li>
+                {% endif %}
+                {% if flag == '3' %}
+                <li data-aos-delay="100">
+                    <h5 class="font-weight-bold px-2 m-0 py-3 bg-light">
+                       <a href="{% url 'dashboardRoute' 3 %}"> Query</a>
+                    </h5>
+                </li>
+                {% else %}
                 <li class="" id="menu-item" data-aos-delay="100">
-                    <h3 class="title">
+                    <h3 class="title py-3 px-2 m-0">
                        <a href="{% url 'dashboardRoute' 3 %}"> Query</a>
                     </h3>
-                </li>    
+                </li>
+                {% endif %}
+                {% if flag == '4' %}
+                <li data-aos-delay="100">
+                    <h5 class="font-weight-bold px-2 m-0 py-3 bg-light">
+                       <a href="{% url 'dashboardRoute' 4 %}"> Team</a>
+                    </h5>
+                </li>
+                {% else %}
+                <li class="" id="menu-item" data-aos-delay="100">
+                    <h3 class="title py-3 px-2 m-0">
+                       <a href="{% url 'dashboardRoute' 4 %}"> Team</a>
+                    </h3>
+                </li>
+                {% endif %}
             </ul>
         </div>
         <div class="main-content col-lg-10 cl-md-10">
@@ -74,6 +111,8 @@
             {% include 'admin/skill.html' %}
             {% elif flag == '3' %}
             {% include 'admin/query.html' %}
+            {% elif flag == '4' %}
+            {% include 'admin/add_team.html' %}
             {% endif %}
         </div>
     </div>
