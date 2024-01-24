@@ -35,17 +35,28 @@
                  class="d-inline object-cover shadow rounded-circle border border-5 border-success" alt="">
             </div>
             <div class="col-11 py-3">
-                <h5 class="d-inline font-weight-bold">{{p.user.get_full_name}}</h5><br>
+                <h5 class="d-inline font-weight-bold">{{p.user.get_full_name}}
+                    <a href="{{p.facebook}}" class="mx-1 bg-light rounded-circle p-2">
+                        <i class="icofont-facebook"></i>
+                    </a>
+                    <a href="{{p.linkedin}}" class="mx-1 bg-light rounded-circle p-2">
+                        <i class="icofont-linkedin"></i>
+                    </a>
+                    <a href="{{p.twitter}}" class="mx-1 bg-light rounded-circle p-2">
+                        <i class="icofont-twitter"></i>
+                    </a>
+                </h5><br>
+
                 <h6 class="d-inline">{{p.user.profile.position}}</h6>
-                <div class="text-end">
+                <div class="">
                     <span>
                         <a href="{% url 'delete_team' p.id %}" class="text-danger confirm-delete">
                             <i class="icofont-trash px-3 border py-1 bg-light rounded"></i>
                         </a>
                     </span>
-                    <span class="text-success">
-                        <a href="{% url 'update_team' p.id%}">
-                            <i class="icofont-pen-alt-4 px-3 border py-1 bg-light rounded"></i>
+                    <span>
+                        <a href="{% url 'update_team' p.id %}">
+                            <i class="icofont-pencil-alt-2 px-3 border py-1 bg-light rounded"></i>
                         </a>
                     </span>
                 </div>
@@ -61,5 +72,4 @@
             <small class="text-dark">Lets create one !</small>
         </div>
         {% endif %}
-    
 </div>

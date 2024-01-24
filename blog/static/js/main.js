@@ -11,7 +11,11 @@
   $('#load-more-post').click(() => {
     $('.more-post').toggleClass('d-none'); 
   });
-  // load profile
+  //invoke modal 
+  $("#staticBackdrop").modal('toggle');
+  $("#staticBackdrop").modal('show');
+  $("#staticBackdrop").modal('hide');
+  // delete confirmation
   $(document).on('click', '.confirm-delete', function(){
     console.log("clicked");
     return confirm('Are you sure you want to delete this?');
