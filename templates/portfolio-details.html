@@ -51,13 +51,17 @@
         <div class="portfolio-details-container">
 
           <div class="owl-carousel portfolio-details-carousel">
+            {% if project.project.projectimage_set.all %}
             {% for img in project.projectimage_set.all %}
+            
             <img src="{{img.image.url}}" class="img-fluid project-image-slide" alt="">
             {% endfor %}
-            <!-- 
+            {% else %}
+            
               <img src="{% static 'img/portfolio/portfolio-details-1.jpg' %}" class="img-fluid" alt="">
               <img src="{% static 'img/portfolio/portfolio-details-2.jpg' %}" class="img-fluid" alt="">
-            <img src="{% static 'img/portfolio/portfolio-details-3.jpg' %}" class="img-fluid" alt=""> -->
+            <img src="{% static 'img/portfolio/portfolio-details-3.jpg' %}" class="img-fluid" alt="">
+            {% endif %}
           </div>
 
           <div class="portfolio-info">
@@ -70,7 +74,7 @@
                   {% endfor %}
                   </li>
                   <li><strong>Project date</strong>: {{project.created_at}}</li>
-                  <li><strong>Project URL</strong>: <a href="#">{{project.link}}</a></li>
+                  <li><strong>Project URL</strong>: <a href="{{project.link}}">Source Code link&nbsp;<i class="icofont-long-arrow-right"></i></a></li>
                 </ul>
           </div>
 
