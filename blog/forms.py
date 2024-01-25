@@ -112,7 +112,10 @@ class FeatureForm(forms.ModelForm):
                 'placeholder':'Enter features..'
                 })
         }
-
+class TechnologyForm(forms.ModelForm):
+    class Meta:
+        model = Technology
+        fields = "__all__"
 class ProjectImageForm(forms.ModelForm):
     
     class Meta:

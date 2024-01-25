@@ -88,11 +88,40 @@
     <div class="feature-content border">
         <div class="content p-5">
             <h5 class="text-center">Project Feature</h5>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="row text-center px-5">
+                    {% for field in feature_form %}
+                    <label>{{field.label}}</label>
+                    {{field}}
+                    <small class="text-danger">{{field.errors}}</small>
+                    {% endfor %}
+                </div>
+                <div class="text-center my-3">
+                    <button type="submit">add</button>
+                </div>
+            </form>
         </div>
     </div>
     <div class="technology-content border">
         <div class="content p-5">
             <h5 class="text-center">Project Technology</h5>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="row px-5">
+                    {% for field in technology_form %}
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label>{{field.label}}</label>
+                        {{field}}
+                        <small class="text-danger">{{field.errors}}</small>
+                    </div>
+                    {% endfor %}
+
+                </div>
+                <div class="text-center my-3">
+                    <button type="submit">add</button>
+                </div>
+            </form>
         </div>
     </div>
 

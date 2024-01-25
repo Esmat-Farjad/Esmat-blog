@@ -9,7 +9,8 @@ from hitcount.views import HitCountDetailView
 from .forms import (
     CommentForm,
     ContactForm,
-      FeatureForm, 
+      FeatureForm,
+      TechnologyForm, 
       ProfileUpdateForm, 
       ProjectForm, 
       ProjectImageForm,
@@ -173,6 +174,8 @@ def blog_view(request):
 
 def add_project(request):
     project_form = ProjectForm()
+    feature_form = FeatureForm()
+    technology_form = TechnologyForm()
     image_form = ProjectImageForm()
     project = Project.objects.all().order_by('-created_at')[:5]
     if request.method == 'POST':
@@ -188,7 +191,9 @@ def add_project(request):
     context = {
         'project_form':project_form,
         'project':project,
-        'image_form':image_form
+        'image_form':image_form,
+        'feature_form':feature_form,
+        'technology_form':technology_form,
 
     }
     return render(request, 'admin/add_project_form.html',context)
