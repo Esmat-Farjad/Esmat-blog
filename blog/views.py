@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
-from .models import Comment, Contact, Post, Profile, Project, ProjectImage, Query, Skill, Team
+from .models import Comment, Contact, Feature, Post, Profile, Project, ProjectImage, Query, Skill, Team, Technology
 from hitcount.views import HitCountDetailView
 from .forms import (
     CommentForm,
@@ -177,6 +177,8 @@ def add_project(request):
     feature_form = FeatureForm()
     technology_form = TechnologyForm()
     image_form = ProjectImageForm()
+    features = Feature.objects.all().order_by("-id")
+    technologies = Technology.objects.all().order_by("-id")
     project = Project.objects.all().order_by('-created_at')[:5]
     if request.method == 'POST':
         project_form = ProjectForm(request.POST)
@@ -194,6 +196,8 @@ def add_project(request):
         'image_form':image_form,
         'feature_form':feature_form,
         'technology_form':technology_form,
+        'features':features,
+        'technologies':technologies,
 
     }
     return render(request, 'admin/add_project_form.html',context)
@@ -354,3 +358,18 @@ def update_team(request, id):
         'team_form':team_form,
     }
     return render(request, 'admin/update_team.html',context)
+
+def add_project_feature(request):
+    if request.method == 'POST':
+        feature_form = FeatureForm(request.POST)
+        if feature_form.is_valid():
+            feature_form.save()
+            messages.success(request, "feature added !")
+            return redirect('add_project')
+def add_project_technology(request):
+    if request.method == 'POST':
+        technology_form = TechnologyForm(request.POST)
+        if technology_form.is_valid():
+            technology_form.save()
+            messages.success(request, "Technology added !")
+            return redirect('add_project')

@@ -28,4 +28,6 @@ urlpatterns = [
     path('contact/update/<str:id>', views.update_contact, name='update_contact'),
     path('team/delete/<str:id>', views.delete_team, name='delete_team'),
     path('team/update/<str:id>', views.update_team, name='update_team'),
+    path('feature/add', views.add_project_feature, name='add_feature'),
+    path('technology/add', views.add_project_technology, name='add_technology'),
 ]
