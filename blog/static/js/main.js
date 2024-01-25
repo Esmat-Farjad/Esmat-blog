@@ -15,6 +15,12 @@
   $("#staticBackdrop").modal('toggle');
   $("#staticBackdrop").modal('show');
   $("#staticBackdrop").modal('hide');
+
+  //dropdwon
+  $('.dropdown-handler').on('click',function(){
+    $('.dropdown-content').slideToggle("slow");
+  });
+
   // delete confirmation
   $(document).on('click', '.confirm-delete', function(){
     console.log("clicked");

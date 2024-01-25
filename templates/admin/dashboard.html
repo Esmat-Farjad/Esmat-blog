@@ -46,11 +46,20 @@
     <!-- ======PAGE CONTENT===== -->
 <div class="main-section my-3">
     <div class="row">
-        <div class="menu-container col-lg-2 cl-md-2 border-right">
-            <div class="my-2 text-center">
-                <h3 class="text-black">Menu</h3>
+        <div class="menu-container col-lg-2 cl-md-2 border-right shadow">
+            <div class="my-2 px-3 d-lg-none d-sm-block d-md-none dropdown-handler">
+                <a href="#">
+                    <h4 class="text-secondary"><span class="d-lg-none d-md-none d-sm-inline">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="22"
+                        viewBox="0 0 128 512">
+                            <path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 
+                            1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"/>
+                        </svg>
+                    </span>Menu</h4>
+                </a>
             </div>
-            <ul type="none" class="px-1">
+            <h3 class="text-center d-sm-none d-md-block d-lg-block">Menu</h3>
+            <ul type="none" class="px-3 d-lg-block d-md-block dropdown-content">
                 {% if flag == '1' %}
                 <li data-aos-delay="100">
                     <h5 class="font-weight-bold px-2 m-0 py-3 bg-light">
