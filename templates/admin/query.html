@@ -1,28 +1,29 @@
+{% load static %}
 <section>
     <div class="section-header">
         <h3>User Queries</h3>
     </div>
-    <div class="">
-        <table class="table table-hover">
-            <thead>
-                <th>#</th>
-                <th>Full Name</th>
-                <th>Subject</th>
-                <th>Message</th>
-                <th>Email</th>
-            </thead>
-            <tbody>
-                {% for q in queries %}
-                <tr>
-                    <td>{{forloop.counter}}</td>
-                    <td>{{q.name}}</td>
-                    <td>{{q.subject}}</td>
-                    <td>{{q.message}}</td>
-                    <td><a href="#">{{q.email}}</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
+    {% for q in queries %}
+    <div class="p-4">
+        <div class="row mb-3">
+            <div class="col-lg-1 col-md-1 ps-4">
+                <img class="border d-inline border-success rounded-circle p-2" src="../../media/default.svg" alt="">
+            </div>
+            <div class="col-lg-11 col-md-11 ps-0 pt-2">
+                <span class="fs-5 fw-bold d-block">{{q.name}}</span>
+                <small class="text-success">{{q.email}}</small>
+            </div>
+            
+            
+        </div>
+        <div class="border rounded bg-light">
+            <div class="subject px-3 pt-3">
+                <h5 class="text-dark">{{q.subject}}</h5>
+            </div>
+            <div class="text px-3 pb-3">
+                {{q.message}}
+            </div>
+        </div>
     </div>
+    {% endfor %}
 </section>
