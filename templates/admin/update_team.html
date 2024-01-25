@@ -1,19 +1,45 @@
 {% load static %}
 {% include '../links/link.html' %}
+<section>
+    <img src="{% static 'img/team_background.svg' %}" width="auto">
+</section>
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content w-100">
         <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Update Team</h1>
+            <!-- <h1 class="modal-title fs-4" id="staticBackdropLabel"> -->
+                <span class="fw-600 text-center">Update</span>    
+            <!-- </h1> -->
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form method="post">
-            <div class="modal-body">
-                {% csrf_token %}
-                {{team_form}}
+            <div class="modal-body px-5 pb-2">
+                <h4 class="text-center">Update team memeber information</h4>
+                <div class="text-center mb-3">
+                    <label>{{team_form.user.label}}</label>
+                    <div class="text-dark">{{team_form.instance.user}}</div>
+                </div>
+                <div class="row">
+                    {% csrf_token%}
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <label>{{team_form.linkedin.label}}</label>
+                        <div class="">{{team_form.linkedin}}</div>
+                        <small class="text-danger">{{field.errors}}</small>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <label>{{team_form.twitter.label}}</label>
+                        <div class="">{{team_form.twitter}}</div>
+                        <small class="text-danger">{{field.errors}}</small>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <label>{{team_form.facebook.label}}</label>
+                        <div class="">{{team_form.facebook}}</div>
+                        <small class="text-danger">{{field.errors}}</small>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
-            <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <a class="btn btn-light" href="{% url 'dashboardRoute' 4 %}">Close</a>
             <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </form>
