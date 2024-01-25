@@ -23,7 +23,6 @@
 
   // delete confirmation
   $(document).on('click', '.confirm-delete', function(){
-    console.log("clicked");
     return confirm('Are you sure you want to delete this?');
 })
   $(".upload-item").on('mouserover', function(){
@@ -38,7 +37,19 @@
       });
     }
   });
+  //collapse of the project
+  $(".feature-content").hide();
+  $(".technology-content").hide();
 
+  $(".feature-opener").on("click", function(){
+    $("#svgRotate").toggleClass("Rotation");
+    $(".feature-content").slideToggle("slow");
+  });
+  
+  $(".technology-opener").on("click", function(){
+    $("#svgRotatet").toggleClass("Rotation");
+    $(".technology-content").slideToggle("slow");
+  });
   // Back to top button
   $(window).scroll(function() {
     if ($(this).scrollTop() > 100) {
