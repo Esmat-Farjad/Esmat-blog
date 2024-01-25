@@ -9,15 +9,16 @@
     <div class="container">
       <div class="d-flex justify-content-between align-items-center">
         <h2>Dashboard</h2>
-        <ol>
+        <ol class="d-sm-none d-lg-flex d-md-flex">
           <li><a href="{%  url 'index' %}">Home</a></li>
           <li><a href="{% url 'add_project' %}">Add Project</a></li>
-          <li>Home</li>
-          <li>Skills</li>
-          <li>Team</li>
-          <li>Project</li>
           <li>Dashboard</li>
         </ol>
+        <div class="d-sm-block d-lg-none d-md-none">
+            <span><a href="">Home</a></span>|
+            <span><a href="">Add Project</a></span>|
+            
+        </div>
       </div>
     </div>
   </section><!-- Breadcrumbs Section -->
@@ -62,54 +63,54 @@
             <ul type="none" class="px-3 d-lg-block d-md-block dropdown-content">
                 {% if flag == '1' %}
                 <li data-aos-delay="100">
-                    <h5 class="font-weight-bold px-2 m-0 py-3 bg-light">
+                    <h5 class="px-2 m-0 py-3 bg-light">
                        <a href="{% url 'dashboardRoute' 1 %}"> Contact</a>
                     </h5>
                 </li>
                 {% else %}
                 <li class="" id="menu-item" data-aos-delay="100">
-                    <h3 class="title py-3 px-2 m-0">
+                    <h5 class="title py-3 px-2 m-0">
                         <a href="{% url 'dashboardRoute' 1 %}">Contact</a> 
-                    </h3>
+                    </h5>
                 </li>
                 {% endif %}
                 {% if  flag == '2' %}
                 <li data-aos-delay="100">
-                    <h5 class="font-weight-bold px-2 m-0 py-3 bg-light">
+                    <h5 class="px-2 m-0 py-3 bg-light">
                        <a href="{% url 'dashboardRoute' 2 %}"> Skills</a>
                     </h5>
                 </li>
                 {% else %}
                 <li class="" id="menu-item" data-aos-delay="100">
-                    <h3 class="title py-3 px-2 m-0">
+                    <h5 class="title py-3 px-2 m-0">
                         <a href="{% url 'dashboardRoute' 2 %}">Skills</a>
-                    </h3>
+                    </h5>
                 </li>
                 {% endif %}
                 {% if flag == '3' %}
                 <li data-aos-delay="100">
-                    <h5 class="font-weight-bold px-2 m-0 py-3 bg-light">
+                    <h5 class="px-2 m-0 py-3 bg-light">
                        <a href="{% url 'dashboardRoute' 3 %}"> Query</a>
                     </h5>
                 </li>
                 {% else %}
                 <li class="" id="menu-item" data-aos-delay="100">
-                    <h3 class="title py-3 px-2 m-0">
+                    <h5 class="title py-3 px-2 m-0">
                        <a href="{% url 'dashboardRoute' 3 %}"> Query</a>
-                    </h3>
+                    </h5>
                 </li>
                 {% endif %}
                 {% if flag == '4' %}
                 <li data-aos-delay="100">
-                    <h5 class="font-weight-bold px-2 m-0 py-3 bg-light">
+                    <h5 class="px-2 m-0 py-3 bg-light">
                        <a href="{% url 'dashboardRoute' 4 %}"> Team</a>
                     </h5>
                 </li>
                 {% else %}
                 <li class="" id="menu-item" data-aos-delay="100">
-                    <h3 class="title py-3 px-2 m-0">
+                    <h5 class="title py-3 px-2 m-0">
                        <a href="{% url 'dashboardRoute' 4 %}"> Team</a>
-                    </h3>
+                    </h5>
                 </li>
                 {% endif %}
             </ul>
