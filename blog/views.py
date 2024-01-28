@@ -277,6 +277,7 @@ def dashboard(request):
         if contact_form.is_valid():
             contact_form.save()
             messages.success(request, "Contact added successfully ")
+            return redirect('dashboardRoute', 1)
         else:
             messages.error(request, "Oops...something went wrong. Please Try Again...")
 
@@ -331,19 +332,22 @@ def dashboardRoute(request, flag):
 def update_contact(request, id):
     contact = Contact.objects.get(id=id)
     contact_form = ContactForm(instance=contact)
-    context = {
-        'contact_form':contact_form,
-    }
-    return render(request, 'admin/update_contact.html', context)
-def confirm_update_contact(request):
     if request.method == 'POST':
-        contact_form = ContactForm(request.POST)
+        contact_form = ContactForm(request.POST, instance=contact)
         if contact_form.is_valid():
             contact_form.save()
             messages.success(request, "Contact info updated.")
             return redirect("dashboardRoute", 1)
-        
-
+    context = {
+        'contact_form':contact_form,
+    }
+    return render(request, 'admin/update_contact.html', context)   
+def delete_contact(request, id):
+    if id:
+        Contact.objects.filter(id=id).delete()
+        messages.success(request, "Contact info has been deleted !")
+        return redirect('dashboardRoute', 1)
+    
 def delete_team(request, id):
     if  id:
         Team.objects.filter(id = id).delete()

@@ -11,6 +11,12 @@
   $('#load-more-post').click(() => {
     $('.more-post').toggleClass('d-none'); 
   });
+  $('#delete-tooltip').hover(function(){
+    $(".delete-tooltiptext").toggleClass("opacity-100");
+  });
+  $('#update-tooltip').hover(function(){
+    $(".update-tooltiptext").toggleClass("opacity-100");
+  });
   //invoke modal 
   // $("#staticBackdrop").modal('toggle');
   $("#staticBackdrop").modal('show');

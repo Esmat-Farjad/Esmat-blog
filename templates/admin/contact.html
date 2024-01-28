@@ -20,7 +20,7 @@
         </div>
     </form>
     {% for contact in info %}
-    <div class="border shadow row text-center ">
+    <div class="border shadow row text-center my-3">
         <div class="col-lg-4 col-md-4 col-sm-12 border-right border-success pt-3">
             <h6 class="font-weight-bold"><i class="icofont-ui-email text-success"></i>&nbsp;Email</h6>
             <h6 class="">{{contact.email}}</h6>
@@ -35,7 +35,37 @@
         </div> 
     </div>
     <div class="text-center mt-3">
-        <button class="btn btn-light text-center"><a href="{% url 'update_contact' contact.id %}">Update</a></button>
+        <small class="update-tooltiptext my-2"> update </small>
+        <small class="delete-tooltiptext my-2"> delete </small>
+        <br>
+        <button class="btn btn-light text-center px-4" id="update-tooltip">
+            <a href="{% url 'update_contact' contact.id %}">
+                <svg xmlns="http://www.w3.org/2000/svg"  height="20" width="20" viewBox="0 0 512 512">
+                    <path fill="#18d26e" d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 
+                    134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 
+                    390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 
+                    6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 
+                    6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 
+                    28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 
+                    152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 
+                    10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 
+                    40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
+                </svg>
+            </a>
+        </button>
+        <button class="btn btn-light text-center px-4" id="delete-tooltip">
+            <a class="text-danger" href="{% url 'delete_contact' contact.id %}">
+                <svg xmlns="http://www.w3.org/2000/svg"  height="20" width="22.5" viewBox="0 0 576 512">
+                    <path fill="#dc0909" d="M566.6 54.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 
+                    192-34.7-34.7c-4.2-4.2-10-6.6-16-6.6c-12.5 0-22.6 10.1-22.6 22.6v29.1L364.3 320h29.1c12.5 
+                    0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16l-34.7-34.7 192-192zM341.1 353.4L222.6 234.9c-42.7-3.7-85.2 
+                    11.7-115.8 42.3l-8 8C76.5 307.5 64 337.7 64 369.2c0 6.8 7.1 11.2 13.2 8.2l51.1-25.5c5-2.5 9.5 4.1 5.4 
+                    7.9L7.3 473.4C2.7 477.6 0 483.6 0 489.9C0 502.1 9.9 512 22.1 512l173.3 0c38.8 0 75.9-15.4 
+                    103.4-42.8c30.6-30.6 45.9-73.1 42.3-115.8z"/>
+                </svg>
+            </a>
+        </button>
+        
     </div>
     {% endfor %}
     
