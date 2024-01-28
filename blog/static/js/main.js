@@ -12,10 +12,12 @@
     $('.more-post').toggleClass('d-none'); 
   });
   //invoke modal 
-  $("#staticBackdrop").modal('toggle');
+  // $("#staticBackdrop").modal('toggle');
   $("#staticBackdrop").modal('show');
-  $("#staticBackdrop").modal('hide');
-
+  // $("#staticBackdrop").modal('hide');
+  // $("#exampleModal").modal("toggle");
+  $("#exampleModal").modal("show");
+  // $("#exampleModal").modal("hide");
   //dropdwon
   $('.dropdown-handler').on('click',function(){
     $('.dropdown-content').slideToggle("slow");

@@ -2,7 +2,11 @@
 {% include '../links/link.html' %}
 {% include '../links/bootstrap_cdn.html' %}
 <section>
+    {% if team_form %}
     <img src="{% static 'img/team_background.svg' %}" width="auto">
+    {% elif contact_form %}
+    <img src="{% static 'img/contact.svg' %}" width="auto">
+    {% endif %}
 </section>
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -13,6 +17,7 @@
             <!-- </h1> -->
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        {% if team_form %}
         <form method="post">
             <div class="modal-body px-5 pb-2">
                 <h4 class="text-center">Update team memeber information</h4>
@@ -44,8 +49,42 @@
             <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </form>
+        <form method="post" action="{% url 'update_contact' %}">
+            <div class="modal-body px-5 pb-2">
+                <h4 class="text-center">Update team memeber information</h4>
+                <div class="text-center mb-3">
+                    <label>{{team_form.user.label}}</label>
+                    <div class="text-dark">{{team_form.instance.user}}</div>
+                </div>
+                <div class="row">
+                    {% csrf_token%}
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <label>{{team_form.linkedin.label}}</label>
+                        <div class="">{{team_form.linkedin}}</div>
+                        <small class="text-danger">{{field.errors}}</small>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <label>{{team_form.twitter.label}}</label>
+                        <div class="">{{team_form.twitter}}</div>
+                        <small class="text-danger">{{field.errors}}</small>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <label>{{team_form.facebook.label}}</label>
+                        <div class="">{{team_form.facebook}}</div>
+                        <small class="text-danger">{{field.errors}}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            <a class="btn btn-light" href="{% url 'dashboardRoute' 4 %}">Close</a>
+            <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </form>
+        {% elif contact_form %}
+        {% endif %}
     </div>
     </div>
 </div>
+
 {% include '../links/scripts.html' %}
 {% include '../links/bootstrap_cdn_js.html' %}

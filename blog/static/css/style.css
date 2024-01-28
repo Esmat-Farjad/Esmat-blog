@@ -158,7 +158,15 @@ a {
   color: #18d26e;
   transition: 0.5s;
 }
-
+.parent-div{
+  position: relative;
+}
+.chiled-div{
+  position: absolute;
+  top: 15%;
+  right:  15%;
+  left: 15%;
+}
 a:hover, a:active, a:focus {
   color: #18d36e;
   outline: none;

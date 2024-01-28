@@ -1,0 +1,40 @@
+{% load static %}
+{% include '../links/link.html' %}
+{% include '../links/bootstrap_cdn.html' %}
+<div class="text-center parent-div">
+    <video width="100%" height="100%" loop autoplay muted>
+        <source src="{% static 'img/contact.mp4' %}" type="video/mp4">
+    </video>
+    <div class="chiled-div border rounded bg-light p-5 bg-opacity-75">
+        <form action="">
+                <h3 class="text-center">Contact Information</h3>
+                <p class="text-center mt-0 pt-0 mb-3 px-5">
+                    <small>Your contact details will be displayed in the main page publicly.</small>
+                    <small>Please make sure that your contact informaion should be accurate. Thanks.</small>
+                </p>
+                {% csrf_token %}
+                <div class="row">
+                    {% for field in contact_form %}
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <label>{{field.label}}</label>
+                        {{field}}
+                        <small class="text-danger">{{field.errors}}</small>
+                    </div>
+                    {% endfor %}
+                </div>
+           
+            <div class="text-end mt-4">
+            <button type="button" class="btn-light btn border">
+                <a href="{% url 'dashboardRoute' 1 %}" class="text-decoration-none text-success">
+                    <i class="icofont-thin-left"></i>&nbsp;Back
+                </a>
+            </button>
+            <button type="reset" class="btn-light btn border">Reset</button>
+            <button type="submit">Save changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% include '../links/scripts.html' %}
+{% include '../links/bootstrap_cdn_js.html' %}

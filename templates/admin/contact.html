@@ -34,13 +34,9 @@
             <h6 class="">{{contact.address}}</h6>
         </div> 
     </div>
-    <form action="{% url 'update_contact' contact.id %}" method="post">
-        {% csrf_token %}
-        <div class="text-center mt-3">
-            <button class="btn btn-light text-center">Update</button>
-        </div>
-    </form>
-    
+    <div class="text-center mt-3">
+        <button class="btn btn-light text-center"><a href="{% url 'update_contact' contact.id %}">Update</a></button>
+    </div>
     {% endfor %}
     
     </div>
