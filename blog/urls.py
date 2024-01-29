@@ -31,4 +31,5 @@ urlpatterns = [
     path('feature/add', views.add_project_feature, name='add_feature'),
     path('technology/add', views.add_project_technology, name='add_technology'),
     path('contact/delete/<str:id>', views.delete_contact, name='delete_contact'),
+    path('skill/delete/<str:id>', views.delete_skill, name='delete_skill'),
 ]

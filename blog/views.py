@@ -381,3 +381,8 @@ def add_project_technology(request):
             technology_form.save()
             messages.success(request, "Technology added !")
             return redirect('add_project')
+def delete_skill(request, id):
+    if id:
+        Skill.objects.get(id=id).delete()
+        messages.success(request, "Skill deleted ! ")
+    return redirect('dashboardRoute', 2)
