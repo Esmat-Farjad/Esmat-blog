@@ -390,7 +390,7 @@ def update_skill(request, id):
     skill = Skill.objects.get(id=id)
     skill_form = SkillForm(instance=skill)
     if request.method == 'POST':
-        skill_form = SkillForm(request.POST, instance=skill)
+        skill_form = SkillForm(request.POST, request.FILES, instance=skill)
         if skill_form.is_valid():
             skill_form.save()
             messages.success(request, "skill updated !")
