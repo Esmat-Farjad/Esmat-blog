@@ -108,6 +108,19 @@
                     </h5>
                 </li>
                 {% endif %}
+                {% if flag == '5' %}
+                <li data-aos-delay="100">
+                    <h5 class="px-2 m-0 py-3 bg-light">
+                       <a href="{% url 'dashboardRoute' 5 %}">Project</a>
+                    </h5>
+                </li>
+                {% else %}
+                <li class="" id="menu-item" data-aos-delay="100">
+                    <h5 class="title py-3 px-2 m-0">
+                       <a href="{% url 'dashboardRoute' 5 %}">Project</a>
+                    </h5>
+                </li>
+                {% endif %}
             </ul>
         </div>
         <div class="main-content col-lg-10 cl-md-10">
@@ -119,6 +132,8 @@
             {% include 'admin/query.html' %}
             {% elif flag == '4' %}
             {% include 'admin/add_team.html' %}
+            {% elif flag == '5' %}
+            {% include 'admin/project.html' %}
             {% endif %}
         </div>
     </div>

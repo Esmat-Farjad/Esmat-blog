@@ -307,6 +307,7 @@ def dashboardRoute(request, flag):
     skills = Skill.objects.all()
     info = Contact.objects.all()
     team_form = TeamForm()
+    project = Project.objects.all()
     team_member = Team.objects.all()
     queries = Query.objects.all().order_by('-id')
     if flag == 1:
@@ -317,6 +318,8 @@ def dashboardRoute(request, flag):
         flag = flag
     elif flag == 4:
         flag = flag
+    elif flag == 5:
+        flag == flag
     context = {
         'skill_form':skill_form,
         'contact_form':contact_form,
@@ -326,6 +329,7 @@ def dashboardRoute(request, flag):
         'queries':queries,
         'team_form':team_form,
         'team_member':team_member,
+        'project':project,
     }
     return render(request, 'admin/dashboard.html', context)
 

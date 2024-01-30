@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="section-header">
+        <h3>Project Manager</h3>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            {% for p in project %}
+            <div class="card">
+                <div class="card-image rounded overflow-hidden p-0 m-0">
+                    {% for img in p.projectimage_set.all %}
+                    {% if p.projectimage_set.all|length > 1 %}
+                    <img src="{{img.image.url}}"  
+                    class="project-image-gallery" alt="">
+                    {% endif %}
+                    {% endfor %}    
+                </div>
+                <div class="body">
+                    <strong>{{p.name}}</strong><br>
+                    <h6>{{p.category}}</h6>
+                    <small>{{p.description}}</small>
+                </div>
+                <div class="">
+                    <small>
+                        {% for t in p.technology.all %}
+                        <span>{{t.name}}</span><span class="text-success"> | </span>
+                        {% endfor %}
+                    </small>
+                    <small>
+                        {% for f in p.feature.all %}
+                        <span>{{f.name}}</span><span class="text-success"> | </span>
+                        {% endfor %}
+                    </small>
+                </div>
+                <div>
+                    <span class="fw-bold">{{p.category}}</span> |
+                    
+                </div>
+            </div>
+            
+            {{p.link}}
+            {{p.created_at}}
+            {% endfor %}
+        </div>
+    </div>
+</div>
