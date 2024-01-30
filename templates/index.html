@@ -350,8 +350,11 @@
         <div class="col-lg-4 col-md-6 portfolio-item filter-card">
           <div class="portfolio-wrap">
             <figure>
-              <img src="{% static 'img/portfolio/card1.jpg' %}" class="img-fluid" alt="">
-              <a href="{% static 'img/portfolio/card1.jpg' %}" class="link-preview venobox" data-gall="portfolioGallery" title="Card 1"><i class="ion ion-eye"></i></a>
+              <!-- <img src="{% static 'img/portfolio/card1.jpg' %}" class="img-fluid" alt=""> -->
+              {% for img in blog.postimage_set.all %}
+              <img src="{{img.image.url}}" class="img-fluid" alt="">
+              <a href="{{img.image.url}}" class="link-preview venobox" data-gall="portfolioGallery" title="Card 1"><i class="ion ion-eye"></i></a>
+              {% endfor %}
               <a href="{% url 'post_view' blog.id %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
             </figure>
 

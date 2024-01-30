@@ -209,7 +209,7 @@ def upload_image(request, pk):
         image_form = ProjectImageForm(request.POST, request.FILES)
         if image_form.is_valid():
             img = image_form.save(commit=False)
-            img.project_id = pk
+            img.project = project
             img.save()
         else:
             messages.error(request, "Oops...Something went wrong please try again.")
