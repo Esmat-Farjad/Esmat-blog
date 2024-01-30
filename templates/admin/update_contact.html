@@ -5,7 +5,9 @@
     <video width="100%" height="100%" loop autoplay muted>
         <source src="{% static 'img/contact.mp4' %}" type="video/mp4">
     </video>
+    
     <div class="chiled-div border rounded bg-light p-5 bg-opacity-75">
+        {% if contact_form %}
         <form method="POST">
                 <h3 class="text-center">Contact Information</h3>
                 <p class="text-center mt-0 pt-0 mb-3 px-5">
@@ -33,7 +35,46 @@
             <button type="submit">Save changes</button>
             </div>
         </form>
+        {% elif skill_form %}
+        <form method="POST" enctype="multipart/form-data">
+            <h3 class="text-center">Skills</h3>
+            <p class="text-center mt-0 pt-0 mb-3 px-5">
+                <small>The added skill and technology will be displayed in the main page.</small>
+                <small>Please upload the logo of the technology to be dislay in the main page. Thanks.</small>
+            </p>
+            {% csrf_token %}
+            <div class="row">
+                
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <label>{{skill_form.name.label}}</label>
+                    {{skill_form.name}}
+                    <small class="text-danger">{{field.errors}}</small>
+                    <label>{{skill_form.logo.label_tag}}</label>
+                    <div class="">{{skill_form.logo}}</div>
+                    <small class="text-danger">{{skill_form.logo.errors}}</small>
+                   
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <label>{{skill_form.logo.label}}</label>
+                    <img src="{{skill_form.logo.initial.url}}" width="auto" class="border rounded" height="150" alt="">
+                </div>
+            </div>
+            
+            <div class="text-end mt-4">
+                <button type="button" class="btn-light btn border">
+                    <a href="{% url 'dashboardRoute' 2 %}" class="text-decoration-none text-success">
+                        <i class="icofont-thin-left"></i>&nbsp;Back
+                    </a>
+                </button>
+                <button type="reset" class="btn-light btn border">Reset</button>
+                <button type="submit">Save changes</button>
+            </div>
+        </form>
+        {% endif %}
     </div>
+    
+
+    
 </div>
 
 {% include '../links/scripts.html' %}

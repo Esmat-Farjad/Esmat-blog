@@ -386,3 +386,18 @@ def delete_skill(request, id):
         Skill.objects.get(id=id).delete()
         messages.success(request, "Skill deleted ! ")
     return redirect('dashboardRoute', 2)
+def update_skill(request, id):
+    skill = Skill.objects.get(id=id)
+    skill_form = SkillForm(instance=skill)
+    if request.method == 'POST':
+        skill_form = SkillForm(request.POST, instance=skill)
+        if skill_form.is_valid():
+            skill_form.save()
+            messages.success(request, "skill updated !")
+            return redirect('dashboardRoute', 2)
+        else:
+            messages.error(request, "something went wrong !")
+    context = {
+        'skill_form':skill_form
+    }
+    return render(request, 'admin/update_contact.html', context)
