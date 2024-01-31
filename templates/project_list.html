@@ -22,9 +22,9 @@
   </section><!-- Breadcrumbs Section -->
     <!-- ======PAGE CONTENT===== -->
     <div class="section-header mb-3">
-        <h3>Add Project</h3>
+        <h3>Projects</h3>
     </div>
-    <section id="portfolio" class="section-bg">
+    <section id="portfolio" >
     <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
         {% for app in projects %}
 
@@ -37,7 +37,7 @@
                   </figure>
       
                   <div class="portfolio-info">
-                    <h4><a href="{% url 'portfolio' app.id %}">{{app.name}}</a></h4>
+                    <h4><a href="{% url 'upload_image' app.id %}">{{app.name}}</a></h4>
                     {% for tech in app.technology.all %}
                     <p class="d-inline">{{tech.name}}</p> |
                     {% endfor %}
