@@ -205,6 +205,7 @@ def add_project(request):
 def upload_image(request, pk):
     image_form = ProjectImageForm()
     project = Project.objects.get(id=pk)
+    project_form = ProjectForm(instance=project)
     if request.method == 'POST':
         image_form = ProjectImageForm(request.POST, request.FILES)
         if image_form.is_valid():
@@ -214,7 +215,11 @@ def upload_image(request, pk):
         else:
             messages.error(request, "Oops...Something went wrong please try again.")
 
-    context={'image_form':image_form,'project':project}
+    context={
+        'image_form':image_form,
+        'project':project,
+        'project_form':project_form,
+        }
     return render(request, 'forms/upload_image.html', context)
 
 def project_list(request):

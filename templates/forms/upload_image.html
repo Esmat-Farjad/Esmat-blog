@@ -83,7 +83,7 @@
     </section><!-- End Portfolio Details Section -->
     <section>
       <div class="container">
-      <div class="text-center mb-4">
+      <div class="mb-4">
         <span class="btn text-success feature-opener">update project 
           <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" id="svgRotate"
                 viewBox="0 0 512 512">
@@ -94,9 +94,23 @@
             </svg>
           </span>
           <a href="#" class="text-danger confirm-delete">delete project&nbsp;<i class="icofont-ui-delete"></i></a>
-        <div class="feature-content border cursor-pointer">
-          <h5>update container</h5>
-          
+        <div class="feature-content border p-3">
+          <h5 class="text-center">update container</h5>
+          <form action="">
+            {% csrf_token %}
+            <div class="row">
+              {% for field in project_form %}
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                <label>{{field.label}}</label>
+                {{field}}
+                <small class="text-danger">{{field.errors}}</small>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="my-3">
+              <button type="submit">update project</button>
+            </div>
+          </form>          
         </div>
       </div>
     </div>
