@@ -91,9 +91,15 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 .item-container{
-  border-left: 4px solid #13a456;
+  border-left: 4px solid #343534;
   padding: 5px;
   margin: 10px 0px ;
+}
+.item-container a{
+  color:black
+}
+.item-container a:hover{
+  color: #13a456;
 }
 .item-container:hover{
   background-color: rgb(231, 231, 231);
