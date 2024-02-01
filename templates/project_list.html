@@ -20,6 +20,26 @@
       </div>
     </div>
   </section><!-- Breadcrumbs Section -->
+  <!-- ========SYSTEM MESSAGES======== -->
+  <div class="message-container my-5">
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags == 'success' %}
+    <div class="text-official text-center">
+        <small class="px-5 py-3 border border-success border-success-emphasis rounded">
+            <span><i class="icofont-check-circled"></i>&nbsp;{{message}}</span>
+        </small>
+    </div>
+    {% elif message.tags == 'error' %}
+    <div class="text-danger text-center position-relative">
+        <small class="alert alert-danger text-danger">
+            <span><i class="icofont-exclamation-circle"></i>&nbsp;{{message}}</span>
+        </small>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+  </div>
     <!-- ======PAGE CONTENT===== -->
     <div class="section-header mb-3">
         <h3>Projects</h3>

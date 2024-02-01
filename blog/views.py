@@ -213,7 +213,12 @@ def update_project(request, id):
         else:
             messages.error(request, "Something went wrong !")
             return redirect('upload_image',id)
-
+def delete_project(request, id ):
+    project = get_object_or_404(Project, id=id)
+    if project:
+        Project.objects.get(id=id).delete()
+        messages.success(request, f"{project} deleted !")
+        return redirect('project_list')
 def upload_image(request, pk):
     image_form = ProjectImageForm()
     project = Project.objects.get(id=pk)
