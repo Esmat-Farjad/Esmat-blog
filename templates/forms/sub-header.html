@@ -20,10 +20,15 @@
               {% if user.is_authenticated %}
               <li class="drop-down"><a href="">{{request.user}}</a>
                 <ul>
+                  {% if user.is_staff %}
                   <li><a href="{% url 'create_post' %}">Create Post</a></li>
+                  {% endif %}
                   <li><a href="#">View Post</a></li>
                   <li><a href="{% url 'update_profile' %}">Profile</a></li>
+                  {% if user.is_superuser  %}
+                  <li><a href="{% url 'add_team' %}">Team</a></li>
                   <li><a href="{% url 'add_project' %}">Add Project</a></li>
+                  {% endif %}
                   <li><a href="{% url 'signout' %}">Logout</a></li>
                   
                 </ul>
