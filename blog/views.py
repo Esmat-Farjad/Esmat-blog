@@ -1,6 +1,6 @@
 
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
@@ -201,6 +201,18 @@ def add_project(request):
 
     }
     return render(request, 'admin/add_project_form.html',context)
+
+def update_project(request, id):
+    project = get_object_or_404(Project,id=id)
+    if request.method == 'POST':
+        project_form = ProjectForm(request.POST, instance=project)
+        if project_form.is_valid():
+            project_form.save()
+            messages.success(request, "Project Updated !")
+            return redirect('upload_image', id)
+        else:
+            messages.error(request, "Something went wrong !")
+            return redirect('upload_image',id)
 
 def upload_image(request, pk):
     image_form = ProjectImageForm()

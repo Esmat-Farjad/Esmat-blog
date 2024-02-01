@@ -16,6 +16,7 @@ urlpatterns = [
     path('post/view/', views.post_view, name='post_view'),
     path('blogs/view/', views.blog_view, name='blog_view'),
     path('project/add/', views.add_project, name='add_project'),
+    path('project/update/<str:id>', views.update_project, name='update_project'),
     path('upload/file/<str:pk>', views.upload_image, name='upload_image'),
     path('project/view', views.project_list, name='project_list'),
     path('profile/update', views.update_profile, name='update_profile'),
