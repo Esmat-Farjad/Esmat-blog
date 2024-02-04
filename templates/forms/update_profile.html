@@ -10,7 +10,9 @@
         <ol>
           <li><a href="{%  url 'index' %}">Home</a></li>
           <li><a href="{% url 'change_password' %}">Change password</a></li>
+          {% if user.is_superuser %}
           <li><a href="{% url 'dashboardRoute' 1 %}">Admin Dashbord</a></li>
+          {% endif %}
           <li>User profile</li>
         </ol>
       </div>
