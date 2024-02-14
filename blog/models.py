@@ -1,11 +1,30 @@
+
 from django.db import models
 from django.contrib.auth.models import User
 
 from hitcount.models import HitCountMixin
-
+# import signals
+from django.dispatch import receiver
+from django.db.models.signals import (
+    post_save,
+    pre_save,
+)
 
 # Create your models here.
+@receiver(pre_save, sender=User)
+def user_pre_save_receiver(instance, sender, *args, **kwargs):
+    """
+    before saved in the database
+    """
+    print(instance.username, instance.id)
 
+@receiver(post_save, sender=User)
+def user_created_handler(instance, created, sender, *args, **kwargs):
+    if created:
+        print("Send email to ", instance.username)
+    else:
+        print(instance.username, "wast just saved")
+# post_save.connect(user_created_handler, sender=User)
 class Post(models.Model, HitCountMixin):
     #Relationship
     user = models.ForeignKey(User, on_delete=models.CASCADE)
