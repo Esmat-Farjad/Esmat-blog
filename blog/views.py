@@ -1,5 +1,5 @@
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
@@ -23,13 +23,34 @@ from .forms import (
       UserUpdateForm
 )
 from django.contrib.auth.forms import PasswordChangeForm
+from django.db.models.signals import (
+    post_save,
+    pre_save,
+)
+# import signals
+from django.dispatch import receiver
+@receiver(pre_save, sender=User)
+def user_pre_save_receiver(instance, sender, *args, **kwargs):
+    """
+    before saved in the database
+    """
+    print(instance.username, instance.id)
+
+@receiver(post_save, sender=User)
+def user_created_handler(instance, created, sender, *args, **kwargs):
+    if created:
+        messages.success(instance.username +" created")
+        print(instance.username, "created")
+# post_save.connect(user_created_handler, sender=User)
 # Create your views here.
+
 class PostDetailView(HitCountDetailView):
     model = Post
     template_name = "post_view.html"
     count_hit = True
     
 
+    
 def index(request):
     blogs = Post.objects.all().order_by('-created_at')[:3]
     project = Project.objects.all().order_by('-created_at')[:3]
@@ -427,3 +448,18 @@ def update_skill(request, id):
         'skill_form':skill_form
     }
     return render(request, 'admin/update_contact.html', context)
+
+def like_view(request):
+    # X_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    # if X_forwarded_for:
+    #     ip = X_forwarded_for.split(',')[0]
+    # else:
+    #     ip = request.META.get('REMOTE_ADDR')
+    if request.method == 'POST':
+        ip = "this is an ip address"
+        data = {
+            'ip':ip,
+            'message':'success',
+            'status':200
+        }
+    return JsonResponse(data, safe=False)

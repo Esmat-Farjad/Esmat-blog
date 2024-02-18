@@ -6,7 +6,7 @@
 */
 (function($) {
   "use strict";
-
+  
   // load more post
   $('#load-more-post').click(() => {
     $('.more-post').toggleClass('d-none'); 
@@ -286,3 +286,27 @@
   });
 
 })(jQuery);
+
+const liked = document.querySelector(".like-button");
+liked.addEventListener("click", function(e) {
+  
+  e.preventDefault();
+  let id = e.target.dataset.postId;
+  let routeUrl = e.target.dataset.routeUrl;
+  console.log(routeUrl);
+  const formData = new FormData();
+  formData.append('post_id',id);
+  formData.append('csrfmiddlewaretoken','{{csrf_token}}');
+  console.log(formData);
+  fetch(
+    routeUrl,
+    {
+    method: 'POST',
+    body: formData
+  }).then(response => response.json()).then(data => {
+    console.log(data);
+  }).catch(error => {
+    console.error("Error: ", error);
+  });
+ 
+});

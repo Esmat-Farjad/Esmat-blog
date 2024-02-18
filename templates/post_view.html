@@ -49,6 +49,8 @@
                             <span class="">{{post.created_at}}</span>
                             <span class="ml-3"><i class="icofont-eye-alt"></i>&nbsp;</span>
                             <span class="text-secondary">{% get_hit_count for post %}</span>
+                            <span class="m-3"><a href="#">Share</a></span>
+                            <span class="m-3 like-button" data-route-url="{% url 'like_view' %}" data-post-id="{{post.id}}" role="button">Like</span>
                         </p>
                     </p>
                 </div>
