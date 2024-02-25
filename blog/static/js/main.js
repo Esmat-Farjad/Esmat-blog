@@ -6,6 +6,7 @@
 */
 (function($) {
   "use strict";
+
   
   // load more post
   $('#load-more-post').click(() => {
@@ -17,14 +18,7 @@
   $('#update-tooltip').hover(function(){
     $(".update-tooltiptext").toggleClass("opacity-100");
   });
-  //invoke modal 
-  // $("#staticBackdrop").modal('toggle');
-  $("#staticBackdrop").modal('show');
-  // $("#staticBackdrop").modal('hide');
-  // $("#exampleModal").modal("toggle");
-  $("#exampleModal").modal("show");
-  // $("#exampleModal").modal("hide");
-  //dropdwon
+
   $('.dropdown-handler').on('click',function(){
     $('.dropdown-content').slideToggle("slow");
   });
@@ -32,7 +26,7 @@
   // delete confirmation
   $(document).on('click', '.confirm-delete', function(){
     return confirm('Are you sure you want to delete this?');
-})
+});
   $(".upload-item").on('mouserover', function(){
     $(".upload-toggle").toggleClass("d-none");
   });

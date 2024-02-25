@@ -28,7 +28,7 @@
         </form>
     </div>
 </section>
-<section class="display">
+<section class="" style="position: relative;">
     <div class="p-5">
         {% if news %}
         <ol>
@@ -37,7 +37,7 @@
                 <h5 class="p-0 m-0">{{new.headline}}</h5>
                 <small>{{new.body_text}}</small>
                 <h5>
-                    <a href="#">
+                    <a href="{% url 'delete_news' new.id %}" class="confirm-delete">
                         <i class="icofont-ui-delete mr-3 text-danger"></i>
                     </a>
                     <a href="#"><i class="icofont-law-document"></i></a>

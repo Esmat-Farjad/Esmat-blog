@@ -488,3 +488,9 @@ def publish_news(request):
             news_form.save()
             messages.success(request, 'News Published !')
             return redirect('dashboardRoute', 6)
+        
+def delete_news(request, id):
+    if id:
+        News.objects.get(id=id).delete()
+        messages.success(request, "News Deleted !")
+        return redirect('dashboardRoute', 6)
