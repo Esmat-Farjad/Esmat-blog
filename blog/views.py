@@ -267,8 +267,10 @@ def upload_image(request, pk):
 
 def project_list(request):
     projects = Project.objects.all().order_by('-created_at')
+    posts = Post.objects.all().order_by('-created_at')
     context = {
-        'projects':projects
+        'projects':projects,
+        'posts':posts
     }
     return render(request, 'project_list.html',context)
 

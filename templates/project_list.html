@@ -47,7 +47,6 @@
     <section id="portfolio" >
     <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
         {% for app in projects %}
-
             <div class="col-lg-4 col-md-6 portfolio-item filter-web">
                 <div class="portfolio-wrap">
                   <figure>
@@ -64,10 +63,31 @@
                   </div>
                 </div>
               </div>
-     
         {% endfor %}
     </div>
-</section>
+  </section>
+  <div class="section-header mb-3">
+    <h3>Posts</h3>
+  </div>
+  <section id="portfolio" >
+    <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+        {% for post in posts %}
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                <div class="portfolio-wrap">
+                  <figure>
+                    <img src="{% static 'img/portfolio/web1.jpg' %}" class="img-fluid" alt="">
+                    <a href="{% static 'img/portfolio/web1.jpg' %}" class="link-preview venobox" data-gall="portfolioGallery" title="Web 1"><i class="ion ion-eye"></i></a>
+                    <a href="{% url 'post_view' post.id %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
+                  </figure>
+                  <div class="portfolio-info">
+                    <h4><a href="{% url 'post_view' post.id %}">{{post.title}}</a></h4>
+                    <p class="d-inline post-title">{{post.text}}</p>
+                  </div>
+                </div>
+              </div>
+        {% endfor %}
+    </div>
+  </section>
     
 </div>
 <!-- ========PAGE CONTAINER END======= -->
