@@ -291,18 +291,24 @@
 
         <header class="section-header">
           <h3>Facts</h3>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+          <p>
+            Our commitment to delivering the latest and most up-to-date 
+            information means that our web app is constantly evolving. 
+            You can trust that you'll always have access to the most 
+            recent facts and discoveries across various fields of 
+            knowledge.
+          </p>
         </header>
 
         <div class="row counters">
 
           <div class="col-lg-3 col-6 text-center">
-            <span data-toggle="counter-up">274</span>
+            <span data-toggle="counter-up">0</span>
             <p>Clients</p>
           </div>
 
           <div class="col-lg-3 col-6 text-center">
-            <span data-toggle="counter-up">421</span>
+            <span data-toggle="counter-up">{{num_project}}</span>
             <p>Projects</p>
           </div>
 
@@ -312,7 +318,7 @@
           </div>
 
           <div class="col-lg-3 col-6 text-center">
-            <span data-toggle="counter-up">18</span>
+            <span data-toggle="counter-up">{{num_team}}</span>
             <p>Hard Workers</p>
           </div>
 
@@ -395,13 +401,12 @@
     </section><!-- End Portfolio Section -->
 
     <!-- ======= Our Clients Section ======= -->
+    {% if client %}
     <section id="clients">
       <div class="container" data-aos="zoom-in">
-
         <header class="section-header">
           <h3>Our Clients</h3>
         </header>
-
         <div class="owl-carousel clients-carousel">
           <img src="{% static 'img/clients/client-1.png' %}" alt="">
           <img src="{% static 'img/clients/client-2.png' %}" alt="">
@@ -412,10 +417,9 @@
           <img src="{% static 'img/clients/client-7.png' %}" alt="">
           <img src="{% static 'img/clients/client-8.png' %}" alt="">
         </div>
-
       </div>
     </section><!-- End Our Clients Section -->
-
+    {% endif %}
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="section-bg">
       <div class="container" data-aos="fade-up">

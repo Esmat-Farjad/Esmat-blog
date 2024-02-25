@@ -57,6 +57,9 @@ def index(request):
     comments = Comment.objects.select_related('user').order_by('-created_at')[:5]
     skills = Skill.objects.all()
     team = Team.objects.all()
+    num_project = project.count()
+    num_team = team.count()
+    
     contact = Contact.objects.all()
     query_form = QueryForm()
     if request.method == 'POST':
@@ -76,6 +79,8 @@ def index(request):
         'query_form':query_form,
         'contact':contact,
         'skills':skills,
+        'num_project':num_project,
+        'num_team':num_team
         }
     
     return render(request, 'index.html', context)
