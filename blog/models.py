@@ -140,7 +140,7 @@ class Skill(models.Model):
     
 class News(models.Model):
     headline = models.CharField(max_length=150)
-    body_text = models.CharField(max_length=300)
+    body_text = models.TextField(max_length=300)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):

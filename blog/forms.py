@@ -152,6 +152,9 @@ class NewsForm(forms.ModelForm):
     class Meta:
         model = News
         fields = "__all__"
+        widgets = {
+            'body_text':forms.Textarea(attrs={'rows':5})
+        }
         
     
 

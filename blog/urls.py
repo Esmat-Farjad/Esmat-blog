@@ -37,5 +37,6 @@ urlpatterns = [
     path('skill/update/<str:id>', views.update_skill, name='update_skill'),
     path('liked/', views.like_view, name='like_view'),
     path('News/publish', views.publish_news, name='publish_news'),
-    path('News/delete/<str:id>', views.delete_news, name='delete_news'),
+    path('News/delete/<str:pk>', views.delete_news, name='delete_news'),
+    path('News/update/<str:pk>', views.update_news, name='update_news'),
 ]

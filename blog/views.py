@@ -489,8 +489,22 @@ def publish_news(request):
             messages.success(request, 'News Published !')
             return redirect('dashboardRoute', 6)
         
-def delete_news(request, id):
-    if id:
-        News.objects.get(id=id).delete()
+def delete_news(request, pk):
+    if pk:
+        News.objects.get(id=pk).delete()
         messages.success(request, "News Deleted !")
         return redirect('dashboardRoute', 6)
+def update_news(request, pk):
+    if pk:
+        news = get_object_or_404(News, id=pk)
+        news_form = NewsForm(instance=news)
+        if request.method == 'POST':
+            news_form = NewsForm(request.POST, instance=news)
+            if news_form.is_valid():
+                news_form.save()
+                messages.success(request, "News Updated !")
+                return redirect("dashboardRoute", 6)
+        context ={
+            'news_form':news_form,
+        }
+        return render(request, 'admin/update_news.html',context)

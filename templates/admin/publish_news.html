@@ -11,24 +11,29 @@
         <form action="{% url 'publish_news' %}" method="POST">
             {% csrf_token %}
             <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="col-lg-3 col-md-3 col-sm-12"></div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <label>{{news_form.headline.label}}</label>
                     <div class="">{{news_form.headline}}</div>
                     <h6 class="text-danger mt-0 pt-0">{{news_form.headline.errors}}</h6>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12">
+            
                     <label>{{news_form.body_text.label}}</label>
                     <div class="">{{news_form.body_text}}</div>
                     <h6 class="text-danger mt-0 pt-0">{{news_form.body_text.errors}}</h6>
                 </div>
+                <div class="col-lg-3 col-md-3 col-sm-12"></div>
             </div>
-            <div class="button">
+            <div class="text-center">
                 <button type="submit">Publish</button>
             </div>
         </form>
     </div>
 </section>
-<section class="" style="position: relative;">
+<section class="">
+    <h4 class="px-5">
+        <span class="">News List</span>
+        <hr class="p-0 m-0">
+    </h4>
     <div class="p-5">
         {% if news %}
         <ol>
@@ -40,7 +45,7 @@
                     <a href="{% url 'delete_news' new.id %}" class="confirm-delete">
                         <i class="icofont-ui-delete mr-3 text-danger"></i>
                     </a>
-                    <a href="#"><i class="icofont-law-document"></i></a>
+                    <a href="{% url 'update_news' new.id %}"><i class="icofont-law-document"></i></a>
                     <small class="ml-3 mr-2">status</small>
                     {% if not forloop.counter > 5 %}
                     <div class="typing d-inline px-5">
