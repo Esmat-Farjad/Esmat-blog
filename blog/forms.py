@@ -152,14 +152,7 @@ class NewsForm(forms.ModelForm):
     class Meta:
         model = News
         fields = "__all__"
-        widgets = {
-            'project_url': forms.Select(attrs={
-                'onchange':'changeProject(event)'
-            }),
-            'post_url': forms.Select(attrs={
-                'onchange':'changePost(event)'
-            })
-        }
+        
     
 
 

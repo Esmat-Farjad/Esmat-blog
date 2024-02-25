@@ -21,16 +21,6 @@
                     <div class="">{{news_form.body_text}}</div>
                     <h6 class="text-danger mt-0 pt-0">{{news_form.body_text.errors}}</h6>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 projectUrl">
-                    <label>{{news_form.project_url.label}}</label>
-                    <div class="">{{news_form.project_url}}</div>
-                    <h6 class="text-danger mt-0 pt-0">{{news_form.project_url.errors}}</h6>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 postUrl">
-                    <label>{{news_form.post_url.label}}</label>
-                    <div class="">{{news_form.post_url}}</div>
-                    <h6 class="text-danger mt-0 pt-0">{{news_form.post_url.errors}}</h6>
-                </div>
             </div>
             <div class="button">
                 <button type="submit">Publish</button>
@@ -71,24 +61,3 @@
         {% endif %}
     </div>
 </section>
-<script>
-    function changePost(event){
-        let post = event.target.value;
-        if(post){
-            document.querySelector(".projectUrl").classList.add("d-none");
-        } else {
-            document.querySelector(".projectUrl").classList.remove("d-none");
-        }
-    }
-    function changeProject(event){
-        let project = event.target.value;
-        console.log(project);
-        if(project){
-            document.querySelector(".postUrl").classList.add("d-none");
-        } else {
-            document.querySelector(".postUrl").classList.remove("d-none");
-
-        }
-        
-    }
-</script>

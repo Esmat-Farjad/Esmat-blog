@@ -141,8 +141,6 @@ class Skill(models.Model):
 class News(models.Model):
     headline = models.CharField(max_length=150)
     body_text = models.CharField(max_length=300)
-    project_url = models.ForeignKey(Project, on_delete=models.SET_NULL, null=True, blank=True)
-    post_url = models.ForeignKey(Post, on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
