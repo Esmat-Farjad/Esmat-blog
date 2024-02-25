@@ -23,7 +23,7 @@
                   {% if user.is_staff %}
                   <li><a href="{% url 'create_post' %}">Create Post</a></li>
                   {% endif %}
-                  <li><a href="#">View Post</a></li>
+                  <li><a href="{% url 'project_list' %}">View Post</a></li>
                   <li><a href="{% url 'update_profile' %}">Profile</a></li>
                   {% if user.is_superuser  %}
                   <li><a href="{% url 'add_team' %}">Team</a></li>
