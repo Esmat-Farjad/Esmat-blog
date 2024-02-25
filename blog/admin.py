@@ -11,7 +11,7 @@ Technology,
 Feature,
 Project,
 ProjectImage,
-Team
+Team,News
 )
 
 
@@ -28,3 +28,4 @@ admin.site.register(Team)
 admin.site.register(Service)
 admin.site.register(Query)
 admin.site.register(Skill)
+admin.site.register(News)

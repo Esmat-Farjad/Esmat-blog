@@ -1,0 +1,94 @@
+<section>
+    <div class="section-header">
+        <h3>Publish your latest news</h3>
+    </div>
+    <div class="px-5">
+        <small class="p-0 m-0">Publish your latest news about your business.</small><br>
+        <small class="p-0 m-0"><span class="font-weight-bold">Note: 
+        </span> Pleas select your Project or Post, you can not select both project of post at once.</small>
+    </div>
+    <div class="p-5">
+        <form action="{% url 'publish_news' %}" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <label>{{news_form.headline.label}}</label>
+                    <div class="">{{news_form.headline}}</div>
+                    <h6 class="text-danger mt-0 pt-0">{{news_form.headline.errors}}</h6>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <label>{{news_form.body_text.label}}</label>
+                    <div class="">{{news_form.body_text}}</div>
+                    <h6 class="text-danger mt-0 pt-0">{{news_form.body_text.errors}}</h6>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 projectUrl">
+                    <label>{{news_form.project_url.label}}</label>
+                    <div class="">{{news_form.project_url}}</div>
+                    <h6 class="text-danger mt-0 pt-0">{{news_form.project_url.errors}}</h6>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 postUrl">
+                    <label>{{news_form.post_url.label}}</label>
+                    <div class="">{{news_form.post_url}}</div>
+                    <h6 class="text-danger mt-0 pt-0">{{news_form.post_url.errors}}</h6>
+                </div>
+            </div>
+            <div class="button">
+                <button type="submit">Publish</button>
+            </div>
+        </form>
+    </div>
+</section>
+<section class="display">
+    <div class="p-5">
+        {% if news %}
+        <ol>
+            {% for new in news %}
+            <li>
+                <h5 class="p-0 m-0">{{new.headline}}</h5>
+                <small>{{new.body_text}}</small>
+                <h5>
+                    <a href="#">
+                        <i class="icofont-ui-delete mr-3 text-danger"></i>
+                    </a>
+                    <a href="#"><i class="icofont-law-document"></i></a>
+                    <small class="ml-3 mr-2">status</small>
+                    {% if not forloop.counter > 5 %}
+                    <div class="typing d-inline px-5">
+                        <span class="m-2"></span>
+                        <span class="my-2 mx-3"></span>
+                        <span class="my-2 ml-4"></span>
+                    </div>
+                    {% endif %}
+                </h5>
+            </li>
+            
+            {% endfor %}
+        </ol>
+        {% else %}
+        <div class="">
+            We could'nt find any news !
+        </div>
+        {% endif %}
+    </div>
+</section>
+<script>
+    function changePost(event){
+        let post = event.target.value;
+        if(post){
+            document.querySelector(".projectUrl").classList.add("d-none");
+        } else {
+            document.querySelector(".projectUrl").classList.remove("d-none");
+        }
+    }
+    function changeProject(event){
+        let project = event.target.value;
+        console.log(project);
+        if(project){
+            document.querySelector(".postUrl").classList.add("d-none");
+        } else {
+            document.querySelector(".postUrl").classList.remove("d-none");
+
+        }
+        
+    }
+</script>

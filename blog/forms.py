@@ -3,7 +3,7 @@ from django import forms
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Comment, Contact, Post, PostImage, Profile, Project, Feature, Query, Skill, Team, Technology, ProjectImage
+from .models import Comment, Contact, News, Post, PostImage, Profile, Project, Feature, Query, Skill, Team, Technology, ProjectImage
 
 class UserRegistrationForm(UserCreationForm):
     class Meta:
@@ -147,6 +147,19 @@ class SkillForm(forms.ModelForm):
     class Meta:
         model = Skill
         fields = "__all__"
+
+class NewsForm(forms.ModelForm):
+    class Meta:
+        model = News
+        fields = "__all__"
+        widgets = {
+            'project_url': forms.Select(attrs={
+                'onchange':'changeProject(event)'
+            }),
+            'post_url': forms.Select(attrs={
+                'onchange':'changePost(event)'
+            })
+        }
     
 
 

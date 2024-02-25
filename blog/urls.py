@@ -13,7 +13,7 @@ urlpatterns = [
     path('post/<int:pk>/<str:slug>', PostDetailView.as_view(), name='post_view'),
     path('profile/update', views.update_profile, name='profile'),
     path('portfolio/<str:pk>', views.portfolio, name='portfolio'),
-    path('post/view/', views.post_view, name='post_view'),
+    path('post/view/', views.post_view, name='posts_view'),
     path('blogs/view/', views.blog_view, name='blog_view'),
     path('project/add/', views.add_project, name='add_project'),
     path('project/update/<str:id>', views.update_project, name='update_project'),
@@ -36,4 +36,5 @@ urlpatterns = [
     path('skill/delete/<str:id>', views.delete_skill, name='delete_skill'),
     path('skill/update/<str:id>', views.update_skill, name='update_skill'),
     path('liked/', views.like_view, name='like_view'),
+    path('News/publish', views.publish_news, name='publish_news'),
 ]

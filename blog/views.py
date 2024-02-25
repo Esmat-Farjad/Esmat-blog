@@ -4,12 +4,13 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
-from .models import Comment, Contact, Feature, Post, Profile, Project, ProjectImage, Query, Skill, Team, Technology
+from .models import Comment, Contact, Feature, News, Post, Profile, Project, ProjectImage, Query, Skill, Team, Technology
 from hitcount.views import HitCountDetailView
 from .forms import (
     CommentForm,
     ContactForm,
       FeatureForm,
+    NewsForm,
       TechnologyForm, 
       ProfileUpdateForm, 
       ProjectForm, 
@@ -59,6 +60,7 @@ def index(request):
     team = Team.objects.all()
     num_project = project.count()
     num_team = team.count()
+    news = News.objects.all().order_by('-created_at')
     
     contact = Contact.objects.all()
     query_form = QueryForm()
@@ -80,7 +82,8 @@ def index(request):
         'contact':contact,
         'skills':skills,
         'num_project':num_project,
-        'num_team':num_team
+        'num_team':num_team,
+        'news':news
         }
     
     return render(request, 'index.html', context)
@@ -360,6 +363,8 @@ def dashboardRoute(request, flag):
     project = Project.objects.all()
     team_member = Team.objects.all()
     queries = Query.objects.all().order_by('-id')
+    news = News.objects.all().order_by('-created_at')
+    news_form = NewsForm()
     if flag == 1:
         flag = flag
     elif flag == 2:
@@ -369,6 +374,8 @@ def dashboardRoute(request, flag):
     elif flag == 4:
         flag = flag
     elif flag == 5:
+        flag == flag
+    elif flag == 6:
         flag == flag
     context = {
         'skill_form':skill_form,
@@ -380,6 +387,8 @@ def dashboardRoute(request, flag):
         'team_form':team_form,
         'team_member':team_member,
         'project':project,
+        'news_form':news_form,
+        'news':news
     }
     return render(request, 'admin/dashboard.html', context)
 
@@ -470,3 +479,12 @@ def like_view(request):
             'status':200
         }
     return JsonResponse(data, safe=False)
+
+def publish_news(request):
+   
+    if request.method == 'POST':
+        news_form = NewsForm(request.POST)
+        if news_form.is_valid():
+            news_form.save()
+            messages.success(request, 'News Published !')
+            return redirect('dashboardRoute', 6)
