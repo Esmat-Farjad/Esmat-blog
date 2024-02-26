@@ -3,7 +3,6 @@
 <!-- {% include '../links/bootstrap_cdn.html' %} -->
 {% include '../forms/sub-header.html' %}
 <div class="container">
-
    <!-- ======= Breadcrumbs Section ======= -->
    <section class="breadcrumbs">
     <div class="container">
@@ -17,6 +16,8 @@
       </div>
     </div>
   </section><!-- Breadcrumbs Section -->
+</div>
+
     <!-- ======PAGE CONTENT===== -->
    <!-- ========SYSTEM MESSAGES======== -->
    <div class="message-container my-5">
@@ -38,9 +39,9 @@
     {% endfor %}
     {% endif %}
     </div>
-</div>
+
     <!-- ======PAGE CONTENT===== -->
-<div class="main-section my-3">
+<!-- <div class="main-section my-3">
     <div class="row">
         <div class="menu-container col-lg-2 col-md-2 col-sm-12 col-xs-12 border-right shadow">
             <div class="my-2 p-3 rounded bg-light dropdown-handler border border-secondary-subtle">
@@ -152,17 +153,82 @@
             {% endif %}
         </div>
     </div>
-</div>
-
-<!-- 
-    <section>
-    <div class="section-header">
-        <h3>
-            Home
-        </h3>
-        <h6 class="text-center"><i class="icofont-gear"></i>&nbsp;Home setting</h6>
+</div> -->
+<div class="">
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <h3 href="#" class="text-center">Menu</h3>
+        {% if flag == '1' %}
+            <a class="text-light" href="{% url 'dashboardRoute' 1 %}"> Contact</>
+        {% else %}
+            <a href="{% url 'dashboardRoute' 1 %}">Contact</a> 
+        {% endif %}
+        {% if  flag == '2' %}
+            <a class="text-light" href="{% url 'dashboardRoute' 2 %}"> Skills</a>
+        {% else %}
+            <a href="{% url 'dashboardRoute' 2 %}">Skills</a>
+        {% endif %}
+        {% if flag == '3' %}
+            <a class="text-light" href="{% url 'dashboardRoute' 3 %}"> Query</a>
+        {% else %}
+            <a href="{% url 'dashboardRoute' 3 %}"> Query</a>
+        {% endif %}
+        {% if flag == '4' %}
+            <a class="text-light" href="{% url 'dashboardRoute' 4 %}"> Team</a>
+        {% else %}
+            <a href="{% url 'dashboardRoute' 4 %}"> Team</a>
+        {% endif %}
+        {% if flag == '5' %}
+            <a class="text-light" href="{% url 'dashboardRoute' 5 %}">Project</a>
+        {% else %}
+            <a href="{% url 'dashboardRoute' 5 %}">Project</a>
+        {% endif %}
+        {% if flag == '6' %}
+            <a class="text-light" href="{% url 'dashboardRoute' 6 %}">Publish News</a>
+        {% else %}
+            <a href="{% url 'dashboardRoute' 6 %}">Publish News</a>
+        {% endif %}
     </div>
-    </section> -->
+    <span style="font-size:20px;cursor:pointer;margin-left: 10px;" onclick="openNav()">&#9776; open menu</span>
+    <section id="main-section" class="p-4">
+        <div class="row">
+            <div class="col-md-9 col-lg-9 col-sm-12">
+            {% if flag == '1' %}
+            {% include 'admin/contact.html' %}
+            {% elif flag == '2' %}
+            {% include 'admin/skill.html' %}
+            {% elif flag == '3' %}
+            {% include 'admin/query.html' %}
+            {% elif flag == '4' %}
+            {% include 'admin/add_team.html' %}
+            {% elif flag == '5' %}
+            {% include 'admin/add_project_form.html' %}
+            {% elif flag == '6' %}
+            {% include 'admin/publish_news.html' %}
+            {% endif %}
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-12 bg-white border rounded ">
+                {% for new in news %}
+                {{new.headline}}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+</div>
+<script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "275px";
+      document.getElementById("main-section").style.marginLeft = "275px";
+      
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("main-section").style.marginLeft = "0";
+
+    }
+</script>
     
     
  

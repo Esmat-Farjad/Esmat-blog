@@ -72,7 +72,7 @@ def index(request):
         else:
             messages.error(request, "Oops...something went wrong. please try again...")
 
-    
+   
     context = {
         'comments':comments,
         'blogs':blogs,
@@ -363,33 +363,29 @@ def dashboardRoute(request, flag):
     team_form = None
     team_member = None
     news_form = None
-    news = None
-    
-    project = Project.objects.all()
-    
-    
-    
-    if flag == 1:
+    news = News.objects.all().order_by('-created_at')
+
+    if flag == '1':
         contact_form = ContactForm()
         info = Contact.objects.all()
         flag = flag
-    elif flag == 2:
+    elif flag == '2':
         skill_form = SkillForm()
         skills = Skill.objects.all()
         print("HELLO")
         flag = flag
-    elif flag == 3:
+    elif flag == '3':
         queries = Query.objects.all().order_by('-id')
         flag = flag
-    elif flag == 4:
+    elif flag == '4':
         team_form = TeamForm()
         team_member = Team.objects.all()
         flag = flag
-    elif flag == 5:
+    elif flag == '5':
         flag == flag
         return redirect("add_project")
-    elif flag == 6:
-        news = News.objects.all().order_by('-created_at')
+    elif flag == '6':
+        
         news_form = NewsForm()
         flag == flag
     context = {
@@ -401,7 +397,6 @@ def dashboardRoute(request, flag):
         'queries':queries,
         'team_form':team_form,
         'team_member':team_member,
-        'project':project,
         'news_form':news_form,
         'news':news
     }
