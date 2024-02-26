@@ -1,18 +1,18 @@
-
+<section>
     <!-- ======PAGE CONTENT===== -->
     <div class="section-header mb-3">
         <h3>Add Team</h3>
     </div>
-    <div class="row">
+    <div>
         <form action="{% url 'add_team' %}" enctype="multipart/form-data" method="POST" class="px-3 w-full" >
             {% csrf_token %}
             <div class="row">
             {% for field in team_form %}
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                <label>{{field.label}}</label>
-                {{field}}
-                <small class="d-block text-danger mt-0 pt-0">{{field.errors}}</small>
-            </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <label>{{field.label}}</label>
+                    {{field}}
+                    <small class="d-block text-danger mt-0 pt-0">{{field.errors}}</small>
+                </div>
             {% endfor %}
             </div>
             {{image_form}}
@@ -72,4 +72,4 @@
             <small class="text-dark">Lets create one !</small>
         </div>
         {% endif %}
-</div>
+</section>
