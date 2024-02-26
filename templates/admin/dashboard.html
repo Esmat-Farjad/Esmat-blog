@@ -208,9 +208,39 @@
             {% endif %}
             </div>
             <div class="col-md-3 col-lg-3 col-sm-12 bg-white border rounded ">
-                {% for new in news %}
-                {{new.headline}}
-                {% endfor %}
+                <div class="py-4">
+                    <h6 class="text-center font-weight-bold">
+                        Lates News Running
+                    </h6>
+                </div>
+                {% if news %}
+                    <ol>
+                    {% for new in news %}
+                    <li>
+                        <h6 class="p-0 m-0">{{new.headline}}</h6>
+                        <small>{{new.body_text}}</small>
+                        <h5>
+                            <a href="{% url 'delete_news' new.id %}" class="confirm-delete">
+                                <i class="icofont-ui-delete mr-3 text-danger"></i>
+                            </a>
+                            <a href="{% url 'update_news' new.id %}"><i class="icofont-law-document"></i></a>
+                            <small class="ml-3 mr-2">status</small>
+                            {% if not forloop.counter > 5 %}
+                            <div class="typing d-inline px-5">
+                                <span class="m-2"></span>
+                                <span class="my-2 mx-3"></span>
+                                <span class="my-2 ml-4"></span>
+                            </div>
+                            {% endif %}
+                        </h5>
+                    </li>
+                    {% endfor %}
+                    </ol>
+                {% else %}
+                <div class="">
+                    We could'nt find any news !
+                </div>
+                {% endif %}
             </div>
         </div>
     </section>
