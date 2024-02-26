@@ -355,27 +355,42 @@ def add_skill(request):
             return redirect('dashboard')
 
 def dashboardRoute(request, flag):
-    contact_form = ContactForm()
-    skill_form = SkillForm()
-    skills = Skill.objects.all()
-    info = Contact.objects.all()
-    team_form = TeamForm()
+    contact_form = None
+    skill_form = None
+    skills = None
+    info = None
+    queries = None
+    team_form = None
+    team_member = None
+    news_form = None
+    news = None
+    
     project = Project.objects.all()
-    team_member = Team.objects.all()
-    queries = Query.objects.all().order_by('-id')
-    news = News.objects.all().order_by('-created_at')
-    news_form = NewsForm()
+    
+    
+    
     if flag == 1:
+        contact_form = ContactForm()
+        info = Contact.objects.all()
         flag = flag
     elif flag == 2:
+        skill_form = SkillForm()
+        skills = Skill.objects.all()
+        print("HELLO")
         flag = flag
     elif flag == 3:
+        queries = Query.objects.all().order_by('-id')
         flag = flag
     elif flag == 4:
+        team_form = TeamForm()
+        team_member = Team.objects.all()
         flag = flag
     elif flag == 5:
         flag == flag
+        return redirect("add_project")
     elif flag == 6:
+        news = News.objects.all().order_by('-created_at')
+        news_form = NewsForm()
         flag == flag
     context = {
         'skill_form':skill_form,

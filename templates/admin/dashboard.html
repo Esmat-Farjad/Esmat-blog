@@ -42,20 +42,20 @@
     <!-- ======PAGE CONTENT===== -->
 <div class="main-section my-3">
     <div class="row">
-        <div class="menu-container col-lg-2 cl-md-2 border-right shadow">
-            <div class="my-2 px-3 d-lg-none d-sm-block d-md-none dropdown-handler">
-                <a href="#">
-                    <h4 class="text-secondary"><span class="d-lg-none d-md-none d-sm-inline">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="22"
-                        viewBox="0 0 128 512">
-                            <path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 
-                            1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"/>
-                        </svg>
-                    </span>Menu</h4>
-                </a>
+        <div class="menu-container col-lg-2 col-md-2 col-sm-12 col-xs-12 border-right shadow">
+            <div class="my-2 p-3 rounded bg-light dropdown-handler border border-secondary-subtle">
+                <span role="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="5" height="22" class="d-lg-none d-md-none d-sm-inline pb-1"
+                    viewBox="0 0 128 512">
+                        <path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 
+                        1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"/>
+                    </svg>
+                    <h5 class="d-inline text-lg-center text-md-center text-sm-start d-md-block d-lg-block">Menu</h5>
+                </span> 
+                
             </div>
-            <h3 class="text-center d-sm-none d-md-block d-lg-block">Menu</h3>
-            <ul type="none" class="px-3 d-lg-block d-md-block dropdown-content">
+            
+            <ul type="none" class="px-3 d-lg-block d-md-block dropdown-content d-sm-none">
                 {% if flag == '1' %}
                 <li data-aos-delay="100">
                     <h5 class="px-2 m-0 py-3 bg-light">
@@ -121,7 +121,7 @@
                     </h5>
                 </li>
                 {% endif %}
-                {% if flag == '5' %}
+                {% if flag == '6' %}
                 <li data-aos-delay="100">
                     <h5 class="px-2 m-0 py-3 bg-light">
                        <a href="{% url 'dashboardRoute' 6 %}">Publish News</a>
@@ -146,7 +146,7 @@
             {% elif flag == '4' %}
             {% include 'admin/add_team.html' %}
             {% elif flag == '5' %}
-            {% include 'admin/project.html' %}
+            {% include 'admin/add_project_form.html' %}
             {% elif flag == '6' %}
             {% include 'admin/publish_news.html' %}
             {% endif %}

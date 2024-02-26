@@ -3,10 +3,12 @@
 * Template URL: https://bootstrapmade.com/bizpage-bootstrap-business-template/
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
+
 */
+
+
 (function($) {
   "use strict";
-
   
   // load more post
   $('#load-more-post').click(() => {
@@ -20,7 +22,7 @@
   });
 
   $('.dropdown-handler').on('click',function(){
-    $('.dropdown-content').slideToggle("slow");
+    $('.dropdown-content').toggleClass('d-sm-none',1000);
   });
 
   // delete confirmation
