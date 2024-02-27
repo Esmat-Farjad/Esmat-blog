@@ -2,7 +2,22 @@
 {% include '../links/link.html' %}
 <!-- {% include '../links/bootstrap_cdn.html' %} -->
 {% include '../forms/sub-header.html' %}
-<div class="container mt-5 pt-5">
+<div class="container">
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+     <div class="container">
+       <div class="d-flex justify-content-between align-items-center">
+         <h2>Dashboard</h2>
+         <ol>
+           <li><a href="{%  url 'index' %}">Home</a></li>
+           <li><a href="{% url 'add_project' %}">Add Project</a></li>
+           <li>Dashboard</li>
+         </ol>
+       </div>
+     </div>
+   </section><!-- Breadcrumbs Section -->
+ </div>
+<div class="container mt-5">
     <section class="border rounded p-5">
         {% if feature %}
         <div class="my-5">
