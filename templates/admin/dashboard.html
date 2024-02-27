@@ -135,12 +135,16 @@
 <script>
     function openNav() {
       document.getElementById("mySidenav").style.width = "275px";
+      document.getElementById("main-section").style.transition = 'all 0.5s ease-in-out';
+
       document.getElementById("main-section").style.marginLeft = "275px";
       
     }
     
     function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("main-section").style.transition = 'all 0.5s ease-in-out';
+
       document.getElementById("main-section").style.marginLeft = "0";
 
     }
