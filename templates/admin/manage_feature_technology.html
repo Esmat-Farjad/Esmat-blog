@@ -5,16 +5,18 @@
 <div class="container mt-5 pt-5">
     <section class="border rounded p-5">
         {% if feature %}
-        <h3 class="text-center">Features Management</h3>
+        <div class="my-3">
+            <h3 class="text-center pb-0 mb-0">Features Management</h3>
+        </div>
         <div class="row">
             <div class="col-md-6 col-lg-6 col-sm-12">
                 
                 <ul type="none" id="features">
                     {% for f in feature %}
                     <li 
-                    data-feature-form-id="{{f.id}}" class="py-2"
+                    data-feature-form-id="{{f.id}}" class="p-2 me-4"
                     data-feature-form-name="{{f.name}}"
-                    >{{f.name}}
+                    ><i class="icofont-pencil-alt-2"></i>&nbsp;{{f.name}}
                     </li>
                     {% endfor %}
                 </ul>
@@ -58,7 +60,7 @@
             method: 'POST',
             body: formData
         }).then(response => response.json()).then(data =>{
-            console.log(data);
+            window.location.href = "{% url 'manage_feature_technology' 'f' %}";
         }).catch(error => {
             console.log(error);
         });

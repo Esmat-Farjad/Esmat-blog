@@ -523,13 +523,11 @@ def manage_feature_technology(request,slug):
     context = {}
     if slug == 'f':
         feature = Feature.objects.all()
-        
         feature_form = FeatureForm()
         context = {
             'feature':feature,
             'feature_form':feature_form
         }
-        
     elif slug == 't':
         technology = Technology.objects.all()
         context = {
@@ -539,7 +537,7 @@ def manage_feature_technology(request,slug):
 def update_feature(request):
     if request.method == 'POST':
         feature_name = request.POST.get('feature_name')
-        feature_id = request.POST.get('feature_id')
-        print(feature_name, " and ", feature_id)
-        data = {'featue_name':feature_name, 'feature_id':feature_id}
+        feature_id = int(request.POST.get('feature_id'))
+        Feature.objects.filter(id=feature_id).update(name=feature_name)
+        data = {'featue_name':feature_name, 'feature_id':feature_id, 'message':'Feature updated'}
         return JsonResponse(data, safe=False)
