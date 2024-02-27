@@ -354,6 +354,7 @@ def dashboardRoute(request, flag):
     features = None
     technologies = None
     project  = None
+    user = None
     if flag == '1':
         contact_form = ContactForm()
         info = Contact.objects.all()
@@ -382,7 +383,11 @@ def dashboardRoute(request, flag):
     elif flag == '6':
         news_form = NewsForm()
         flag == flag
+    elif flag == '7':
+        user = User.objects.all()
+        flag = flag
     context = {
+        'users':user,
         'skill_form':skill_form,
         'contact_form':contact_form,
         'info':info,

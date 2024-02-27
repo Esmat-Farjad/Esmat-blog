@@ -1,0 +1,33 @@
+<section>
+    <div class="section-header">
+        <h3>User Management</h3>
+    </div>
+    <div class="bg-light rounded p-2 text-success">
+        <h4 class="">Active Users</h4>
+    </div>
+    <div class="">
+        <ul type="none">
+            {% for user in users %}
+            {% if user.is_active %}
+            <li class="p-2">
+                {% if user.get_full_name == '' %}
+                Administrator
+                {% else %}
+                {{user.get_full_name}}
+                {% endif %}
+            </li>
+            {% endif %}
+            {%  endfor %}
+        </ul>
+    </div>
+    <div class="bg-light rounded p-2 text-warning">
+        <h4 class="">Deactive Users</h4>
+    </div>
+    <div class="">
+        {% for user in users %}
+        {% if not user.is_active %}
+        {{user.get_full_name}}
+        {% endif %}
+        {%  endfor %}
+    </div>
+</section>
