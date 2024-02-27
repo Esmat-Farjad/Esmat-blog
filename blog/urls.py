@@ -42,4 +42,6 @@ urlpatterns = [
     path('featur/technology/manage/<str:slug>',views.manage_feature_technology, name='manage_feature_technology'),
     path('feature/update', views.update_feature, name='update_feature'),
     path('feature/delete/<str:pk>', views.delete_feature, name='delete_feature'),
+    path('technology/delete/<str:pk>', views.delete_technology, name='delete_technology'),
+    path('technology/update', views.update_technology, name='update_technology'),
 ]

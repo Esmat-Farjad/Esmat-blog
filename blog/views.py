@@ -545,3 +545,14 @@ def delete_feature(request, pk):
     if pk:
         Feature.objects.filter(id=pk).delete()
         return redirect('manage_feature_technology', 'f')
+def delete_technology(request, pk):
+    if pk:
+        Technology.objects.filter(id=pk).delete()
+        return redirect('manage_feature_technology', 't')
+def update_technology(request):
+    if request.method == 'POST':
+        name = request.POST.get('technology-name')
+        t_type = request.POST.get('technology-type')
+        tid = request.POST.get('technology-id')
+        Technology.objects.filter(id=tid).update(name=name, type=t_type)
+        return redirect('manage_feature_technology', 't')

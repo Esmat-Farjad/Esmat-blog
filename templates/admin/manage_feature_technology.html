@@ -47,7 +47,7 @@
                     data-technology-form-id="{{f.id}}"
                     data-technology-form-name="{{f.name}}"
                     data-technology-form-type="{{f.type}}">
-                        <a href="{% url 'delete_feature' f.id %}" 
+                        <a href="{% url 'delete_technology' f.id %}" 
                         class="btn mr-2 btn-sm btn-light border border-danger-subtle text-danger confirm-delete">
                             <i class="icofont-ui-delete"></i>
                         </a>
@@ -59,15 +59,17 @@
             </div>
             <div class="col-md-6 col-lg-6 col-sm-12">
                 <div id="technology-form" style="display: none;" class="px-5">
-                    <label for="technology-name">Technology Name</label>
-                    <input type="text" name="technology-name" id="technology-name">
-
-                    <label for="technology-type">Technology Type</label>
-                    <input type="text" name="technology-type" id="technology-type">
-                    <input type="number" name="technology-id" id="technology-id" style="display: none;">
-                    <div class="mt-3">
-                        <button class="btn btn-sm btn-light" id="update-button" data-self-declare="update" >update</button>
-                    </div>
+                    <form action="{% url 'update_technology' %}" method="POST">
+                        {% csrf_token %}
+                        <label for="technology-name">Technology Name</label>
+                        <input type="text" name="technology-name" id="technology-name">
+                        <label for="technology-type">Technology Type</label>
+                        <input type="text" name="technology-type" id="technology-type">
+                        <input type="number" name="technology-id" id="technology-id" style="display: none;">
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-sm btn-light" id="update-technology-button" >update</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -111,7 +113,6 @@
     document.getElementById("technology-name").value = e.target.dataset.technologyFormName;
     document.getElementById("technology-type").value = e.target.dataset.technologyFormType;
     document.getElementById("technology-id").value = e.target.dataset.technologyFormId;
-
 }
 </script>
 {% include '../links/scripts.html' %}
