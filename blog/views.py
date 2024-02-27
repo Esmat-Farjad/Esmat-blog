@@ -202,13 +202,6 @@ def blog_view(request):
     return render(request, 'blogs_view.html')
 
 def add_project(request):
-    project_form = ProjectForm()
-    feature_form = FeatureForm()
-    technology_form = TechnologyForm()
-    image_form = ProjectImageForm()
-    features = Feature.objects.all().order_by("-id")
-    technologies = Technology.objects.all().order_by("-id")
-    project = Project.objects.all().order_by('-created_at')[:5]
     if request.method == 'POST':
         project_form = ProjectForm(request.POST)
         image_form = ProjectImageForm(request.POST, request.FILES)
@@ -218,18 +211,8 @@ def add_project(request):
             img.project = pro
             img.save()
             messages.success(request, f"{pro} was added successfully. please upload project images.")
-            
-    context = {
-        'project_form':project_form,
-        'project':project,
-        'image_form':image_form,
-        'feature_form':feature_form,
-        'technology_form':technology_form,
-        'features':features,
-        'technologies':technologies,
 
-    }
-    return render(request, 'admin/add_project_form.html',context)
+    return redirect('dashboardRoute', 5)
 
 def update_project(request, id):
     project = get_object_or_404(Project,id=id)
@@ -364,7 +347,13 @@ def dashboardRoute(request, flag):
     team_member = None
     news_form = None
     news = News.objects.all().order_by('-created_at')
-
+    project_form = None
+    feature_form = None
+    technology_form = None
+    image_form = None
+    features = None
+    technologies = None
+    project  = None
     if flag == '1':
         contact_form = ContactForm()
         info = Contact.objects.all()
@@ -383,9 +372,14 @@ def dashboardRoute(request, flag):
         flag = flag
     elif flag == '5':
         flag == flag
-        return redirect("add_project")
+        project_form = ProjectForm()
+        feature_form = FeatureForm()
+        technology_form = TechnologyForm()
+        image_form = ProjectImageForm()
+        features = Feature.objects.all().order_by("-id")
+        technologies = Technology.objects.all().order_by("-id")
+        project = Project.objects.all().order_by('-created_at')[:5]
     elif flag == '6':
-        
         news_form = NewsForm()
         flag == flag
     context = {
@@ -398,7 +392,14 @@ def dashboardRoute(request, flag):
         'team_form':team_form,
         'team_member':team_member,
         'news_form':news_form,
-        'news':news
+        'news':news,
+        'project_form':project_form,
+        'feature_form':feature_form,
+        'technology_form':technology_form,
+        'image_form':image_form,
+        'features':features,
+        'technologies':technologies,
+        'project':project, 
     }
     return render(request, 'admin/dashboard.html', context)
 
@@ -518,3 +519,8 @@ def update_news(request, pk):
             'news_form':news_form,
         }
         return render(request, 'admin/update_news.html',context)
+def manage_feature_technology(request,pk,slug):
+    if slug == 'f':
+        pass
+    elif slug == 't':
+        pass

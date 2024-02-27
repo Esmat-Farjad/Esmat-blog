@@ -1,44 +1,7 @@
 {% load static %}
 {% include '../links/link.html' %}
 {% include '../forms/sub-header.html' %}
-
-<div class="container">
-
-   <!-- ======= Breadcrumbs Section ======= -->
-   <section class="breadcrumbs">
-    <div class="container">
-      <div class="d-flex justify-content-between align-items-center">
-        <h2>Add Project</h2>
-        <ol>
-          <li><a href="{%  url 'index' %}">Home</a></li>
-          <li><a href="{% url 'project_list' %}">View Project</a></li>
-          <li>Add Project</li>
-        </ol>
-      </div>
-    </div>
-  </section><!-- Breadcrumbs Section -->
-    <!-- ======PAGE CONTENT===== -->
-    <!-- ========SYSTEM MESSAGES======== -->
-    <div class="message-container my-5">
-        {% if messages %}
-        {% for message in messages %}
-        {% if message.tags == 'success' %}
-        <div class="text-official text-center">
-            <small class="px-5 py-3 border border-success border-success-emphasis rounded">
-                <span><i class="icofont-check-circled"></i>&nbsp;{{message}}</span>
-            </small>
-        </div>
-        {% elif message.tags == 'error' %}
-        <div class="text-danger text-center position-relative">
-            <small class="alert alert-danger text-danger">
-                <span><i class="icofont-exclamation-circle"></i>&nbsp;{{message}}</span>
-            </small>
-        </div>
-        {% endif %}
-        {% endfor %}
-        {% endif %}
-    </div>
-    <!-- ======PAGE CONTENT===== -->
+<section class="rounded border p-5">
     <div class="section-header mb-3">
         <h3>Add Project</h3>
     </div>
@@ -137,6 +100,9 @@
             </div>
         </div>
         {% endfor %}
+        <div class="text-center">
+            <a href="#"><i class="icofont-gear"></i>&nbsp;Manage</a>
+        </div>
     </div>  
     {% else %}
     <div class=" m-0 p-0">
@@ -162,6 +128,9 @@
             </div>
         </div>
         {% endfor %}
+        <div class="text-center">
+            <a href="#"><i class="icofont-gear"></i>&nbsp;Manage</a>
+        </div>
     </div>
     {% else %}
     <p>
@@ -175,15 +144,32 @@
         Project List
     </h5>
     {% if project %}
-    {% for p in project %}
-        <div class="project-info">
-            <a href="{% url 'upload_image' p.id %}">
-                <h5 class="p-0 m-0 post-tilte d-inline">{{p.name}}</h5>
-                <h6  class="p-0 m-0 post-description">{{p.description}}</h6>
-            </a>
+    <section id="portfolio">
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+            {% for app in project %}
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                <div class="portfolio-wrap">
+                  <figure>
+                      {% for img in app.projectimage_set.all %}
+                      {% if forloop.counter == 1 %}
+                      <img src="{{img.image.url}}" class="img-fluid" alt="">
+                      {% endif %}
+                      {% endfor %}
+                      <a href="{{img.image.url}}" class="link-preview venobox" data-gall="portfolioGallery" title="Web 1"><i class="ion ion-eye"></i></a>
+                      <a href="{% url 'portfolio' app.id %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
+                  </figure>
+      
+                  <div class="portfolio-info">
+                    <h4><a href="{% url 'portfolio' app.id %}">{{app.name}}</a></h4>
+                    {% for tech in app.technology.all %}
+                    <p class="d-inline">{{tech.name}}</p> |
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
         </div>
-    {% endfor %}
-    
+    </section>
     {% else %}
     <div class="text-center my-3">
         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" viewBox="0 0 512 512">
@@ -194,7 +180,7 @@
     </div>
     {% endif %}
    
-</div>
+</section>
 
 <!-- ========PAGE CONTAINER END======= -->
 {% include '../links/scripts.html' %}
