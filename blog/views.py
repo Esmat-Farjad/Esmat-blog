@@ -523,10 +523,8 @@ def manage_feature_technology(request,slug):
     context = {}
     if slug == 'f':
         feature = Feature.objects.all()
-        feature_form = FeatureForm()
         context = {
-            'feature':feature,
-            'feature_form':feature_form
+            'feature':feature
         }
     elif slug == 't':
         technology = Technology.objects.all()
