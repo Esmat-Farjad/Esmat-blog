@@ -39,4 +39,6 @@ urlpatterns = [
     path('News/publish', views.publish_news, name='publish_news'),
     path('News/delete/<str:pk>', views.delete_news, name='delete_news'),
     path('News/update/<str:pk>', views.update_news, name='update_news'),
+    path('featur/technology/manage/<str:slug>',views.manage_feature_technology, name='manage_feature_technology'),
+    path('feature/update', views.update_feature, name='update_feature'),
 ]

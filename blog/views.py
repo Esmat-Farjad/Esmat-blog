@@ -519,8 +519,27 @@ def update_news(request, pk):
             'news_form':news_form,
         }
         return render(request, 'admin/update_news.html',context)
-def manage_feature_technology(request,pk,slug):
+def manage_feature_technology(request,slug):
+    context = {}
     if slug == 'f':
-        pass
+        feature = Feature.objects.all()
+        
+        feature_form = FeatureForm()
+        context = {
+            'feature':feature,
+            'feature_form':feature_form
+        }
+        
     elif slug == 't':
-        pass
+        technology = Technology.objects.all()
+        context = {
+            'technology':technology
+        }
+    return render(request, 'admin/manage_feature_technology.html', context)
+def update_feature(request):
+    if request.method == 'POST':
+        feature_name = request.POST.get('feature_name')
+        feature_id = request.POST.get('feature_id')
+        print(feature_name, " and ", feature_id)
+        data = {'featue_name':feature_name, 'feature_id':feature_id}
+        return JsonResponse(data, safe=False)

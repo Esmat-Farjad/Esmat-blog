@@ -101,7 +101,7 @@
         </div>
         {% endfor %}
         <div class="text-center">
-            <a href="#"><i class="icofont-gear"></i>&nbsp;Manage</a>
+            <a href="{% url 'manage_feature_technology' 'f' %}"><i class="icofont-gear"></i>&nbsp;Manage</a>
         </div>
     </div>  
     {% else %}
@@ -129,7 +129,7 @@
         </div>
         {% endfor %}
         <div class="text-center">
-            <a href="#"><i class="icofont-gear"></i>&nbsp;Manage</a>
+            <a href="{% url 'manage_feature_technology' 't' %}"><i class="icofont-gear"></i>&nbsp;Manage</a>
         </div>
     </div>
     {% else %}
