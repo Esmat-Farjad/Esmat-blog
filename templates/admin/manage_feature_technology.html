@@ -5,18 +5,21 @@
 <div class="container mt-5 pt-5">
     <section class="border rounded p-5">
         {% if feature %}
-        <div class="my-3">
+        <div class="my-5">
             <h3 class="text-center pb-0 mb-0">Features Management</h3>
         </div>
         <div class="row">
-            <div class="col-md-6 col-lg-6 col-sm-12">
-                
+            <div class="col-md-6 col-lg-6 col-sm-12 border-right">
                 <ul type="none" id="features">
                     {% for f in feature %}
-                    <li 
-                    data-feature-form-id="{{f.id}}" class="p-2 me-4"
-                    data-feature-form-name="{{f.name}}"
-                    ><i class="icofont-pencil-alt-2"></i>&nbsp;{{f.name}}
+                    <li class="py-3"
+                    data-feature-form-id="{{f.id}}"
+                    data-feature-form-name="{{f.name}}">
+                        <a href="{% url 'delete_feature' f.id %}" 
+                        class="btn me-4 btn-sm btn-light border border-danger-subtle text-danger confirm-delete">
+                            <i class="icofont-ui-delete"></i>
+                        </a>
+                        <i class="icofont-pencil-alt-2"></i>&nbsp;{{f.name}}
                     </li>
                     {% endfor %}
                 </ul>
@@ -26,8 +29,7 @@
                     <input type="text" name="feature-name" id="feature-name">
                     <input type="number" name="feature-id" id="feature-id" style="display: none;">
                     <div class="mt-3">
-                        <button class="btn btn-sm btn-light" id="update-button">update</button>
-                        <a href="#" class="btn btn-light confirm-delete text-danger"><i class="icofont-ui-delete"></i></a>
+                        <button class="btn btn-sm btn-light" id="update-button" data-self-declare="update" >update</button>
                     </div>
                 </div>
             </div>
@@ -51,9 +53,12 @@
         feature_name = document.getElementById("feature-name").value;
         feature_id = document.getElementById("feature-id").value;
 
+        
+
         formData = new FormData();
         formData.append('feature_name', feature_name);
         formData.append('feature_id', feature_id);
+ 
         formData.append('csrfmiddlewaretoken','{{csrf_token}}');
         console.log(formData);
         fetch('{% url "update_feature" %}', {

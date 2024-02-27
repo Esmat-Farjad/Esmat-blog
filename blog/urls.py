@@ -41,4 +41,5 @@ urlpatterns = [
     path('News/update/<str:pk>', views.update_news, name='update_news'),
     path('featur/technology/manage/<str:slug>',views.manage_feature_technology, name='manage_feature_technology'),
     path('feature/update', views.update_feature, name='update_feature'),
+    path('feature/delete/<str:pk>', views.delete_feature, name='delete_feature'),
 ]

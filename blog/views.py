@@ -538,6 +538,12 @@ def update_feature(request):
     if request.method == 'POST':
         feature_name = request.POST.get('feature_name')
         feature_id = int(request.POST.get('feature_id'))
+        
         Feature.objects.filter(id=feature_id).update(name=feature_name)
         data = {'featue_name':feature_name, 'feature_id':feature_id, 'message':'Feature updated'}
         return JsonResponse(data, safe=False)
+    
+def delete_feature(request, pk):
+    if pk:
+        Feature.objects.filter(id=pk).delete()
+        return redirect('manage_feature_technology', 'f')
