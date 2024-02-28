@@ -132,7 +132,48 @@
               
         </div>  
     </section><!-- End Portfolio Details Section -->
-  
+    <div class="container">
+      <section class="mt-4 mb-2">
+        <div class="section-header">
+          <h3>
+            My Activities
+          </h3>
+        </div>
+        <div class="p-5 border rounded my-2">
+          <h5 class="">
+            <i class="icofont-file-alt"></i>&nbsp;Posts
+          </h5>
+          <div class="my-2">
+            {% if posts %}
+            posts to be display...
+            {% else %}
+            <p class="p-0 m-0">
+              <hr class="p-0 m-0">
+              <h6 class="p-0 m-0 text-dark">We couldn't find your posts !</h6>
+              <small><a href="{% url 'create_post' %}">Let's Create One</a></small>
+            </p> 
+            {% endif %}
+          </div>
+        </div>
+        <div class="p-5 border rounded ">
+          <h5>
+            <i class="icofont-dashboard-web"></i>&nbsp;
+            Projects
+          </h5>
+          <div class="my-2">
+            {% if projects %}
+            projects to be display...
+            {% else %}
+            <p class="p-0 m-0">
+              <hr class="p-0 m-0">
+              <h6 class="p-0 m-0 text-dark">We couldn't find your projects !</h6>
+              <small><a href="{% url 'add_project' %}">Let's Create One</a></small>
+            </p> 
+            {% endif %}
+          </div>
+        </div>
+      </section>
+    </div>
     </main><!-- End #main -->
     <!-- ======PAGE CONTENT===== -->
     
