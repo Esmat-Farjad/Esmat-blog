@@ -24,7 +24,7 @@
                   <li><a href="{% url 'create_post' %}">Create Post</a></li>
                   {% endif %}
                   <li><a href="{% url 'project_list' %}">View Post</a></li>
-                  <li><a href="{% url 'update_profile' %}">Profile</a></li>
+                  <li><a href="{% url 'update_profile' request.user.id %}">Profile</a></li>
                   {% if user.is_superuser  %}
                   <li><a href="{% url 'add_team' %}">Team</a></li>
                   <li><a href="{% url 'add_project' %}">Add Project</a></li>

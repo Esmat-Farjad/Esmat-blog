@@ -16,7 +16,7 @@
                 {{user.get_full_name}}
                 {% endif %}
                 <span style="position: absolute; top: 5%; right: 5%;">
-                    <a href="#">
+                    <a href="{% url 'update_profile' user.id %}">
                         <h5 class="d-inline">
                             <i class="icofont-safety"></i>
                         </h5>

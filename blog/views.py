@@ -162,8 +162,8 @@ def post_view(request, pid):
     context = {'post':post, 'all_posts':all_posts}
     return render(request, 'post_view.html', context)
 
-def update_profile(request):
-    user = request.user
+def update_profile(request, pk):
+    user = get_object_or_404(User, id=pk)
     user_form = UserUpdateForm(instance=user)
     profile_form = ProfileUpdateForm(instance=user.profile)
     user = User.objects.get(id=user.id)
