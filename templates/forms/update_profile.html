@@ -160,7 +160,7 @@
                       <small class="d-inlne modernWay">{{post.text}}</small>
                       <h6>
                         <a href="#" class="text-white"><i class="icofont-ui-add rounded-circle bg-success border border-success shadow p-2 m-1"></i></a>
-                        <a href="#" class="text-white"><i class="icofont-pencil-alt-2 rounded-circle bg-success border border-success shadow p-2 m-1"></i></a>
+                        <a href="{% url 'update_post' post.id %}" class="text-white"><i class="icofont-pencil-alt-2 rounded-circle bg-success border border-success shadow p-2 m-1"></i></a>
                         <a href="#" class="text-white"><i class="icofont-ui-delete rounded-circle bg-danger border border-danger shadow p-2 m-1"></i></a>
                       </h6>
                     </div>

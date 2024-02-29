@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
-from .models import Comment, Contact, Feature, News, Post, Profile, Project, ProjectImage, Query, Skill, Team, Technology
+from .models import Comment, Contact, Feature, News, Post, PostImage, Profile, Project, ProjectImage, Query, Skill, Team, Technology
 from hitcount.views import HitCountDetailView
 from .forms import (
     CommentForm,
@@ -156,6 +156,22 @@ def create_post(request):
     }   
     return render(request, 'forms/post_form.html', context)
 
+def update_post(request, post):
+    blog = get_object_or_404(Post, id=post)
+    postimage = get_object_or_404(PostImage, post=blog.id)
+    post_form = BlogPostForm(instance=blog)
+    postimage_form = PostImageForm(instance=postimage)
+    if request.method == 'POST':
+        post_form = BlogPostForm(request.POST, instance=blog)
+        postimage_form = PostImageForm(request.POST, instance=postimage)
+
+        if post_form.is_valid():
+            pass
+    context = {
+        'post_form':post_form,
+        'postimage_form':postimage_form
+    }
+    return render(request, 'forms/update_post.html', context)
 
 def post_view(request, pid):
     post = Post.objects.get(id=pid)

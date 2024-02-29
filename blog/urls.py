@@ -20,7 +20,7 @@ urlpatterns = [
     path('project/delete/<str:id>', views.delete_project, name='delete_project'),
     path('upload/file/<str:pk>', views.upload_image, name='upload_image'),
     path('project/view', views.project_list, name='project_list'),
-   
+    path('post/update/<post>', views.update_post, name='update_post'),
     path('password/change', views.change_password, name='change_password'),
     path('user/review', views.user_review, name='user_review'),
     path('team/create', views.add_team, name='add_team'),
