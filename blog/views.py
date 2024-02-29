@@ -165,9 +165,12 @@ def update_post(request, post):
     if request.method == 'POST':
         post_form = BlogPostForm(request.POST, instance=blog)
         postimage_form = PostImageForm(request.POST, instance=post_image)
-
-        if post_form.is_valid():
-            pass
+        if post_form.is_valid() and postimage_form.is_valid():
+            postForm = post_form.save(commit=False)
+            postimage_form.post = postForm
+            postimage_form.save()
+            postForm=post_form.save()
+            messages.success(request, 'Your post updated successfully !')
     context = {
         'post_form':post_form,
         'postimage_form':postimage_form,

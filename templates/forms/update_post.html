@@ -45,7 +45,7 @@
             <div class="section-header ">
                 <h3>Update Your Post</h3>
             </div>
-            <form action="{% url 'create_post' %}" enctype="multipart/form-data" method="POST" class="px-3" >
+            <form  enctype="multipart/form-data" method="POST" class="px-3" >
                 {% csrf_token %}
                 {% for field in post_form %}
                 <label class="mt-2">{{field.label}}</label>
