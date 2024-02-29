@@ -158,18 +158,20 @@ def create_post(request):
 
 def update_post(request, post):
     blog = get_object_or_404(Post, id=post)
-    postimage = get_object_or_404(PostImage, post=blog.id)
+    postimage = PostImage.objects.filter(post=post)
+    post_image = get_object_or_404(PostImage, post=post)
     post_form = BlogPostForm(instance=blog)
-    postimage_form = PostImageForm(instance=postimage)
+    postimage_form = PostImageForm(instance=post_image)
     if request.method == 'POST':
         post_form = BlogPostForm(request.POST, instance=blog)
-        postimage_form = PostImageForm(request.POST, instance=postimage)
+        postimage_form = PostImageForm(request.POST, instance=post_image)
 
         if post_form.is_valid():
             pass
     context = {
         'post_form':post_form,
-        'postimage_form':postimage_form
+        'postimage_form':postimage_form,
+        'postimage':postimage
     }
     return render(request, 'forms/update_post.html', context)
 

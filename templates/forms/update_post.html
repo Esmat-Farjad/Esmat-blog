@@ -52,7 +52,12 @@
                 <div class="" >{{field}}</div>
                 <h6 class="text-danger mt-0 pt-0">{{field.errors}}</h6>
                 {% endfor %}
-                
+                {% for img in postimage %}
+                <a href="{{img.image.url}}">
+                    <img src="{{img.image.url}}" width="auto" height="150" class="rounded my-2 border" alt="">
+                </a>
+                {% endfor %}
+                <br>
                 <label class="mt-2">{{postimage_form.image.label}}</label>
                 {{postimage_form.image}}
                 <h6 class="text-danger mt-0 pt-0">{{field.errors}}</h6>
