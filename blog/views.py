@@ -155,6 +155,8 @@ def create_post(request):
         'recent_post':recent_post
     }   
     return render(request, 'forms/post_form.html', context)
+
+
 def post_view(request, pid):
     post = Post.objects.get(id=pid)
     all_posts = Post.objects.all().order_by('-created_at')
@@ -164,7 +166,7 @@ def post_view(request, pid):
 def update_profile(request, pk):
     user = get_object_or_404(User, id=pk)
     projects = Project.objects.all()
-    posts = Post.objects.all()
+    posts = Post.objects.filter(user=request.user)
     user_form = UserUpdateForm(instance=user)
     profile_form = ProfileUpdateForm(instance=user.profile)
     user = User.objects.get(id=user.id)
