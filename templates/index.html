@@ -402,11 +402,11 @@
             <figure>
               <img src="{% static 'img/portfolio/web1.jpg' %}" class="img-fluid" alt="">
               <a href="{% static 'img/portfolio/web1.jpg' %}" class="link-preview venobox" data-gall="portfolioGallery" title="Web 1"><i class="ion ion-eye"></i></a>
-              <a href="{% url 'portfolio' app.id %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
+              <a href="{% url 'project_view' app.id %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
             </figure>
 
             <div class="portfolio-info">
-              <h4><a href="{% url 'portfolio' app.id %}">{{app.name}}</a></h4>
+              <h4><a href="{% url 'project_view' app.id %}">{{app.name}}</a></h4>
               {% for tech in app.technology.all %}
               <p class="d-inline">{{tech.name}}</p> |
               {% endfor %}

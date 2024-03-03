@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Portfolio Details</title>
+  <title>Project Details</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -31,39 +31,32 @@
     <!-- ======= Breadcrumbs Section ======= -->
     <section class="breadcrumbs">
       <div class="container">
-
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Portfolio Details</h2>
+          <h2>Project Details</h2>
           <ol>
             <li><a href="{%  url 'index' %}">Home</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li>Portfolio Details</li>
+            <li><a href="{% url 'project_list' %}">Project List</a></li>
+            <li>Project Details</li>
           </ol>
         </div>
-
       </div>
     </section><!-- Breadcrumbs Section -->
 
     <!-- ======= Portfolio Details Section ======= -->
     <section class="portfolio-details">
       <div class="container">
-
         <div class="portfolio-details-container">
-
           <div class="owl-carousel portfolio-details-carousel">
-            {% if project.project.projectimage_set.all %}
             {% for img in project.projectimage_set.all %}
-            
+            {% if img %}
             <img src="{{img.image.url}}" class="img-fluid project-image-slide" alt="">
-            {% endfor %}
             {% else %}
-            
               <img src="{% static 'img/portfolio/portfolio-details-1.jpg' %}" class="img-fluid" alt="">
               <img src="{% static 'img/portfolio/portfolio-details-2.jpg' %}" class="img-fluid" alt="">
-            <img src="{% static 'img/portfolio/portfolio-details-3.jpg' %}" class="img-fluid" alt="">
+              <img src="{% static 'img/portfolio/portfolio-details-3.jpg' %}" class="img-fluid" alt="">
             {% endif %}
+            {% endfor %}
           </div>
-
           <div class="portfolio-info">
             <h3>Project information</h3>
                 <ul>
@@ -77,16 +70,13 @@
                   <li><strong>Project URL</strong>: <a href="{{project.link}}">Source Code link&nbsp;<i class="icofont-long-arrow-right"></i></a></li>
                 </ul>
           </div>
-
         </div>
-
         <div class="portfolio-description">
           <h2>{{project.name}}</h2>
           <p>{{project.description}}</p>
         </div>
       </div>
     </section><!-- End Portfolio Details Section -->
-
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -120,7 +110,6 @@
               <strong>Phone:</strong> +1 5589 55488 55<br>
               <strong>Email:</strong> info@example.com<br>
             </p>
-
             <div class="social-links">
               <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
               <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
@@ -128,9 +117,7 @@
               <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
               <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
             </div>
-
           </div>
-
           <div class="col-lg-3 col-md-6 footer-newsletter">
             <h4>Our Newsletter</h4>
             <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna veniam enim veniam illum dolore legam minim quorum culpa amet magna export quem marada parida nodela caramase seza.</p>

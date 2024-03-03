@@ -223,13 +223,12 @@ def update_profile(request, pk):
     }
     return render(request, 'forms/update_profile.html', context)
 
-def portfolio(request, pk):
-    if pk:
-        project = Project.objects.get(id=pk)
-        context = {
-            'project':project
-        }
-    return render(request, 'portfolio-details.html',context)
+def project_view(request, pk):
+    project = get_object_or_404(Project, id=pk)
+    context = {
+        'project':project
+    }
+    return render(request, 'project-details.html',context)
 
 def blog_view(request):
     return render(request, 'blogs_view.html')
