@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
-from .models import Comment, Contact, Feature, News, Post, PostImage, Profile, Project, ProjectImage, Query, Skill, Team, Technology
+from .models import Comment, Contact, Feature, News, Post, PostImage, Profile, Project,Query, Skill, Team, Technology
 from hitcount.views import HitCountDetailView
 from .forms import (
     CommentForm,
@@ -180,7 +180,11 @@ def update_post(request, post):
         'postimage':postimage
     }
     return render(request, 'forms/update_post.html', context)
-
+def delete_post(request, pk):
+    if pk:
+        Post.objects.get(id=pk).delete()
+        messages.success(request, "Post deleted successfully !")
+        return redirect('update_profile', request.user.id)
 def post_view(request, pid):
     post = Post.objects.get(id=pid)
     all_posts = Post.objects.all().order_by('-created_at')
