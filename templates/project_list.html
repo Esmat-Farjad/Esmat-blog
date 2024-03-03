@@ -41,64 +41,56 @@
     {% endif %}
   </div>
     <!-- ======PAGE CONTENT===== -->
-    <div class="section-header mb-3">
-        <h3>Projects</h3>
-    </div>
-    <section id="portfolio" >
-    <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-        {% for app in projects %}
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                <div class="portfolio-wrap">
-                  <figure>
-                    <img src="{% static 'img/portfolio/web1.jpg' %}" class="img-fluid" alt="">
-                    <a href="{% static 'img/portfolio/web1.jpg' %}" class="link-preview venobox" data-gall="portfolioGallery" title="Web 1"><i class="ion ion-eye"></i></a>
-                    <a href="{% url 'portfolio' app.id %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                  </figure>
-      
-                  <div class="portfolio-info">
-                    <h4><a href="{% url 'upload_image' app.id %}">{{app.name}}</a></h4>
-                    {% for tech in app.technology.all %}
-                    <p class="d-inline">{{tech.name}}</p> |
-                    {% endfor %}
-                  </div>
-                </div>
-              </div>
-        {% endfor %}
-    </div>
-    <div class="mt-2">
-      <h4><a href="#">
-        <i class="icofont-tools-alt-2"></i></i>&nbsp;Manage Projects
-      </a></h4>
-    </div>
-  </section>
-  <div class="section-header mb-3">
-    <h3>Posts</h3>
-  </div>
-  <section id="portfolio" >
-    <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-        {% for post in posts %}
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                <div class="portfolio-wrap">
-                  <figure>
-                    <img src="{% static 'img/portfolio/web1.jpg' %}" class="img-fluid" alt="">
-                    <a href="{% static 'img/portfolio/web1.jpg' %}" class="link-preview venobox" data-gall="portfolioGallery" title="Web 1"><i class="ion ion-eye"></i></a>
-                    <a href="{% url 'post_view' post.id %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                  </figure>
-                  <div class="portfolio-info">
-                    <p><a href="{% url 'post_view' post.id %}" class="heading modernWay">{{post.title}}</a></h5>
-                    <small class="d-inlne modernWay">{{post.text}}</small>
-                  </div>
-                </div>
-              </div>
-        {% endfor %}
-    </div>
-    <div class="mt-2">
-      <h4><a href="#">
-        <i class="icofont-tools-alt-2"></i></i>&nbsp;Manage Posts
-      </a></h4>
-    </div>
-  </section>
+  <section id="portfolio" class="section-bg">
+    <div class="container" data-aos="fade-up">
+      <header class="section-header">
+        <h3 class="section-title">Our Portfolio</h3>
+      </header>
+      <div class="row" data-aos="fade-up" data-aos-delay="100">
+        <div class=" col-lg-12">
+          <ul id="portfolio-flters">
+            <li data-filter="*" class="filter-active">All</li>
+            <li data-filter=".filter-card">Blog</li>
+            <li data-filter=".filter-web">Web</li>
+          </ul>
+        </div>
+      </div>
     
+      <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200" id="project-container">
+          {% for app in projects %}
+              <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                  <div class="portfolio-wrap">
+                    <figure>
+                      <img src="{% static 'img/portfolio/web1.jpg' %}" class="img-fluid" alt="">
+                      <a href="{% static 'img/portfolio/web1.jpg' %}" class="link-preview venobox" data-gall="portfolioGallery" title="Web 1"><i class="ion ion-eye"></i></a>
+                      <a href="{% url 'project_view' app.id %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
+                    </figure>
+                    <div class="portfolio-info">
+                      <h4><a href="{% url 'upload_image' app.id %}">{{app.name}}</a></h4>
+                      {% for tech in app.technology.all %}
+                      <p class="d-inline">{{tech.name}}</p> |
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+          {% endfor %}
+          {% for post in posts %}
+              <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                  <div class="portfolio-wrap">
+                    <figure>
+                      <img src="{% static 'img/portfolio/web1.jpg' %}" class="img-fluid" alt="">
+                      <a href="{% static 'img/portfolio/web1.jpg' %}" class="link-preview venobox" data-gall="portfolioGallery" title="Web 1"><i class="ion ion-eye"></i></a>
+                      <a href="{% url 'post_view' post.id %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
+                    </figure>
+                    <div class="portfolio-info">
+                      <p><a href="{% url 'post_view' post.id %}" class="heading modernWay">{{post.title}}</a></h5>
+                      <small class="d-inlne modernWay">{{post.text}}</small>
+                    </div>
+                  </div>
+                </div>
+          {% endfor %}
+        </div>
+    </section>
 </div>
 <!-- ========PAGE CONTAINER END======= -->
 {% include './links/scripts.html' %}

@@ -94,7 +94,15 @@ BAROWED
 .cursor-pointer{
   cursor: pointer;
 }
-
+.activate{
+  background-color: #13a456;
+  color: white;
+}
+.portfolio-button .btn:hover{
+  background-color: #13a456;
+  color: white;
+  transition: all 0.5s ease-in-out;
+}
 #features li{
   cursor: pointer;
 }
