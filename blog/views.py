@@ -1,5 +1,5 @@
 
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
@@ -263,7 +263,8 @@ def delete_project(request, id ):
     if project:
         Project.objects.get(id=id).delete()
         messages.success(request, f"{project} deleted !")
-        return redirect('project_list')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        
 def upload_image(request, pk):
     image_form = ProjectImageForm()
     project = Project.objects.get(id=pk)

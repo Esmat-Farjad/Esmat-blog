@@ -178,51 +178,6 @@
             {% endif %}
           </div>
         </div>
-        {% if request.user.is_superuser %}
-        <div class="p-5 border rounded ">
-          <h5>
-            <i class="icofont-dashboard-web"></i>&nbsp;
-            Projects
-          </h5>
-          <div class="my-2">
-            
-            {% if projects%}
-            <section id="portfolio">
-              <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-                {% for app in projects %}
-                  <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                    <div class="portfolio-wrap">
-                      <figure>
-                        <img src="{% static 'img/portfolio/web1.jpg' %}" class="img-fluid" alt="">
-                        <a href="{% static 'img/portfolio/web1.jpg' %}" class="link-preview venobox" data-gall="portfolioGallery" title="Web 1"><i class="ion ion-eye"></i></a>
-                        <a href="{% url 'portfolio' app.id %}" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                      </figure>
-          
-                      <div class="portfolio-info">
-                        <h4><a href="{% url 'upload_image' app.id %}">{{app.name}}</a></h4>
-                        {% for tech in app.technology.all %}
-                        <p class="d-inline">{{tech.name}}</p> |
-                        {% endfor %}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="">
-                    <a href="#">update</a>
-                    <a href="#">delete</a>
-                  </div>
-                {% endfor %}
-              </div>
-            </section>
-            {% else %}
-            <p class="p-0 m-0">
-              <hr class="p-0 m-0">
-              <h6 class="p-0 m-0 text-dark">We couldn't find your projects !</h6>
-              <small><a href="{% url 'add_project' %}">Let's Create One</a></small>
-            </p> 
-            {% endif %}
-          </div>
-        </div>
-        {% endif %}
       </section>
     </div>
     </main><!-- End #main -->

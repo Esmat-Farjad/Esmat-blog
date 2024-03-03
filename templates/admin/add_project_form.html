@@ -164,6 +164,11 @@
                     {% for tech in app.technology.all %}
                     <p class="d-inline">{{tech.name}}</p> |
                     {% endfor %}
+                    <h6>
+                        <a href="{% url 'add_project' %}" class="text-white"><i class="icofont-ui-add rounded-circle bg-success border border-success shadow p-2 m-1"></i></a>
+                        <a href="{% url 'upload_image' app.id %}" class="text-white"><i class="icofont-pencil-alt-2 rounded-circle bg-success border border-success shadow p-2 m-1"></i></a>
+                        <a href="{% url 'delete_project' app.id %}" class="text-white confirm-delete"><i class="icofont-ui-delete rounded-circle bg-danger border border-danger shadow p-2 m-1"></i></a>
+                      </h6>
                   </div>
                 </div>
               </div>
