@@ -38,17 +38,15 @@
     </div>
     <!-- ======PAGE CONTENT===== -->
     <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-12 py-4">
-            
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 pt-5">
-            <div class="section-header ">
-                <h3>Create Your Post</h3>
+        <div class="col-lg-6 col-md-6 col-sm-12 pt-5 border rounded">
+            <div class="text-center mb-3">
+                <h5 class="font-weight-bold p-0 m-0">Create Your Post</h5>
+                <small>create your post here</small>
             </div>
             <form action="{% url 'create_post' %}" enctype="multipart/form-data" method="POST" class="px-3" >
                 {% csrf_token %}
                 {% for field in post_form %}
-                <label class="mt-2">{{field.label}}</label>
+                <label class="">{{field.label}}</label>
                 <div class="" >{{field}}</div>
                 <h6 class="text-danger mt-0 pt-0">{{field.errors}}</h6>
                 {% endfor %}
@@ -62,26 +60,29 @@
                 </div>
             </form>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-12">
-            
-        </div>
-    </div>
-    <div class="post-container my-5">
-        <div class="section-header ">
-            <h3>Created Post</h3>
-        </div>
-        <div class="posts">
-            {% for post in recent_post %}
-            
-            <div class="item-container">
-                <a href="{% url 'post_view' post.id %}">
-                <p class="post-title">{{post.title}}</p>
-                <p class="post-description">{{post.text}}</p>
-                </a>
+        <div class="col-lg-6 col-md-6 col-sm-12 border rounded">
+            <div class="post-container my-5">
+                <div class="text-center mb-3">
+                    <h5 class="font-weight-bold m-0 p-0">
+                        Posts
+                    </h5>
+                    <small>find the list of post created below</small>
+                </div>
+                <div class="posts">
+                    {% for post in recent_post %}
+                    <div class="item-container px-3 py-2 text-capitalize border-bottom">
+                        <a href="{% url 'post_view' post.id %}">
+                            <span class="rounded-circle border px-2 py-1 bg-light mr-3">{{forloop.counter}}</span>
+                            <p class="post-title d-inline">{{post.title}}</p><br>
+                            <small class="modernWay ml-5">{{post.text}}</small>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
-            {% endfor %}
         </div>
     </div>
+    
 </div>
 <!-- ========PAGE CONTAINER END======= -->
 {% include '../links/scripts.html' %}

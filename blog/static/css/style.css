@@ -222,11 +222,7 @@ body {
   color: #666666;
   font-family: "Open Sans", sans-serif;
 }
-.item-container{
-  border-left: 4px solid #343534;
-  padding: 5px;
-  margin: 10px 0px ;
-}
+
 .item-container a{
   color:black
 }
