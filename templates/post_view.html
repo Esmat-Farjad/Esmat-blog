@@ -29,14 +29,20 @@
                 <h3>Web Blogs</h3>
             </div>
             <div class="shadow border rounded p-4">
-                <div class="content">
-                    <img src="{{post.user.profile.picture.url}}" class="user-avatar-active" alt="user profile">
+                <div class="row content">
+                    <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1">
+                        <img src="{{post.user.profile.picture.url}}" class="user-avatar-active" alt="user profile">
+                    </div>
+                    <div class="col-md-11 col-lg-11 col-sm-11 col-xs-11 px-4 pt-2 pl-sm-5">
                     {% if post.user.get_full_name %}
-                    <h5 class="d-inline font-weight-bold">{{post.user.get_full_name}}</h5>
-                    <small>{{post.user.profile.position}}</small>
-                    {% else %}
-                    <h5 class="d-inline font-weight-bold">Admin</h5>
+                        <h5 class="d-inline font-weight-bold">{{post.user.get_full_name}}</h5>
+                        <span class="">updated at: {{post.created_at}}</span>
+                        <small>{{post.user.profile.position}}</small>
+                        {% else %}
+                        <h5 class="d-inline font-weight-bold">Admin</h5><br>
+                        <small class="">updated at: {{post.created_at}}</small>
                     {% endif %}
+                    </div>
                 </div>
                 <div class="post-container">
                     <h3 class="my-3 font-weight-bold">{{post.title}}</h3>
@@ -46,8 +52,7 @@
                         <img src="{{pic.image.url}}" class="post-image rounded " alt="image">
                         {% endfor %}
                         <p class="text-small">
-                            <span class="text-secondary mr-2">updated at: </span>
-                            <span class="">{{post.created_at}}</span>
+                            
                             <span class="ml-3"><i class="icofont-eye-alt"></i>&nbsp;</span>
                             <span class="text-secondary">{% get_hit_count for post %}</span>
                             <span class="m-3"><a href="#">Share</a></span>
