@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification</title>
+    {% include './links/link.html' %}
+
+</head>
+<body style="pointer-events: none;">
+    {% include './forms/sub-header.html' %}
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel"><img src="{% static 'img/E-Smartx2.png' %}" style="max-height: 25px;" alt=""></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center" style="position: relative;">
+            <h1 class=" mb-0 p-0" style="font-size:250px; color: rgb(233, 233, 233);">
+                <i class="icofont-tools-alt-2"></i>
+            </h1>
+            <div style="position: absolute; top: 5%; right: 0; left: 0;">
+                <h4 class=" m-0 font-weight-bold">Account Notification</h4>
+                <p class="pb-0 mb-0">
+                    <h6>Dear {{user}}</h6>
+                </p>
+                <p class="p-0 m-0">Your account has been created successfully, but your access to the platform is limited by default.</p>
+                <p class="pt-0 mt-0">if your want get more access to the system, Please ask for more access to the system.</p>
+                <h6><a href="#">Get More Access...</a></h6>
+                <h6><a href="{% url 'signin' %}">Sign In</a></h6>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+<script>
+    
+</script>
+<!-- ========PAGE CONTAINER END======= -->
+{% include './links/scripts.html' %}

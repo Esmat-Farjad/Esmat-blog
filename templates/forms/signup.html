@@ -38,25 +38,22 @@
             <form action="{% url 'signup' %}" method="POST">
                 {% csrf_token %}
                 <div class="row px-5">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="col-lg-3 col-md-3 col-sm-12"></div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 px-5">
                         {% for field in user_form %}
                         <label class="mb-0-0">{{field.label}}</label>
-                        {{field}}
-                        <h6 class="text-danger mt-0 pt-0 text-small">{{field.errors}}</h6>
-                        {% endfor %}
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        {% for field in profile_form %}
-                        <label>{{field.label}}</label>
                         {{field}}
                         <h6 class="text-danger mt-0 pt-0 text-small">{{field.errors}}</h6>
                         {% endfor %}
                         <div class="form-check mt-2">
                             <input class="form-check-input" type="checkbox" id="agree" required>
                             <label class="text-sm" for="agree">I agree to <a href="#">Terms and conditions</a></label>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12"></div>
                 </div>
+                
                 
                 <div class="text-center my-3">
                     <button type="submit">Sign Up</button>

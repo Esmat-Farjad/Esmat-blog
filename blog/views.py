@@ -103,27 +103,18 @@ def signin(request):
     return render(request, 'forms/signin.html')
 def signup(request):
     user_form = UserRegistrationForm()
-    profile_form = ProfileUpdateForm()
     if request.method == "POST":
         user_form = UserRegistrationForm(request.POST)
-        profile_form = ProfileUpdateForm(request.POST, request.FILES)
-        if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid():
             username = user_form.cleaned_data.get("username")
-            user = user_form.save(commit=False)
-            user.is_active = False
-            n_user = user.save()
-            profile = profile_form.save(commit=False)
-            profile.user = n_user
-            
-            profile.save()
-            profile_form.save_m2m()
+            user = user_form.save()
             messages.success(request, f"{username} registered successfully !")
+            return redirect('blank_page', user)
         else:
             messages.error(request, "Form is not valid Sorry !")
             
     context = {
-        'user_form':user_form,
-        'profile_form':profile_form
+        'user_form':user_form
         }
     return render(request, 'forms/signup.html', context)
 
@@ -595,3 +586,8 @@ def update_technology(request):
         tid = request.POST.get('technology-id')
         Technology.objects.filter(id=tid).update(name=name, type=t_type)
         return redirect('manage_feature_technology', 't')
+def blank_page(request, user):
+    context ={
+        'user':user
+    }
+    return render(request,'_blank_page.html',context)

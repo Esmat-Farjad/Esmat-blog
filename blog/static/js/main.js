@@ -9,7 +9,7 @@
 
 (function($) {
   "use strict";
-  
+  $("#staticBackdrop").modal('show');
   // load more post
   $('#load-more-post').click(() => {
     $('.more-post').toggleClass('d-none'); 
