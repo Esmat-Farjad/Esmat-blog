@@ -467,7 +467,22 @@ h1, h2, h3, h4, h5, h6 {
 .user-list td{
   font-size: small ;
 }
-
+.user-avatar{
+  object-fit: cover;
+  width: 60px;
+  height: 60px;
+  border-radius: 40px;
+  border: 4px solid rgb(228, 228, 228);
+  padding: 3px;
+}
+.user-avatar-active{
+  object-fit: cover;
+  width: 60px;
+  height: 60px;
+  border-radius: 40px;
+  border: 2px solid #02b857;
+  padding: 3px;
+}
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/

@@ -183,10 +183,10 @@ def delete_post(request, pk):
         messages.success(request, "Post deleted successfully !")
         return redirect('update_profile', request.user.id)
     
-@login_required(login_url='/signin/')
+
 def post_view(request, pid):
     post = Post.objects.get(id=pid)
-    all_posts = Post.objects.all().order_by('-created_at')
+    all_posts = Post.objects.select_related('user').order_by('-created_at')
     context = {'post':post, 'all_posts':all_posts}
     return render(request, 'post_view.html', context)
 
