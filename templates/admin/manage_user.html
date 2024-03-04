@@ -6,27 +6,43 @@
         <h4 class="">Active Users</h4>
     </div>
     <div class="">
-        <ul type="none">
-            {% for user in users %}
-            {% if user.is_active %}
-            <li class="p-2" style="position: relative;">
-                {% if user.get_full_name == '' %}
-                Administrator
-                {% else %}
-                {{user.get_full_name}}
-                {% endif %}
-                <span style="position: absolute; top: 5%; right: 5%;">
-                    <a href="{% url 'update_profile' user.id %}">
-                        <h5 class="d-inline">
-                            <i class="icofont-safety"></i>
-                        </h5>
-                        <small class="manage-access">Manage Access</small>
-                    </a>
-                </span>
-            </li>
-            {% endif %}
-            {%  endfor %}
-        </ul>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Full Name</th>
+                    <th>Username</th>
+                    <th>Position</th>
+                    <th>E-mail</th>
+                    <th>Phone No.</th>
+                    <th>Address</th>
+                    <th>Manage</th>
+                </tr>
+            </thead>
+            <tbody class="user-list">
+                {% for user in users %}
+                <tr>
+                    <td>
+                        <img src="{{user.profile.picture.url}}" width="20" height="20" class=" rounded-circle border shadow" alt="">
+                    </td>
+                    <td>
+                        {% if user.get_full_name %}
+                        {{user.get_full_name}}
+                        {% else %}
+                        {{Admin}}
+                        {% endif %}
+                    </td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.profile.position}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.profile.contact}}</td>
+                    <td>{{user.profile.address}}</td>
+                    <td><a href="#"><i class="icofont-tools-alt-2 bg-light px-4 py-2 border rounded"></i></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
     <div class="bg-light rounded p-2 text-warning">
         <h4 class="">Deactive Users</h4>
