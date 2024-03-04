@@ -22,6 +22,7 @@
             </thead>
             <tbody class="user-list">
                 {% for user in users %}
+                {% if user.is_active %}
                 <tr>
                     <td>
                         <img src="{{user.profile.picture.url}}" width="20" height="20" class=" rounded-circle border shadow" alt="">
@@ -40,6 +41,7 @@
                     <td>{{user.profile.address}}</td>
                     <td><a href="#"><i class="icofont-tools-alt-2 bg-light px-4 py-2 border rounded"></i></a></td>
                 </tr>
+                {% endif %}
                 {% endfor %}
             </tbody>
         </table>
@@ -48,10 +50,43 @@
         <h4 class="">Deactive Users</h4>
     </div>
     <div class="">
-        {% for user in users %}
-        {% if not user.is_active %}
-        {{user.get_full_name}}
-        {% endif %}
-        {%  endfor %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Full Name</th>
+                    <th>Username</th>
+                    <th>Position</th>
+                    <th>E-mail</th>
+                    <th>Phone No.</th>
+                    <th>Address</th>
+                    <th>Manage</th>
+                </tr>
+            </thead>
+            <tbody class="text-secondary user-list">
+                {% for user in users %}
+                {% if user.is_active == False %}
+                <tr>
+                    <td>
+                        <img src="{{user.profile.picture.url}}" width="20" height="20" class=" rounded-circle border shadow" alt="">
+                    </td>
+                    <td>
+                        {% if user.get_full_name %}
+                        {{user.get_full_name}}
+                        {% else %}
+                        {{Admin}}
+                        {% endif %}
+                    </td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.profile.position}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.profile.contact}}</td>
+                    <td>{{user.profile.address}}</td>
+                    <td><a href="#"><span class="bg-success text-white px-2 py-1 rounded border border-success">Activate</span></a></td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </section>

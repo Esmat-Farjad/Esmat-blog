@@ -19,22 +19,21 @@
               <li><a href="#team">Team</a></li>
               <li><a href="#contact">Contact Us</a></li>
               {% if user.is_authenticated %}
-              <li class="drop-down"><a href="">{{request.user}}</a>
-                <ul>
-                  {% if user.is_staff %}
-                  <li><a href="{% url 'create_post' %}">Create Post</a></li>
-                  {% endif %}
-                  <li><a href="{% url 'project_list' %}">View Post</a></li>
-                  {% if user.is_superuser %}
-                  <li><a href="{% url 'add_team' %}">Team</a></li>
-                  <li><a href="{% url 'add_project' %}">Add Project</a></li>
-                  {% endif %}
-                  <li><a href="{% url 'update_profile' request.user.id %}">Profile</a></li>
-                  <li><a href="{% url 'signout' %}">Logout</a></li>
-                  
-                </ul>
-              </li>
-              {% else %}
+                <li class="drop-down"><a href="">{{request.user}}</a>
+                  <ul>
+                    {% if user.is_staff %}
+                      <li><a href="{% url 'create_post' %}">Create Post</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'project_list' %}">View Post</a></li>
+                    {% if user.is_superuser %}
+                      <li><a href="{% url 'add_team' %}">Team</a></li>
+                      <li><a href="{% url 'add_project' %}">Add Project</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'update_profile' request.user.id %}">Profile</a></li>
+                    <li><a href="{% url 'signout' %}">Logout</a></li>
+                  </ul>
+                </li>
+              {% elif not user.is_authenticated %}
               <li class="drop-down"><a href="">Account</a>
                 <ul>
                   <li><a href="{% url 'signin' %}">Sign In</a></li>

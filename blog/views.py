@@ -40,7 +40,6 @@ def user_pre_save_receiver(instance, sender, *args, **kwargs):
 @receiver(post_save, sender=User)
 def user_created_handler(instance, created, sender, *args, **kwargs):
     if created:
-        messages.success(instance.username +" created")
         print(instance.username, "created")
 # post_save.connect(user_created_handler, sender=User)
 # Create your views here.
@@ -110,9 +109,11 @@ def signup(request):
         profile_form = ProfileUpdateForm(request.POST, request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
             username = user_form.cleaned_data.get("username")
-            user = user_form.save()
+            user = user_form.save(commit=False)
+            user.is_active = False
+            n_user = user.save()
             profile = profile_form.save(commit=False)
-            profile.user = user
+            profile.user = n_user
             
             profile.save()
             profile_form.save_m2m()
