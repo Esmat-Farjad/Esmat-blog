@@ -1,5 +1,6 @@
 
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
@@ -87,8 +88,6 @@ def index(request):
     
     return render(request, 'index.html', context)
 
-def home(request):
-    return HttpResponse("Hello and welcome !")
 def signin(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -101,6 +100,7 @@ def signin(request):
             messages.error(request, "Invalid username or password !")
 
     return render(request, 'forms/signin.html')
+
 def signup(request):
     user_form = UserRegistrationForm()
     if request.method == "POST":
@@ -118,10 +118,13 @@ def signup(request):
         }
     return render(request, 'forms/signup.html', context)
 
+@login_required(login_url='/signin/')
 def signout(request):
     logout(request)
     return render(request, 'index.html')
 
+
+@login_required(login_url='/signin/')
 def create_post(request):
     blog_post_form=BlogPostForm()
     image_form = PostImageForm()
@@ -147,7 +150,7 @@ def create_post(request):
         'recent_post':recent_post
     }   
     return render(request, 'forms/post_form.html', context)
-
+@login_required(login_url='/signin/')
 def update_post(request, post):
     blog = get_object_or_404(Post, id=post)
     postimage = PostImage.objects.filter(post=post)
@@ -172,17 +175,22 @@ def update_post(request, post):
         'postimage':postimage
     }
     return render(request, 'forms/update_post.html', context)
+
+@login_required(login_url='/signin/')
 def delete_post(request, pk):
     if pk:
         Post.objects.get(id=pk).delete()
         messages.success(request, "Post deleted successfully !")
         return redirect('update_profile', request.user.id)
+    
+@login_required(login_url='/signin/')
 def post_view(request, pid):
     post = Post.objects.get(id=pid)
     all_posts = Post.objects.all().order_by('-created_at')
     context = {'post':post, 'all_posts':all_posts}
     return render(request, 'post_view.html', context)
 
+@login_required(login_url='/signin/')
 def update_profile(request, pk):
     user = get_object_or_404(User, id=pk)
     projects = Project.objects.all()
@@ -215,6 +223,7 @@ def update_profile(request, pk):
     }
     return render(request, 'forms/update_profile.html', context)
 
+@login_required(login_url='/signin/')
 def project_view(request, pk):
     project = get_object_or_404(Project, id=pk)
     context = {
@@ -222,9 +231,11 @@ def project_view(request, pk):
     }
     return render(request, 'project-details.html',context)
 
+@login_required(login_url='/signin/')
 def blog_view(request):
     return render(request, 'blogs_view.html')
 
+@login_required(login_url='/signin/')
 def add_project(request):
     if request.method == 'POST':
         project_form = ProjectForm(request.POST)
@@ -238,6 +249,7 @@ def add_project(request):
 
     return redirect('dashboardRoute', 5)
 
+@login_required(login_url='/signin/')
 def update_project(request, id):
     project = get_object_or_404(Project,id=id)
     if request.method == 'POST':
@@ -249,13 +261,16 @@ def update_project(request, id):
         else:
             messages.error(request, "Something went wrong !")
             return redirect('upload_image',id)
+        
+@login_required(login_url='/signin/')
 def delete_project(request, id ):
     project = get_object_or_404(Project, id=id)
     if project:
         Project.objects.get(id=id).delete()
         messages.success(request, f"{project} deleted !")
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-        
+
+@login_required(login_url='/signin/')        
 def upload_image(request, pk):
     image_form = ProjectImageForm()
     project = Project.objects.get(id=pk)
@@ -276,6 +291,7 @@ def upload_image(request, pk):
         }
     return render(request, 'forms/upload_image.html', context)
 
+
 def project_list(request):
     projects = Project.objects.all().order_by('-created_at')
     posts = Post.objects.all().order_by('-created_at')
@@ -285,6 +301,7 @@ def project_list(request):
     }
     return render(request, 'project_list.html',context)
 
+@login_required(login_url='/signin/')
 def change_password(request):
     password_form = PasswordChangeForm(user=request.user)
     if request.method == 'POST':
@@ -300,6 +317,7 @@ def change_password(request):
     }
     return render(request, 'forms/change_password.html', context)
 
+@login_required(login_url='/signin/')
 def user_review(request):
     comment_form = CommentForm()
     if request.method == 'POST':
@@ -316,6 +334,7 @@ def user_review(request):
     }
     return render(request, 'forms/user_review.html',context)
 
+@login_required(login_url='/signin/')
 def add_team(request):
     team_form = TeamForm()
     if request.method == 'POST':
@@ -328,6 +347,7 @@ def add_team(request):
             messages.error(request, "Oops...something went wrong !")
     return redirect('dashboardRoute', 4)
 
+@login_required(login_url='/signin/')
 def dashboard(request):
     contact_form = ContactForm()
     skill_form = SkillForm()
@@ -350,6 +370,7 @@ def dashboard(request):
     }
     return render(request, 'admin/dashboard.html', context)
 
+@login_required(login_url='/signin/')
 def add_skill(request):
     if request.method == 'POST':
         skill_form = SkillForm(request.POST, request.FILES)
@@ -361,7 +382,8 @@ def add_skill(request):
             print(skill_form)
             messages.error(request, "Oops...someting went wrong. Please try again.")
             return redirect('dashboard')
-
+        
+@login_required(login_url='/signin/')
 def dashboardRoute(request, flag):
     contact_form = None
     skill_form = None
@@ -433,6 +455,7 @@ def dashboardRoute(request, flag):
     }
     return render(request, 'admin/dashboard.html', context)
 
+@login_required(login_url='/signin/')
 def update_contact(request, id):
     contact = Contact.objects.get(id=id)
     contact_form = ContactForm(instance=contact)
@@ -445,18 +468,23 @@ def update_contact(request, id):
     context = {
         'contact_form':contact_form,
     }
-    return render(request, 'admin/update_contact.html', context)   
+    return render(request, 'admin/update_contact.html', context) 
+
+@login_required(login_url='/signin/')  
 def delete_contact(request, id):
     if id:
         Contact.objects.filter(id=id).delete()
         messages.success(request, "Contact info has been deleted !")
         return redirect('dashboardRoute', 1)
     
+@login_required(login_url='/signin/')    
 def delete_team(request, id):
     if  id:
         Team.objects.filter(id = id).delete()
         messages.success(request, "Team Member Removed Successfully !")
         return redirect('dashboardRoute', 4 )
+    
+@login_required(login_url='/signin/')
 def update_team(request, id):
     team = Team.objects.get(id=id)
     team_form = TeamForm(instance=team)
@@ -471,6 +499,7 @@ def update_team(request, id):
     }
     return render(request, 'admin/update_team.html',context)
 
+@login_required(login_url='/signin/')
 def add_project_feature(request):
     if request.method == 'POST':
         feature_form = FeatureForm(request.POST)
@@ -478,6 +507,8 @@ def add_project_feature(request):
             feature_form.save()
             messages.success(request, "feature added !")
             return redirect('add_project')
+        
+@login_required(login_url='/signin/')
 def add_project_technology(request):
     if request.method == 'POST':
         technology_form = TechnologyForm(request.POST)
@@ -485,11 +516,15 @@ def add_project_technology(request):
             technology_form.save()
             messages.success(request, "Technology added !")
             return redirect('add_project')
+        
+@login_required(login_url='/signin/')
 def delete_skill(request, id):
     if id:
         Skill.objects.get(id=id).delete()
         messages.success(request, "Skill deleted ! ")
     return redirect('dashboardRoute', 2)
+
+@login_required(login_url='/signin/')
 def update_skill(request, id):
     skill = Skill.objects.get(id=id)
     skill_form = SkillForm(instance=skill)
@@ -505,7 +540,7 @@ def update_skill(request, id):
         'skill_form':skill_form
     }
     return render(request, 'admin/update_contact.html', context)
-
+@login_required(login_url='/signin/')
 def like_view(request):
     # X_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     # if X_forwarded_for:
@@ -521,6 +556,7 @@ def like_view(request):
         }
     return JsonResponse(data, safe=False)
 
+@login_required(login_url='/signin/')
 def publish_news(request):
    
     if request.method == 'POST':
@@ -530,11 +566,14 @@ def publish_news(request):
             messages.success(request, 'News Published !')
             return redirect('dashboardRoute', 6)
         
+@login_required(login_url='/signin/')        
 def delete_news(request, pk):
     if pk:
         News.objects.get(id=pk).delete()
         messages.success(request, "News Deleted !")
         return redirect('dashboardRoute', 6)
+    
+@login_required(login_url='/signin/')
 def update_news(request, pk):
     if pk:
         news = get_object_or_404(News, id=pk)
@@ -549,6 +588,8 @@ def update_news(request, pk):
             'news_form':news_form,
         }
         return render(request, 'admin/update_news.html',context)
+    
+@login_required(login_url='/signin/')
 def manage_feature_technology(request,slug):
     context = {}
     if slug == 'f':
@@ -562,6 +603,8 @@ def manage_feature_technology(request,slug):
             'technology':technology
         }
     return render(request, 'admin/manage_feature_technology.html', context)
+
+@login_required(login_url='/signin/')
 def update_feature(request):
     if request.method == 'POST':
         feature_name = request.POST.get('feature_name')
@@ -571,14 +614,19 @@ def update_feature(request):
         data = {'featue_name':feature_name, 'feature_id':feature_id, 'message':'Feature updated'}
         return JsonResponse(data, safe=False)
     
+@login_required(login_url='/signin/')    
 def delete_feature(request, pk):
     if pk:
         Feature.objects.filter(id=pk).delete()
         return redirect('manage_feature_technology', 'f')
+
+@login_required(login_url='/signin/')
 def delete_technology(request, pk):
     if pk:
         Technology.objects.filter(id=pk).delete()
         return redirect('manage_feature_technology', 't')
+    
+@login_required(login_url='/signin/')
 def update_technology(request):
     if request.method == 'POST':
         name = request.POST.get('technology-name')
@@ -586,6 +634,8 @@ def update_technology(request):
         tid = request.POST.get('technology-id')
         Technology.objects.filter(id=tid).update(name=name, type=t_type)
         return redirect('manage_feature_technology', 't')
+    
+
 def blank_page(request, user):
     context ={
         'user':user
