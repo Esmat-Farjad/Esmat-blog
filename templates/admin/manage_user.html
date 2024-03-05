@@ -2,11 +2,10 @@
     <div class="section-header">
         <h3>User Management</h3>
     </div>
-    <div class="bg-light rounded p-2 text-success">
-        <h4 class="vertical-align-middle">Active Users</h4>
+    <div class="alert alert-success px-3 py-3 border-left border-success">
+        <h5 class="p-0 m-0 font-weight-bold">Active Users</h5>
     </div>
     <div class="">
-
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -46,8 +45,8 @@
             </tbody>
         </table>
     </div>
-    <div class="bg-light rounded p-2 text-warning">
-        <h4 class="">Deactive Users</h4>
+    <div class="alert alert-warning px-3 py-3 border-left border-warning">
+        <h5 class="p-0 m-0 font-weight-bold">Deactive Users</h5>
     </div>
     <div class="">
         <table class="table table-hover">
@@ -72,7 +71,7 @@
                     </td>
                     <td>
                         {% if user.get_full_name %}
-                        {{user.get_full_name}}
+                        {{user.get_full_name}}{{user.is_active}}
                         {% else %}
                         {{Admin}}
                         {% endif %}
