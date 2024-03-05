@@ -1,6 +1,7 @@
 
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_control
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
@@ -635,7 +636,7 @@ def update_technology(request):
         Technology.objects.filter(id=tid).update(name=name, type=t_type)
         return redirect('manage_feature_technology', 't')
     
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def blank_page(request, user):
     context ={
         'user':user
