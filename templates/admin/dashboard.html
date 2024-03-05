@@ -112,8 +112,10 @@
                     {% for new in news %}
                     <li>
                         <h6 class="p-0 m-0">{{new.headline}}</h6>
-                        <small>{{new.body_text}}</small>
-                        <h5>
+                        <div class="p-2 rounded border">
+                            <small>{{new.body_text}}</small>
+                        </div>
+                        <h6 class="py-1 border-left border-right border-bottom bg-white px-3">
                             <a href="{% url 'delete_news' new.id %}" class="confirm-delete">
                                 <i class="icofont-ui-delete mr-3 text-danger"></i>
                             </a>
@@ -125,12 +127,14 @@
                                 <span class="my-2 mx-3"></span>
                                 <span class="my-2 ml-4"></span>
                             </div>
+                            <small class="text-white badge badge-danger text-opacity-50">live...</small>
                             {% else %}
-                            <div class="d-inline">
+                            <div class="d-inline mr-5 pr-4">
                                 <i class="icofont-spinner-alt-3"></i>
                             </div>
+                            <small class="text-white badge badge-secondary text-opacity-50">live...</small>
                             {% endif %}
-                        </h5>
+                        </h6>
                     </li>
                     {% endfor %}
                     </ol>
